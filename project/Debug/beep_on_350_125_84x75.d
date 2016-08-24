@@ -1,0 +1,9 @@
+.\debug\beep_on_350_125_84x75.o: ..\STemWin\GUIDemo\beep_on_350_125_84x75.c
+.\debug\beep_on_350_125_84x75.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\debug\beep_on_350_125_84x75.o: ..\STemWin\inc\GUI.h
+.\debug\beep_on_350_125_84x75.o: ..\STemWin\inc\GUI_ConfDefaults.h
+.\debug\beep_on_350_125_84x75.o: ..\STemWin\Config\GUIConf.h
+.\debug\beep_on_350_125_84x75.o: ..\STemWin\inc\GUI_Type.h
+.\debug\beep_on_350_125_84x75.o: ..\STemWin\inc\LCD.h
+.\debug\beep_on_350_125_84x75.o: ..\STemWin\inc\Global.h
+.\debug\beep_on_350_125_84x75.o: ..\STemWin\inc\GUI_Version.h

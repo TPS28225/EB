@@ -1,0 +1,9 @@
+.\debug\eb_face_1.o: ..\STemWin\GUIDemo\EB_Face_1.c
+.\debug\eb_face_1.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\debug\eb_face_1.o: ..\STemWin\inc\GUI.h
+.\debug\eb_face_1.o: ..\STemWin\inc\GUI_ConfDefaults.h
+.\debug\eb_face_1.o: ..\STemWin\Config\GUIConf.h
+.\debug\eb_face_1.o: ..\STemWin\inc\GUI_Type.h
+.\debug\eb_face_1.o: ..\STemWin\inc\LCD.h
+.\debug\eb_face_1.o: ..\STemWin\inc\Global.h
+.\debug\eb_face_1.o: ..\STemWin\inc\GUI_Version.h

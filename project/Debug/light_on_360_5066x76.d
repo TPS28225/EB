@@ -1,0 +1,9 @@
+.\debug\light_on_360_5066x76.o: ..\STemWin\GUIDemo\light_on_360_5066x76.c
+.\debug\light_on_360_5066x76.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\debug\light_on_360_5066x76.o: ..\STemWin\inc\GUI.h
+.\debug\light_on_360_5066x76.o: ..\STemWin\inc\GUI_ConfDefaults.h
+.\debug\light_on_360_5066x76.o: ..\STemWin\Config\GUIConf.h
+.\debug\light_on_360_5066x76.o: ..\STemWin\inc\GUI_Type.h
+.\debug\light_on_360_5066x76.o: ..\STemWin\inc\LCD.h
+.\debug\light_on_360_5066x76.o: ..\STemWin\inc\Global.h
+.\debug\light_on_360_5066x76.o: ..\STemWin\inc\GUI_Version.h

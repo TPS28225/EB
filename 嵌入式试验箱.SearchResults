@@ -1,0 +1,55 @@
+---- etharp_query Matches (13 in 3 files) ----
+Dhcp.c (utilities\...\core):204
+  result = etharp_query(netif, &dhcp->offered_ip_addr, NULL);
+  if (result != ERR_OK) {
+    LWIP_DEBUGF(DHCP_DEBUG | LWIP_DBG_TRACE | LWIP_DBG_LEVEL_WARNING, ("dhcp_check: could not perform ARP query\n"));
+Etharp.c (utilities\...\netif):788
+ * For unicast addresses, the packet is submitted to etharp_query(). In
+ * case the IP address is outside the local network, the IP address of
+ * the gateway is used.
+Etharp.c (utilities\...\netif):798
+ * or the return type of either etharp_query() or etharp_send_ip().
+ */
+err_t
+Etharp.c (utilities\...\netif):849
+    return etharp_query(netif, ipaddr, q);
+  }
+
+Etharp.c (utilities\...\netif):892
+etharp_query(struct netif *netif, struct ip_addr *ipaddr, struct pbuf *q)
+{
+  struct eth_addr * srcaddr = (struct eth_addr *)netif->hwaddr;
+Etharp.c (utilities\...\netif):902
+    LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE, ("etharp_query: will not add non-unicast IP address to ARP cache\n"));
+    return ERR_ARG;
+  }
+Etharp.c (utilities\...\netif):915
+    LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE, ("etharp_query: could not create ARP entry\n"));
+    if (q) {
+      LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE, ("etharp_query: packet dropped\n"));
+      ETHARP_STATS_INC(etharp.memerr);
+    }
+Etharp.c (utilities\...\netif):941
+         etharp_query again could lead to sending the queued packets. */
+    }
+  }
+Etharp.c (utilities\...\netif):1004
+          LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE, ("etharp_query: queued packet %p on ARP entry %"S16_F"\n", (void *)q, (s16_t)i));
+          result = ERR_OK;
+        } else {
+Etharp.c (utilities\...\netif):1009
+          LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE, ("etharp_query: could not queue a copy of PBUF_REF packet %p (out of memory)\n", (void *)q));
+          /* { result == ERR_MEM } through initialization */
+        }
+Etharp.c (utilities\...\netif):1014
+        LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE, ("etharp_query: could not queue a copy of PBUF_REF packet %p (out of memory)\n", (void *)q));
+        /* { result == ERR_MEM } through initialization */
+      }
+Etharp.c (utilities\...\netif):1020
+      LWIP_DEBUGF(ETHARP_DEBUG | LWIP_DBG_TRACE, ("etharp_query: Ethernet destination address unknown, queueing disabled, packet %p dropped\n", (void *)q));
+#endif
+    }
+Etharp.h (utilities\...\netif):164
+err_t etharp_query(struct netif *netif, struct ip_addr *ipaddr, struct pbuf *q);
+err_t etharp_request(struct netif *netif, struct ip_addr *ipaddr);
+/** For Ethernet network interfaces, we might want to send "gratuitous ARP";
