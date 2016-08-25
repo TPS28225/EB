@@ -171,66 +171,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>722</LineNumber>
+          <LineNumber>308</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134283058</Address>
+          <Address>134219078</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\GIT\鐗╄仈缃戝疄楠岀2016_08_17\DRIVER\RC522.c</Filename>
+          <Filename>..\App\Task_Test.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Pro\../DRIVER/RC522.c\722</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>719</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134283050</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\GIT\鐗╄仈缃戝疄楠岀2016_08_17\DRIVER\RC522.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Pro\../DRIVER/RC522.c\719</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>132</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134332440</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\GIT\鐗╄仈缃戝疄楠岀2016_08_17\EXAM\Exam.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Pro\../EXAM/Exam.c\132</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>946</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134341588</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\GIT\鐗╄仈缃戝疄楠岀2016_08_17\EXAM\Exam.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Pro\../EXAM/Exam.c\946</Expression>
+          <Expression>\\Pro\../App/Task_Test.c\308</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -297,7 +249,7 @@
 
   <Group>
     <GroupName>App</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -331,7 +283,7 @@
 
   <Group>
     <GroupName>BSP</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2210,6 +2162,19 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
+      <PathWithFileName>..\STemWin\font_chinese\xbffontcreate.c</PathWithFileName>
+      <FilenameWithoutPath>xbffontcreate.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>16</GroupNumber>
+      <FileNumber>139</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
       <PathWithFileName>..\STemWin\font_chinese\HZK_HWXK_24.c</PathWithFileName>
       <FilenameWithoutPath>HZK_HWXK_24.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -2225,7 +2190,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>17</GroupNumber>
-      <FileNumber>139</FileNumber>
+      <FileNumber>140</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
@@ -2238,7 +2203,7 @@
     </File>
     <File>
       <GroupNumber>17</GroupNumber>
-      <FileNumber>140</FileNumber>
+      <FileNumber>141</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>

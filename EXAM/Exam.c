@@ -174,12 +174,7 @@ void bmpdisplay_exam2(void)
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
 	
-	GUI_SetBkColor(GUI_BLACK);
-	GUI_SetColor(0x00d1fef0);
-	GUI_SetFont(&GUI_Font32_ASCII);
-	GUI_SetTextMode(GUI_TM_TRANS);
-	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
+
 
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,	0);

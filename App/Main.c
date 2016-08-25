@@ -55,14 +55,14 @@ void Task_StartUp(void *pdata)
 	//				(INT8U) OS_USER_PRIO_GET(N));							//分配给任务的优先级  
 
 //	OSTaskCreate(Task_TCP_Client, (void *)0, &Stk_Task_TCP_Client[TASK_TCP_CLIENT_STK_SIZE-1], OS_USER_PRIO_GET(2));//在移入真正的实验板后再开启
-	OSTaskCreate(Task_UDP_Client, (void *)0, &Stk_Task_UDP_Client[TASK_UDP_CLIENT_STK_SIZE-1], OS_USER_PRIO_GET(3));
+//	OSTaskCreate(Task_UDP_Client, (void *)0, &Stk_Task_UDP_Client[TASK_UDP_CLIENT_STK_SIZE-1], OS_USER_PRIO_GET(3));
 //	OSTaskCreate(Task_OUTPUT, (void *)0, &Stk_Task_OUTPUT[TASK_TEST_OUTPUT_STK_SIZE-1], OS_USER_PRIO_GET(8));
 //	OSTaskCreate(Task_INPUT, (void *)0, &Stk_Task_INPUT[TASK_TEST_INPUT_STK_SIZE-1], OS_USER_PRIO_GET(7));
 //	OSTaskCreate(Task_KEY, (void *)0, &Stk_Task_KEY[TASK_TEST_KEY_STK_SIZE-1], OS_USER_PRIO_GET(6));
-	OSTaskCreate(Task_TX, (void *)0, &Stk_Task_TX[TASK_TEST_TX_STK_SIZE-1], OS_USER_PRIO_GET(4));
-  OSTaskCreate(Task_RX, (void *)0, &Stk_Task_RX[TASK_TEST_RX_STK_SIZE-1], OS_USER_PRIO_GET(5));
+//	OSTaskCreate(Task_TX, (void *)0, &Stk_Task_TX[TASK_TEST_TX_STK_SIZE-1], OS_USER_PRIO_GET(4));
+//  OSTaskCreate(Task_RX, (void *)0, &Stk_Task_RX[TASK_TEST_RX_STK_SIZE-1], OS_USER_PRIO_GET(5));
 //		//OLED显示任务
-//	OSTaskCreate(Task_OLEDDisplay, (void *)0, &Stk_Task_OLED_DISPLAY[TASK_OLED_DISPLAY_STK_SIZE-1], OS_USER_PRIO_GET(9));
+	OSTaskCreate(Task_OLEDDisplay, (void *)0, &Stk_Task_OLED_DISPLAY[TASK_OLED_DISPLAY_STK_SIZE-1], OS_USER_PRIO_GET(9));
 //	//声音任务
 //	OSTaskCreate(Task_BEEP_MUSIC_Display, (void *)0, &Stk_Task_BEEP_MUSIC[TASK_BEEP_MUSIC_STK_SIZE-1], OS_USER_PRIO_GET(10));
 	OSTaskSuspend(OS_USER_PRIO_LOWEST);

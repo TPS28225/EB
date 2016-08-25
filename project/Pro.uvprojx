@@ -1167,6 +1167,11 @@
           <GroupName>STemwin_Font</GroupName>
           <Files>
             <File>
+              <FileName>xbffontcreate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STemWin\font_chinese\xbffontcreate.c</FilePath>
+            </File>
+            <File>
               <FileName>HZK_HWXK_24.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STemWin\font_chinese\HZK_HWXK_24.c</FilePath>

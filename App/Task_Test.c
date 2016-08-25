@@ -1,12 +1,13 @@
 /***********************************************************************
-ÎÄ¼şÃû³Æ£º
-¹¦    ÄÜ£º
-±àĞ´Ê±¼ä£º
-±à Ğ´ ÈË£º
-×¢    Òâ£º
+æ–‡ä»¶åç§°ï¼š
+åŠŸ    èƒ½ï¼š
+ç¼–å†™æ—¶é—´ï¼š
+ç¼– å†™ äººï¼š
+æ³¨    æ„ï¼š
 ***********************************************************************/
 #include "main.h"  
 #include "bmpdisplay.h"
+#include "xbffontcreate.h"
 __align(8) OS_STK Stk_Task_RX[TASK_TEST_RX_STK_SIZE];
 __align(8) OS_STK Stk_Task_TX[TASK_TEST_TX_STK_SIZE];
 __align(8) OS_STK Stk_Task_OUTPUT[TASK_TEST_OUTPUT_STK_SIZE];
@@ -15,9 +16,9 @@ __align(8) OS_STK Stk_Task_KEY[TASK_TEST_KEY_STK_SIZE];
 __align(8) OS_STK Stk_Task_UDP_Client[TASK_UDP_CLIENT_STK_SIZE];
 __align(8) OS_STK Stk_Task_TCP_Client[TASK_TCP_CLIENT_STK_SIZE];
 
-//ÏÔÊ¾ÆÁ
+//æ˜¾ç¤ºå±
 __align(8) OS_STK Stk_Task_OLED_DISPLAY[TASK_OLED_DISPLAY_STK_SIZE];
-//ÉùÒô
+//å£°éŸ³
 __align(8) OS_STK Stk_Task_BEEP_MUSIC[TASK_BEEP_MUSIC_STK_SIZE];
 tx_buf_t  tx_buf;
 rx_buf_t  rx_buf;
@@ -56,13 +57,13 @@ typedef struct
 }taskRunTime;
 taskRunTime runTime;
 /***********************************************************************
-º¯ÊıÃû³Æ£ºvoid Task_LED(void *pdata)
-¹¦    ÄÜ£º
-ÊäÈë²ÎÊı£º
-Êä³ö²ÎÊı£º
-±àĞ´Ê±¼ä£º
-±à Ğ´ ÈË£º
-×¢    Òâ£º
+å‡½æ•°åç§°ï¼švoid Task_LED(void *pdata)
+åŠŸ    èƒ½ï¼š
+è¾“å…¥å‚æ•°ï¼š
+è¾“å‡ºå‚æ•°ï¼š
+ç¼–å†™æ—¶é—´ï¼š
+ç¼– å†™ äººï¼š
+æ³¨    æ„ï¼š
 ***********************************************************************/
 void Task_INPUT(void *pdata)
 {		
@@ -103,22 +104,22 @@ void Task_OUTPUT(void *pdata)
 //			runTime.OutputRunTime = runTime.OutputEndTime - runTime.OutputStartTime;	
 //		OSTimeDlyHMSM(0, 0, 1, 0);
 		
-//	//ÊµÑé1Àı×Ó	
+//	//å®éªŒ1ä¾‹å­	
 //		INPUTDEVICE.exist_people=1;
 //		INPUTDEVICE.sound_exceed_threshold=1;
 //		INPUTDEVICE.Magnetic_Door_Contact=1;
 //		INPUTDEVICE.temperature=30;
 //		OUTPUTDEVICE.LED[0]=1;
-//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//ÑÓÊ±2s
+//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//å»¶æ—¶2s
 //		
 //		INPUTDEVICE.exist_people=0;
 //		INPUTDEVICE.sound_exceed_threshold=0;
 //		INPUTDEVICE.Magnetic_Door_Contact=0;
 //		INPUTDEVICE.temperature=20;
 //		OUTPUTDEVICE.LED[0]=0;
-//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//ÑÓÊ±2s
+//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//å»¶æ—¶2s
 //		
-//	//ÊµÑé2Àı×Ó			
+//	//å®éªŒ2ä¾‹å­			
 //		OUTPUTDEVICE.LED[0]=1;	
 //		OUTPUTDEVICE.LED[1]=1;			
 //		OUTPUTDEVICE.LED[2]=1;			
@@ -127,7 +128,7 @@ void Task_OUTPUT(void *pdata)
 //		INPUTDEVICE.sound_exceed_threshold=1;			
 //		INPUTDEVICE.LightIntensity=65535;
 //		
-//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//ÑÓÊ±2s	
+//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//å»¶æ—¶2s	
 //		
 //		OUTPUTDEVICE.LED[0]=0;	
 //		OUTPUTDEVICE.LED[1]=0;			
@@ -137,48 +138,48 @@ void Task_OUTPUT(void *pdata)
 //		INPUTDEVICE.sound_exceed_threshold=0;		
 //		INPUTDEVICE.LightIntensity=10;
 //		
-//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//ÑÓÊ±2s	
+//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//å»¶æ—¶2s	
 
-////	//ÊµÑé3Àı×Ó		
+////	//å®éªŒ3ä¾‹å­		
 //		INPUTDEVICE.humidity=70;
 //		INPUTDEVICE.temperature=30;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//ÑÓÊ±2s	
+//		OSTimeDlyHMSM(0, 0, 2, 0);//å»¶æ—¶2s	
 
 //		INPUTDEVICE.humidity=55;
 //		INPUTDEVICE.temperature=23;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//ÑÓÊ±2s		
+//		OSTimeDlyHMSM(0, 0, 2, 0);//å»¶æ—¶2s		
 //		
 //		INPUTDEVICE.humidity=40;
 //		INPUTDEVICE.temperature=15;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//ÑÓÊ±2s		
+//		OSTimeDlyHMSM(0, 0, 2, 0);//å»¶æ—¶2s		
 
-//	//ÊµÑé4Àı×Ó		
+//	//å®éªŒ4ä¾‹å­		
 //		INPUTDEVICE.Distance=7.011;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//ÑÓÊ±2s	
+//		OSTimeDlyHMSM(0, 0, 2, 0);//å»¶æ—¶2s	
 
 //		INPUTDEVICE.Distance=4.23;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//ÑÓÊ±2s		
+//		OSTimeDlyHMSM(0, 0, 2, 0);//å»¶æ—¶2s		
 //		
 //		INPUTDEVICE.Distance=1.345;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//ÑÓÊ±2s	
+//		OSTimeDlyHMSM(0, 0, 2, 0);//å»¶æ—¶2s	
 
 
-//		OSTimeDlyHMSM(0, 0, 6, 0);//ÑÓÊ±2s
+//		OSTimeDlyHMSM(0, 0, 6, 0);//å»¶æ—¶2s
 //		IR_LearnState++;
 //		if(4==IR_LearnState)IR_LearnState=0;	
 
 	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_State=1;
-	OSTimeDlyHMSM(0, 0, 6, 0);//ÑÓÊ±2s
+	OSTimeDlyHMSM(0, 0, 6, 0);//å»¶æ—¶2s
 	}
 }
 /***********************************************************************
-º¯ÊıÃû³Æ£ºvoid Task_TX(void *pdata)
-¹¦    ÄÜ£º
-ÊäÈë²ÎÊı£º
-Êä³ö²ÎÊı£º
-±àĞ´Ê±¼ä£º
-±à Ğ´ ÈË£º
-×¢    Òâ£º
+å‡½æ•°åç§°ï¼švoid Task_TX(void *pdata)
+åŠŸ    èƒ½ï¼š
+è¾“å…¥å‚æ•°ï¼š
+è¾“å‡ºå‚æ•°ï¼š
+ç¼–å†™æ—¶é—´ï¼š
+ç¼– å†™ äººï¼š
+æ³¨    æ„ï¼š
 ***********************************************************************/
 
 void Task_TX(void *pdata)
@@ -198,13 +199,13 @@ void Task_TX(void *pdata)
 	}
 }
 /***********************************************************************
-º¯ÊıÃû³Æ£ºvoid Task_RX(void *pdata)
-¹¦    ÄÜ£º
-ÊäÈë²ÎÊı£º
-Êä³ö²ÎÊı£º
-±àĞ´Ê±¼ä£º
-±à Ğ´ ÈË£º
-×¢    Òâ£º
+å‡½æ•°åç§°ï¼švoid Task_RX(void *pdata)
+åŠŸ    èƒ½ï¼š
+è¾“å…¥å‚æ•°ï¼š
+è¾“å‡ºå‚æ•°ï¼š
+ç¼–å†™æ—¶é—´ï¼š
+ç¼– å†™ äººï¼š
+æ³¨    æ„ï¼š
 ***********************************************************************/
 
 void Task_RX(void *pdata)
@@ -222,13 +223,13 @@ void Task_RX(void *pdata)
 
 /***********************************************************************
 ***********************************************************************
-º¯ÊıÃû³Æ£ºvoid Task_UDP_Client(void *pdata)
-¹¦    ÄÜ£º
-ÊäÈë²ÎÊı£º
-Êä³ö²ÎÊı£º
-±àĞ´Ê±¼ä£º
-±à Ğ´ ÈË£º
-×¢    Òâ£º
+å‡½æ•°åç§°ï¼švoid Task_UDP_Client(void *pdata)
+åŠŸ    èƒ½ï¼š
+è¾“å…¥å‚æ•°ï¼š
+è¾“å‡ºå‚æ•°ï¼š
+ç¼–å†™æ—¶é—´ï¼š
+ç¼– å†™ äººï¼š
+æ³¨    æ„ï¼š
 ***********************************************************************/
 void Task_UDP_Client(void *pdata)
 {
@@ -253,7 +254,7 @@ void Task_UDP_Client(void *pdata)
 		runTime.UdpEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.UdpEndTime - runTime.UdpStartTime > runTime.UdpRunTime)
 			runTime.UdpRunTime = runTime.UdpEndTime - runTime.UdpStartTime;
-		OSTimeDlyHMSM(0, 0, 0, 10);//¹ÒÆğ10ms£¬ÒÔ±ãÆäËûÏß³ÌÔËĞĞ
+		OSTimeDlyHMSM(0, 0, 0, 10);//æŒ‚èµ·10msï¼Œä»¥ä¾¿å…¶ä»–çº¿ç¨‹è¿è¡Œ
 	}
 }
 
@@ -281,7 +282,7 @@ void Task_TCP_Client(void *pdata)
 		}		
 		LocalTime ++;
 		LwIP_Periodic_Handle(LocalTime);		
-		OSTimeDlyHMSM(0, 0, 0, 100);//¹ÒÆğ10ms£¬ÒÔ±ãÆäËûÏß³ÌÔËĞĞ
+		OSTimeDlyHMSM(0, 0, 0, 100);//æŒ‚èµ·10msï¼Œä»¥ä¾¿å…¶ä»–çº¿ç¨‹è¿è¡Œ
 	}
 }
 
@@ -289,9 +290,27 @@ void Task_OLEDDisplay(void *pdata)
 {
 	FATFS fs;
 	f_mount(0, &fs);
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC,ENABLE);//Òª¿ªÆôSTenwim£¬±ØĞëÏÈ¿ªCRCÊ±ÖÓ
-  GUI_Init();	
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC,ENABLE);//è¦å¼€å¯STenwimï¼Œå¿…é¡»å…ˆå¼€CRCæ—¶é’Ÿ
+  GUI_Init();
+	
+//	Create_XBF16("0:/SYSTEM/FONT/XBF20.xbf");	
+//	GUI_SetBkColor(GUI_BLACK);
+//	GUI_SetColor(0x00d1fef0);
+//	GUI_SetFont(&GUI_Font32_ASCII);
+//	GUI_SetTextMode(GUI_TM_TRANS);	GUI_UC_SetEncodeUTF8();
+//	GUI_DispStringHCenterAt("111111111",100,0);
+//	GUI_Clear();
+
+//	GUI_SetFont(&XBF16_Font);
+//	GUI_SetColor(GUI_RED);
+//	GUI_SetTextMode(GUI_TM_TRANS);
+//	GUI_Clear();
+
+//	GUI_DispStringHCenterAt("æŒ‰ç…§åè¿›åˆ¶æ•´æ•°æ ¼å¼è¾“å‡ºï¼Œæ˜¾ç¤º a=1234  ",300,0);//("ALIENTEK XBF æ±‰å­—æ˜¾ç¤º");
+//	while(1);
+	
 //	MainTask();
+	
 	bmpdisplay_demo();
 }
 

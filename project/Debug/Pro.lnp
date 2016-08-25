@@ -123,6 +123,7 @@
 ".\debug\lcdconf_flexcolor_template.o"
 ".\debug\gui_x_ucos.o"
 "..\STemWin\Lib\STemWin528_CM3_OS_Keil.lib"
+".\debug\xbffontcreate.o"
 ".\debug\hzk_hwxk_24.o"
 ".\debug\exam.o"
 ".\debug\bmpdisplay.o"
