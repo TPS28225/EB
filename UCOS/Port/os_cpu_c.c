@@ -117,7 +117,7 @@ void  OSTaskStatHook (void)
 OS_STK *OSTaskStkInit (void (*task)(void *p_arg), void *p_arg, OS_STK *ptos, INT16U opt)
 {
     OS_STK *stk;
-	INT32U i;
+//	INT32U i;
 
 
     (void)opt;                                   /* 'opt' is not used, prevent warning                 */

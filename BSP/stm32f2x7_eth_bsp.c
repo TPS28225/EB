@@ -50,7 +50,7 @@ static void Delay(uint32_t nCount)
   */
 void ETH_BSP_Config(void)
 {
-  RCC_ClocksTypeDef RCC_Clocks;
+//  RCC_ClocksTypeDef RCC_Clocks;
 	Delay(2000);//ÑÓÊ±µÈ´ýÍøÂç¸´Î»
 	/* Configure the GPIO ports for ethernet pins */
   ETH_GPIO_Config();
@@ -191,17 +191,17 @@ void ETH_GPIO_Config(void)
   * @param  None
   * @retval None
   */
-void ETH_NVIC_Config(void)
-{
-  NVIC_InitTypeDef   NVIC_InitStructure;
+//void ETH_NVIC_Config(void)
+//{
+//  NVIC_InitTypeDef   NVIC_InitStructure;
 
-  /* 2 bit for pre-emption priority, 2 bits for subpriority */
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4); 
-  
-  /* Enable the Ethernet global Interrupt */
-  NVIC_InitStructure.NVIC_IRQChannel = ETH_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);    
-}
+//  /* 2 bit for pre-emption priority, 2 bits for subpriority */
+//  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4); 
+//  
+//  /* Enable the Ethernet global Interrupt */
+//  NVIC_InitStructure.NVIC_IRQChannel = ETH_IRQn;
+//  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+//  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+//  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+//  NVIC_Init(&NVIC_InitStructure);    
+//}

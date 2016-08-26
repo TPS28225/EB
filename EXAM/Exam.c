@@ -1111,7 +1111,55 @@ void bmpdisplay_exam6_entrance_guard(void){
 }
 
 
+void bmpdisplay_exam7(void){
+	int Delete_Counter=0;
+	int picture_counter=0;
+	
+	GUI_MEMDEV_Handle hMem_Main;	
+	GUI_MEMDEV_Handle hMem_Sub_FS_19_93_439x223[3];
+	
+//
+// Create the memory device
+//
+	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
+	
+	GUI_SetBkColor(GUI_BLACK);
+	GUI_SetColor(0x00d1fef0);
+	GUI_SetFont(&GUI_Font16_ASCII);
+//	GUI_SetFont(&GUI_Fontyouyuan20);
+
+	GUI_SetTextMode(GUI_TM_TRANS);
+	GUI_UC_SetEncodeUTF8();
+	GUI_Clear();
+
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/face.bmp",0,0,0);
+	GUI_MEMDEV_Select(0);
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
+//	GUI_Delay(5000);	
+	
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/exam7/exam7_background.bmp",0,0,0);
+	GUI_MEMDEV_Select(0);	
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
+	GUI_MEMDEV_Delete(hMem_Main);	
+
+	hMem_Sub_FS_19_93_439x223[0]=Create_MEMDEV_Icon("0:/picture/exam7/FS1_19_93_439x223.bmp",19,93);	
+	hMem_Sub_FS_19_93_439x223[1]=Create_MEMDEV_Icon("0:/picture/exam7/FS2_19_93_439x223.bmp",19,93);	
+	hMem_Sub_FS_19_93_439x223[2]=Create_MEMDEV_Icon("0:/picture/exam7/FS3_19_93_439x223.bmp",19,93);	
+
+	while(1){	
+		GUI_MEMDEV_CopyToLCDAt(hMem_Sub_FS_19_93_439x223[picture_counter],19,93);
+		if(++picture_counter>2)picture_counter=0;
+		if(7!=OUTPUTDEVICE.Cureent_Exam_Num){
+			for(Delete_Counter=0;Delete_Counter<=4;Delete_Counter++){
+				Delete_MEMDEV_Icon(hMem_Sub_FS_19_93_439x223[Delete_Counter]);
+			}		
+		}
+		GUI_Delay(50);		
+	}
+}
 
 
 
