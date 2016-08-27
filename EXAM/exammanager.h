@@ -10,6 +10,7 @@ void bmpdisplay_exam5(void);
 void bmpdisplay_exam6_bus(void);
 void bmpdisplay_exam6_entrance_guard(void);
 void bmpdisplay_exam7(void);
+void bmpdisplay_exam8(void);
 #endif
 
 

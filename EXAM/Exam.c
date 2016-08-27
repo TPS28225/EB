@@ -1155,7 +1155,75 @@ void bmpdisplay_exam7(void){
 		if(7!=OUTPUTDEVICE.Cureent_Exam_Num){
 			for(Delete_Counter=0;Delete_Counter<=4;Delete_Counter++){
 				Delete_MEMDEV_Icon(hMem_Sub_FS_19_93_439x223[Delete_Counter]);
-			}		
+			}
+			break;			
+		}
+		GUI_Delay(50);		
+	}
+}
+
+void bmpdisplay_exam8(void){
+	int picture_counter=0;
+	
+	GUI_MEMDEV_Handle hMem_Main;	
+	GUI_MEMDEV_Handle hMem_Sub_chart1_39_67_134x134;
+	GUI_MEMDEV_Handle hMem_Sub_chart2_223_51_138x135;
+	GUI_MEMDEV_Handle hMem_Sub_chart3_136_89_130x122;
+	GUI_MEMDEV_Handle hMem_Sub_chart4_329_96_121x110;
+	GUI_MEMDEV_Handle hMem_Sub_chart5_35_50_418x160;	
+//
+// Create the memory device
+//
+	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
+
+	
+	GUI_SetBkColor(GUI_BLACK);
+	GUI_SetColor(0x00d1fef0);
+	GUI_SetFont(&GUI_Font16_ASCII);
+//	GUI_SetFont(&GUI_Fontyouyuan20);
+
+	GUI_SetTextMode(GUI_TM_TRANS);
+	GUI_UC_SetEncodeUTF8();
+	GUI_Clear();
+
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/face.bmp",0,0,0);
+	GUI_MEMDEV_Select(0);
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
+//	GUI_Delay(5000);	
+	
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/exam8/exam8_background.bmp",0,0,0);
+	GUI_MEMDEV_Select(0);	
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
+	GUI_MEMDEV_Delete(hMem_Main);
+	
+	hMem_Sub_chart1_39_67_134x134=Create_MEMDEV_Icon("0:/picture/exam8/chart1_39_67_134x134.bmp",39,67);	
+	hMem_Sub_chart2_223_51_138x135=Create_MEMDEV_Icon("0:/picture/exam8/chart2_223_51_138x135.bmp",223,51);	
+	hMem_Sub_chart3_136_89_130x122=Create_MEMDEV_Icon("0:/picture/exam8/chart3_136_89_130x122.bmp",136,89);	
+	hMem_Sub_chart4_329_96_121x110=Create_MEMDEV_Icon("0:/picture/exam8/chart4_329_96_121x110.bmp",39,89);	
+	hMem_Sub_chart5_35_50_418x160=Create_MEMDEV_Icon("0:/picture/exam8/chart5_35_50_418x160.bmp",35,50);
+
+	while(1){	
+		switch(picture_counter++){
+			case 0:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_chart1_39_67_134x134,39,67);break;
+			
+			case 1:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_chart2_223_51_138x135,223,51);break;
+
+			case 2:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_chart3_136_89_130x122,136,89);break;
+
+			case 3:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_chart4_329_96_121x110,329,96);break;
+
+			case 4:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_chart5_35_50_418x160,35,50);picture_counter=0;break;					
+		}
+		
+		if(8!=OUTPUTDEVICE.Cureent_Exam_Num){
+			Delete_MEMDEV_Icon(hMem_Sub_chart1_39_67_134x134);
+			Delete_MEMDEV_Icon(hMem_Sub_chart2_223_51_138x135);
+			Delete_MEMDEV_Icon(hMem_Sub_chart3_136_89_130x122);
+			Delete_MEMDEV_Icon(hMem_Sub_chart4_329_96_121x110);
+			Delete_MEMDEV_Icon(hMem_Sub_chart5_35_50_418x160);
+			break;
 		}
 		GUI_Delay(50);		
 	}

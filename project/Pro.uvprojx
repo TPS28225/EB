@@ -639,11 +639,6 @@
               <FilePath>..\CMSIS\Core\arm_math.h</FilePath>
             </File>
             <File>
-              <FileName>core_cm4.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\CMSIS\Core\core_cm4.h</FilePath>
-            </File>
-            <File>
               <FileName>core_cmFunc.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\CMSIS\Core\core_cmFunc.h</FilePath>
@@ -652,21 +647,6 @@
               <FileName>core_cmInstr.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\CMSIS\Core\core_cmInstr.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\CMSIS\Core\stm32f4xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\CMSIS\Core\system_stm32f4xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\CMSIS\Core\stm32f4xx_conf.h</FilePath>
             </File>
             <File>
               <FileName>system_stm32f2xx.c</FileName>

@@ -212,27 +212,7 @@ void Delete_MEMDEV_Icon(GUI_MEMDEV_Handle hMem_Sub)
 			GUI_MEMDEV_Delete(hMem_Sub);		
 }
 
-void bmpdisplay_demo(void)
-{
-	OUTPUTDEVICE.Cureent_Exam_Num=7;
-	while(1){
-		switch(OUTPUTDEVICE.Cureent_Exam_Num){	
-			case 1:bmpdisplay_exam1();break;
-			
-			case 2:bmpdisplay_exam2();break;
-			
-			case 3:bmpdisplay_exam3();break;
-			
-			case 4:bmpdisplay_exam4();break;
-			
-			case 5:bmpdisplay_exam5();break;
-			
-			case 61:bmpdisplay_exam6_bus();break;
-			
-			case 62:bmpdisplay_exam6_entrance_guard();break;
-			
-			case 7:bmpdisplay_exam7();break;
-			
-		}		
-	}	
-}
+//void bmpdisplay_demo(void)
+//{
+
+//}

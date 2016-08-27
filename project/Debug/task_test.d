@@ -108,3 +108,4 @@
 .\debug\task_test.o: ..\BSP\sram.h
 .\debug\task_test.o: ..\EXAM\bmpdisplay.h
 .\debug\task_test.o: ..\STemWin\font_chinese\xbffontcreate.h
+.\debug\task_test.o: ..\EXAM\exammanager.h

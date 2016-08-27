@@ -8,6 +8,7 @@
 #include "main.h"  
 #include "bmpdisplay.h"
 #include "xbffontcreate.h"
+#include "exammanager.h"
 __align(8) OS_STK Stk_Task_RX[TASK_TEST_RX_STK_SIZE];
 __align(8) OS_STK Stk_Task_TX[TASK_TEST_TX_STK_SIZE];
 __align(8) OS_STK Stk_Task_OUTPUT[TASK_TEST_OUTPUT_STK_SIZE];
@@ -311,7 +312,28 @@ void Task_OLEDDisplay(void *pdata)
 	
 //	MainTask();
 	
-	bmpdisplay_demo();
+	OUTPUTDEVICE.Cureent_Exam_Num=8;
+	while(1){
+		switch(OUTPUTDEVICE.Cureent_Exam_Num){	
+			case 1:bmpdisplay_exam1();break;
+			
+			case 2:bmpdisplay_exam2();break;
+			
+			case 3:bmpdisplay_exam3();break;
+			
+			case 4:bmpdisplay_exam4();break;
+			
+			case 5:bmpdisplay_exam5();break;
+			
+			case 61:bmpdisplay_exam6_bus();break;
+			
+			case 62:bmpdisplay_exam6_entrance_guard();break;
+			
+			case 7:bmpdisplay_exam7();break;
+			
+			case 8:bmpdisplay_exam8();break;					
+		}		
+	}	
 }
 
 
