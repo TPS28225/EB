@@ -19,8 +19,9 @@ typedef struct {
 	int RFID_CARDID;
 	u16 Data;
 	u8 	Card_State;//判断输出卡信息的卡状态，决定是否写入新的余额
+	u8  Card_State_Operation;	//专用在判断公交卡将处于刷卡状态还是充值状态
 	u8  entrance_guard_pass;	
-	u8  ACK[2];
+	u8  ACK[3];
 }CARD_Property;
 typedef union
 {
@@ -52,6 +53,7 @@ typedef struct {
 	char	 			OLED[OLED_OUTPUT_ARRY_NUM];											
 	char        Bluetooth[BLUETOOTH_TX_ARRY_NUM][TX_RX_BUFFER_SIZE];//√			
 	char        IR_State;           //√
+	char				IR_LearnState;	
 	CARD_Info		RFID_CARD;
 	char        IR_Code[IRCODE_ARRY_NUM];    //√
 	char				Cureent_Exam_Num;

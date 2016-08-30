@@ -652,7 +652,7 @@ void bmpdisplay_exam4(void)
 }
 
 
-int IR_LearnState=3;
+
 void bmpdisplay_exam5(void){
 	int Delete_Counter=0;
 	int counter_2=0;
@@ -715,9 +715,9 @@ void bmpdisplay_exam5(void){
 	hMem_Sub_Recomend_Sendsuccess_195_193_256x31=Create_MEMDEV_Icon("0:/picture/exam5/Recomend_Sendsuccess_195_193_256x31.bmp",195,193);
 
 	while(1){
-		if(Recomend_Record!=IR_LearnState){
-			Recomend_Record=IR_LearnState;
-			switch(IR_LearnState){
+		if(Recomend_Record!=OUTPUTDEVICE.IR_LearnState){
+			Recomend_Record=OUTPUTDEVICE.IR_LearnState;
+			switch(OUTPUTDEVICE.IR_LearnState){
 				case 0:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Pressbuten_195_193_256x31,195,193);				
 					counter_2=0;
 					break;
@@ -866,21 +866,18 @@ void bmpdisplay_exam6_bus(void){
 	hMem_Sub_ID_background_130_135_77x17=Create_MEMDEV_Icon("0:/picture/exam6/ID_background_130_135_77x17.bmp",130,135);	
 	hMem_Sub_not_enough_145_157_63x23=Create_MEMDEV_Icon("0:/picture/exam6/not_enough_145_157_63x23.bmp",145,157);	
 	hMem_Sub_remaining_sum_background_145_160_42x18=Create_MEMDEV_Icon("0:/picture/exam6/remaining_sum_background_145_160_42x18.bmp",145,160);	
-
-
-	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Data=10;
-	INPUTDEVICE.RFID_CARD.rfid_card_Info.Data=0;
 	
-		switch(2){
-				case 1:
-					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Putcard_75_105_160x80,75,105);
-					break;
-				case 2:
-					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Slotcard_75_105_160x80,75,105);
-					break;
-		}
+	switch(OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_State_Operation){
+		case 1:
+			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Putcard_75_105_160x80,75,105);
+			break;
+		case 2:
+			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Slotcard_75_105_160x80,75,105);
+			break;
+	}
+	
 	while(1){
-		switch(2){
+		switch(OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_State_Operation){
 			case 1:
 				if(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){
 					if(RFID_CARDID_Record!=INPUTDEVICE.RFID_CARD.rfid_card_Info.RFID_CARDID){
