@@ -1225,7 +1225,7 @@ void bmpdisplay_exam8(void){
 			Delete_MEMDEV_Icon(hMem_Sub_chart5_35_50_418x160);
 			break;
 		}
-		GUI_Delay(50);		
+		GUI_Delay(200);		
 	}
 }
 

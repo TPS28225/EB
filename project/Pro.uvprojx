@@ -1141,9 +1141,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>STemwin_Demo</GroupName>
-        </Group>
-        <Group>
           <GroupName>STemwin_Font</GroupName>
           <Files>
             <File>
@@ -1157,6 +1154,9 @@
               <FilePath>..\STemWin\font_chinese\HZK_HWXK_24.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>STemwin_Demo</GroupName>
         </Group>
         <Group>
           <GroupName>EXAM</GroupName>

@@ -33,7 +33,7 @@ int main(void)
 	return 0;
 }
 //Æô¶¯ÈÎÎñ¶ÑÕ»
-OS_STK Stk_TaskStartUp[TASK_STARTUP_STK_SIZE];
+ OS_STK Stk_TaskStartUp[TASK_STARTUP_STK_SIZE];
 
 void Task_StartUp(void *pdata)
 {

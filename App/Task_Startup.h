@@ -7,7 +7,7 @@
 ***********************************************************************/
 #ifndef _APP_TASK_STARTUP_H_
 #define _APP_TASK_STARTUP_H_
-
+#include "main.h"
 
 //启动任务堆栈大小
 #define TASK_STARTUP_STK_SIZE  100
