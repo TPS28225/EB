@@ -1226,7 +1226,75 @@ void bmpdisplay_exam8(void){
 	}
 }
 
+void bmpdisplay_exam9(void){
+	int picture_counter=0;
+	int picture_falg=0;
+	
+	GUI_MEMDEV_Handle hMem_Main;	
+	GUI_MEMDEV_Handle hMem_Sub_comm_105_125_278x20[6];
+//
+// Create the memory device
+//
+	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
+	
+	GUI_SetBkColor(GUI_BLACK);
+	GUI_SetColor(0x00d1fef0);
+	GUI_SetFont(&GUI_Font16_ASCII);
+//	GUI_SetFont(&GUI_Fontyouyuan20);
+
+	GUI_SetTextMode(GUI_TM_TRANS);
+	GUI_UC_SetEncodeUTF8();
+	GUI_Clear();
+	
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/face.bmp",0,0,0);
+	GUI_MEMDEV_Select(0);
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
+//	GUI_Delay(5000);	
+	
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/exam9/exam9_background.bmp",0,0,0);
+	GUI_MEMDEV_Select(0);	
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
+	GUI_MEMDEV_Delete(hMem_Main);	
+	
+	hMem_Sub_comm_105_125_278x20[0]=Create_MEMDEV_Icon("0:/picture/exam9/comm1_105_125_278x20.bmp",105,125);	
+	hMem_Sub_comm_105_125_278x20[1]=Create_MEMDEV_Icon("0:/picture/exam9/comm2_105_125_278x20.bmp",105,125);	
+	hMem_Sub_comm_105_125_278x20[2]=Create_MEMDEV_Icon("0:/picture/exam9/comm3_105_125_278x20.bmp",105,125);
+	hMem_Sub_comm_105_125_278x20[3]=Create_MEMDEV_Icon("0:/picture/exam9/comm4_105_125_278x20.bmp",105,125);
+	hMem_Sub_comm_105_125_278x20[4]=Create_MEMDEV_Icon("0:/picture/exam9/comm5_105_125_278x20.bmp",105,125);
+	hMem_Sub_comm_105_125_278x20[5]=Create_MEMDEV_Icon("0:/picture/exam9/comm6_105_125_278x20.bmp",105,125);
+	
+	while(1){
+		if(0==picture_falg){		
+			picture_counter++;
+			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_105_125_278x20[picture_counter],105,125);			
+
+			if(picture_counter>=5){
+				picture_falg=1;
+			}
+		}
+		else if(1==picture_falg){
+			picture_counter--;
+			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_105_125_278x20[picture_counter],105,125);			
+			if(picture_counter==0){
+				picture_falg=0;		
+			}
+		}
+		
+		if(9!=OUTPUTDEVICE.Cureent_Exam_Num){
+			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[0]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[1]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[2]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[3]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[4]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[5]);
+			break;
+		}
+		GUI_Delay(20);		
+	}
+}
 
 
 

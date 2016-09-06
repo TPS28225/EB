@@ -90,7 +90,7 @@ void Task_KEY(void *pdata)
 extern int IR_LearnState;
 void Task_OUTPUT(void *pdata)
 {	
-	IR_LearnState=0;		
+//	IR_LearnState=0;		
   while(1)
 	{
 //		runTime.OutputStartTime = TIM_GetCounter(DELAY_TIMER);
@@ -312,7 +312,7 @@ void Task_OLEDDisplay(void *pdata)
 	
 //	MainTask();
 	
-	OUTPUTDEVICE.Cureent_Exam_Num=8;
+	OUTPUTDEVICE.Cureent_Exam_Num=9;
 	while(1){
 		switch(OUTPUTDEVICE.Cureent_Exam_Num){	
 			case 1:bmpdisplay_exam1();break;
@@ -331,7 +331,9 @@ void Task_OLEDDisplay(void *pdata)
 			
 			case 7:bmpdisplay_exam7();break;
 			
-			case 8:bmpdisplay_exam8();break;					
+			case 8:bmpdisplay_exam8();break;
+
+			case 9:bmpdisplay_exam9();break;			
 		}		
 	}	
 }
