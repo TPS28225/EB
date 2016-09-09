@@ -153,95 +153,95 @@ static void _DemoShowColorBar(void) {
 * Return value:
 *   Number of data bytes available.
 */
-static int BmpGetData(void * p, const U8 ** ppData, unsigned NumBytesReq, U32 Off) 
-{
-	static int readaddress=0;
-	FIL * phFile;
-	UINT NumBytesRead;
-	#if SYSTEM_SUPPORT_UCOS
-		OS_CPU_SR cpu_sr;
-	#endif
-	
-	phFile = (FIL *)p;
-	
-	if (NumBytesReq > sizeof(bmpBuffer)) 
-	{
-		NumBytesReq = sizeof(bmpBuffer);
-	}
+//static int BmpGetData(void * p, const U8 ** ppData, unsigned NumBytesReq, U32 Off) 
+//{
+//	static int readaddress=0;
+//	FIL * phFile;
+//	UINT NumBytesRead;
+//	#if SYSTEM_SUPPORT_UCOS
+//		OS_CPU_SR cpu_sr;
+//	#endif
+//	
+//	phFile = (FIL *)p;
+//	
+//	if (NumBytesReq > sizeof(bmpBuffer)) 
+//	{
+//		NumBytesReq = sizeof(bmpBuffer);
+//	}
 
-	//移动指针到应该读取的位置
-	if(Off == 1) readaddress = 0;
-	else readaddress=Off;
-	#if SYSTEM_SUPPORT_UCOS
-		OS_ENTER_CRITICAL();	//临界区
-	#endif
-	f_lseek(phFile,readaddress); 
-	
-	//读取数据到缓冲区中
-	f_read(phFile,bmpBuffer,NumBytesReq,&NumBytesRead);
-	#if SYSTEM_SUPPORT_UCOS
-		OS_EXIT_CRITICAL();	//退出临界区 
-	#endif
-	*ppData = (U8 *)bmpBuffer;
-	return NumBytesRead;//返回读取到的字节数
-}
+//	//移动指针到应该读取的位置
+//	if(Off == 1) readaddress = 0;
+//	else readaddress=Off;
+//	#if SYSTEM_SUPPORT_UCOS
+//		OS_ENTER_CRITICAL();	//临界区
+//	#endif
+//	f_lseek(phFile,readaddress); 
+//	
+//	//读取数据到缓冲区中
+//	f_read(phFile,bmpBuffer,NumBytesReq,&NumBytesRead);
+//	#if SYSTEM_SUPPORT_UCOS
+//		OS_EXIT_CRITICAL();	//退出临界区 
+//	#endif
+//	*ppData = (U8 *)bmpBuffer;
+//	return NumBytesRead;//返回读取到的字节数
+//}
 
-//在指定位置显示无需加载到RAM中的BMP图片(需文件系统支持！对于小RAM，推荐使用此方法！)
-//BMPFileName:图片在SD卡或者其他存储设备中的路径
-//mode:显示模式
-//		0 在指定位置显示，有参数x,y确定显示位置
-//		1 在LCD中间显示图片，当选择此模式的时候参数x,y无效。
-//x:图片左上角在LCD中的x轴位置(当参数mode为1时，此参数无效)
-//y:图片左上角在LCD中的y轴位置(当参数mode为1时，此参数无效)
-//member:  缩放比例的分子项
-//denom:缩放比例的分母项
-//返回值:0 显示正常,其他 失败
-int dispbmpex(char *BMPFileName,u8 mode,u32 x,u32 y,int member,int denom)
-{
-	char result;
-	int XSize,YSize;
-	float Xflag,Yflag;
-	GUI_COLOR forecolor,bkcolor;
-	forecolor=GUI_GetColor();			//获取当前前景色
-	bkcolor=GUI_GetBkColor();			//获取当前背景色
-	
-	result = f_open(&BMPFile,(const TCHAR*)BMPFileName,FA_READ);	//打开文件
-	//文件打开错误
-	if(result != FR_OK) 	return 1;
-		
-	switch(mode)
-	{
-		case 0:	//在指定位置显示图片
-			if((member == 1) && (denom == 1)) //无需缩放，直接绘制
-			{
-				GUI_BMP_DrawEx(BmpGetData,&BMPFile,x,y);//在指定位置显示BMP图片
-			}else //否则图片需要缩放
-			{
-				GUI_BMP_DrawScaledEx(BmpGetData,&BMPFile,x,y,member,denom);
-			}
-			break;
-		case 1:	//在LCD中间显示图片
-			XSize = GUI_BMP_GetXSizeEx(BmpGetData,&BMPFile);	//获取图片的X轴大小
-			YSize = GUI_BMP_GetYSizeEx(BmpGetData,&BMPFile);	//获取图片的Y轴大小
-			if((member == 1) && (denom == 1)) //无需缩放，直接绘制
-			{
-				//在LCD中间显示图片
-				GUI_BMP_DrawEx(BmpGetData,&BMPFile,(lcddev.width-XSize)/2-1,(lcddev.height-YSize)/2-1);
-			}else //否则图片需要缩放
-			{
-				Xflag = (float)XSize*((float)member/(float)denom);
-				Yflag = (float)YSize*((float)member/(float)denom);
-				XSize = (lcddev.width-(int)Xflag)/2-1;
-				YSize = (lcddev.height-(int)Yflag)/2-1;
-				GUI_BMP_DrawScaledEx(BmpGetData,&BMPFile,XSize,YSize,member,denom);
-			}
-			break;
-	}
-	f_close(&BMPFile);		//关闭BMPFile文件
-	GUI_SetColor(forecolor);		//恢复前景色
-	GUI_SetBkColor(bkcolor);		//恢复背景色
-	return 0;
-}
+////在指定位置显示无需加载到RAM中的BMP图片(需文件系统支持！对于小RAM，推荐使用此方法！)
+////BMPFileName:图片在SD卡或者其他存储设备中的路径
+////mode:显示模式
+////		0 在指定位置显示，有参数x,y确定显示位置
+////		1 在LCD中间显示图片，当选择此模式的时候参数x,y无效。
+////x:图片左上角在LCD中的x轴位置(当参数mode为1时，此参数无效)
+////y:图片左上角在LCD中的y轴位置(当参数mode为1时，此参数无效)
+////member:  缩放比例的分子项
+////denom:缩放比例的分母项
+////返回值:0 显示正常,其他 失败
+//int dispbmpex(char *BMPFileName,u8 mode,u32 x,u32 y,int member,int denom)
+//{
+//	char result;
+//	int XSize,YSize;
+//	float Xflag,Yflag;
+//	GUI_COLOR forecolor,bkcolor;
+//	forecolor=GUI_GetColor();			//获取当前前景色
+//	bkcolor=GUI_GetBkColor();			//获取当前背景色
+//	
+//	result = f_open(&BMPFile,(const TCHAR*)BMPFileName,FA_READ);	//打开文件
+//	//文件打开错误
+//	if(result != FR_OK) 	return 1;
+//		
+//	switch(mode)
+//	{
+//		case 0:	//在指定位置显示图片
+//			if((member == 1) && (denom == 1)) //无需缩放，直接绘制
+//			{
+//				GUI_BMP_DrawEx(BmpGetData,&BMPFile,x,y);//在指定位置显示BMP图片
+//			}else //否则图片需要缩放
+//			{
+//				GUI_BMP_DrawScaledEx(BmpGetData,&BMPFile,x,y,member,denom);
+//			}
+//			break;
+//		case 1:	//在LCD中间显示图片
+//			XSize = GUI_BMP_GetXSizeEx(BmpGetData,&BMPFile);	//获取图片的X轴大小
+//			YSize = GUI_BMP_GetYSizeEx(BmpGetData,&BMPFile);	//获取图片的Y轴大小
+//			if((member == 1) && (denom == 1)) //无需缩放，直接绘制
+//			{
+//				//在LCD中间显示图片
+//				GUI_BMP_DrawEx(BmpGetData,&BMPFile,(lcddev.width-XSize)/2-1,(lcddev.height-YSize)/2-1);
+//			}else //否则图片需要缩放
+//			{
+//				Xflag = (float)XSize*((float)member/(float)denom);
+//				Yflag = (float)YSize*((float)member/(float)denom);
+//				XSize = (lcddev.width-(int)Xflag)/2-1;
+//				YSize = (lcddev.height-(int)Yflag)/2-1;
+//				GUI_BMP_DrawScaledEx(BmpGetData,&BMPFile,XSize,YSize,member,denom);
+//			}
+//			break;
+//	}
+//	f_close(&BMPFile);		//关闭BMPFile文件
+//	GUI_SetColor(forecolor);		//恢复前景色
+//	GUI_SetBkColor(bkcolor);		//恢复背景色
+//	return 0;
+//}
 
 //int dispstreambmpex(char *BMPFileName,u8 mode,u32 x,u32 y,int member,int denom)
 //{
@@ -281,16 +281,18 @@ void MainTask(void) {
 	GUI_SetTextMode(GUI_TEXTMODE_TRANS);
   GUI_SetFont(&GUI_Font24_ASCII);
   GUI_DispStringHCenterAt("COLOR_ShowColorBar - Sample", 160, 5);
-  _DemoShowColorBar();
-  while(1)
-	{		
-		dispbmpex("0:/picture/dog.bmp",0,0,	0,	1,1);
-		GUI_Delay(3000);
-		GUI_Clear();
 
-		dispbmpex("0:/picture/face.bmp",0,0,	0,	1,1);
-		GUI_Delay(3000);
-		GUI_Clear();
+  while(1)
+	{  
+		_DemoShowColorBar();		
+				OSTimeDlyHMSM(0, 0, 2, 0);//??100ms,????????
+//		dispbmpex("0:/picture/dog.bmp",0,0,	0,	1,1);
+//		GUI_Delay(3000);
+//		GUI_Clear();
+
+//		dispbmpex("0:/picture/face.bmp",0,0,	0,	1,1);
+//		GUI_Delay(3000);
+//		GUI_Clear();
 	}
 }
 

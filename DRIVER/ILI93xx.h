@@ -96,16 +96,19 @@ extern u16  BACK_COLOR; //背景颜色.默认为白色
 
 //////////////////////////////////////////////////////////////////////////////////	 
 //-----------------LCD端口定义---------------- 
-#define	LCD_LED_SET GPIO_SetBits(GPIOB , GPIO_Pin_0) //LCD背光  PB0 	    
+//#define	LCD_LED_SET GPIO_SetBits(GPIOB , GPIO_Pin_0) //LCD背光  PB0 	    
 //LCD地址结构体
 typedef struct
 {
 	vu16 LCD_REG;
 	vu16 LCD_RAM;
 } LCD_TypeDef;
-//使用NOR/SRAM的 Bank1.sector1,地址位HADDR[27,26]=11 A16作为数据命令区分线 
+////使用NOR/SRAM的 Bank1.sector1,地址位HADDR[27,26]=11 A16作为数据命令区分线 
+////注意设置时STM32内部会右移一位对其! 			    
+//#define LCD_BASE        ((u32)(0x60000000 | 0x00001FFFE))
+//使用NOR/SRAM的 Bank1.sector1,地址位HADDR[27,26]=11 A7作为数据命令区分线 
 //注意设置时STM32内部会右移一位对其! 			    
-#define LCD_BASE        ((u32)(0x60000000 | 0x00001FFFE))
+#define LCD_BASE        ((u32)(0x60000000 | 0x0000000FE))
 #define TFTLCD          ((LCD_TypeDef *) LCD_BASE)
 //////////////////////////////////////////////////////////////////////////////////
 	 
@@ -125,18 +128,18 @@ typedef struct
 //画笔颜色
 #define WHITE         	 0xFFFF
 #define BLACK         	 0x0000	  
-#define BLUE         	 0x001F  
+#define BLUE         	 	 0x001F  
 #define BRED             0XF81F
-#define GRED 			 0XFFE0
-#define GBLUE			 0X07FF
+#define GRED 			 			 0XFFE0
+#define GBLUE			 			 0X07FF
 #define RED           	 0xF800
 #define MAGENTA       	 0xF81F
 #define GREEN         	 0x07E0
 #define CYAN          	 0x7FFF
 #define YELLOW        	 0xFFE0
-#define BROWN 			 0XBC40 //棕色
-#define BRRED 			 0XFC07 //棕红色
-#define GRAY  			 0X8430 //灰色
+#define BROWN 			 		 0XBC40 //棕色
+#define BRRED 					 0XFC07 //棕红色
+#define GRAY  					 0X8430 //灰色
 //GUI颜色
 
 #define DARKBLUE      	 0X01CF	//深蓝色

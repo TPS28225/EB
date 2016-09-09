@@ -19,8 +19,9 @@
 #define TASK_TCP_CLIENT_STK_SIZE	2000
 #define TASK_TEST_INPUT_STK_SIZE	400
 #define TASK_TEST_KEY_STK_SIZE		400
-#define TASK_OLED_DISPLAY_STK_SIZE	(1024)
+#define TASK_OLED_DISPLAY_STK_SIZE (1024)
 #define TASK_BEEP_MUSIC_STK_SIZE	(256)
+#define TASK_STATE_TEST_STK_SIZE				(128)
 
 extern OS_EVENT * q_msg_zigbee_rx;			
 extern OS_EVENT * q_msg_zigbee_tx;
@@ -39,6 +40,7 @@ extern OS_STK Stk_Task_INPUT[TASK_TEST_INPUT_STK_SIZE];
 extern OS_STK Stk_Task_KEY[TASK_TEST_KEY_STK_SIZE];
 extern OS_STK Stk_Task_OLED_DISPLAY[TASK_OLED_DISPLAY_STK_SIZE];
 extern OS_STK Stk_Task_BEEP_MUSIC[TASK_BEEP_MUSIC_STK_SIZE];
+extern OS_STK Stk_Task_STATE_TEST[TASK_STATE_TEST_STK_SIZE];
 
 void Task_TX(void *pdata);
 void Task_RX(void *pdata);
@@ -49,4 +51,5 @@ void Task_TCP_Client(void *pdata);
 void Task_KEY(void *pdata);
 void Task_OLEDDisplay(void *pdata);
 void Task_BEEP_MUSIC_Display(void *pdata);
+void Task_STATE_TEST(void *pdata);
 #endif

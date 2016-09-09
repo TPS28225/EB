@@ -1228,7 +1228,7 @@ void bmpdisplay_exam8(void){
 
 void bmpdisplay_exam9(void){
 	int picture_counter=0;
-	int picture_falg=0;
+//	int picture_falg=0;
 	
 	GUI_MEMDEV_Handle hMem_Main;	
 	GUI_MEMDEV_Handle hMem_Sub_comm_105_125_278x20[6];
@@ -1267,21 +1267,28 @@ void bmpdisplay_exam9(void){
 	hMem_Sub_comm_105_125_278x20[5]=Create_MEMDEV_Icon("0:/picture/exam9/comm6_105_125_278x20.bmp",105,125);
 	
 	while(1){
-		if(0==picture_falg){		
-			picture_counter++;
-			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_105_125_278x20[picture_counter],105,125);			
+//Ë«Ïò
+//		if(0==picture_falg){		
+//			picture_counter++;
+//			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_105_125_278x20[picture_counter],105,125);			
 
-			if(picture_counter>=5){
-				picture_falg=1;
-			}
-		}
-		else if(1==picture_falg){
-			picture_counter--;
-			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_105_125_278x20[picture_counter],105,125);			
-			if(picture_counter==0){
-				picture_falg=0;		
-			}
-		}
+//			if(picture_counter>=5){
+//				picture_falg=1;
+//			}
+//		}
+//		else if(1==picture_falg){
+//			picture_counter--;
+//			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_105_125_278x20[picture_counter],105,125);			
+//			if(picture_counter==0){
+//				picture_falg=0;		
+//			}
+//		}
+//µ¥Ïò
+		GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_105_125_278x20[picture_counter],105,125);			
+		picture_counter++;
+		if(picture_counter>5){
+			picture_counter=0;
+		}		
 		
 		if(9!=OUTPUTDEVICE.Cureent_Exam_Num){
 			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[0]);

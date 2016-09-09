@@ -14,9 +14,9 @@
 //#define KEY3_PIN               	GPIO_Pin_7             
 //#define KEY3_PORT         			GPIOD                     
 //#define KEY3_CLK          			RCC_AHB1Periph_GPIOD
-#define KEY3_PIN               	GPIO_Pin_4             
-#define KEY3_PORT         			GPIOA                     
-#define KEY3_CLK          			RCC_AHB1Periph_GPIOA
+#define KEY3_PIN               	GPIO_Pin_6             
+#define KEY3_PORT         			GPIOE                    
+#define KEY3_CLK          			RCC_AHB1Periph_GPIOE
 
 #define KEY4_PIN               GPIO_Pin_9               
 #define KEY4_PORT         			GPIOG                     
@@ -28,9 +28,9 @@
 #define DOOR_PORT         			GPIOC                     
 #define DOOR_CLK          			RCC_AHB1Periph_GPIOC
 
-#define HUMAN_PIN               GPIO_Pin_13               
-#define HUMAN_PORT         			GPIOC                     
-#define HUMAN_CLK          			RCC_AHB1Periph_GPIOC
+#define HUMAN_PIN               GPIO_Pin_3               
+#define HUMAN_PORT         			GPIOE                     
+#define HUMAN_CLK          			RCC_AHB1Periph_GPIOE
 
 #define SOUND_PIN               GPIO_Pin_7               
 #define SOUND_PORT         			GPIOF                     

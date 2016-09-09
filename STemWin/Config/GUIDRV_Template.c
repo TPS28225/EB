@@ -61,7 +61,7 @@ Purpose     : Template driver, could be used as starting point for new
 
 //定义LCD的命令和数据位.
 u32 UCGUI_LCD_CMD  = 0X60000000; //地址为0X60000000; 
-u32 UCGUI_LCD_DATA = 0X60020000; //地址为0x60020000;  
+u32 UCGUI_LCD_DATA = 0X60000100; //地址为0x60020000;  
 /*********************************************************************
 *
 *       Defines

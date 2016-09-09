@@ -11,7 +11,7 @@
 #define BEEP_OFF   GPIO_ResetBits(BEEP_GPIO,BEEP_PIN)
 
 //void BEEP_Run(void);
-//void BEEP_Configuration(void);
+void BEEP_Configuration(void);
 void Beep_Config(void);
 void musicPlay(void);
 #endif

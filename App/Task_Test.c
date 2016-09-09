@@ -16,6 +16,7 @@ __align(8) OS_STK Stk_Task_INPUT[TASK_TEST_INPUT_STK_SIZE];
 __align(8) OS_STK Stk_Task_KEY[TASK_TEST_KEY_STK_SIZE];
 __align(8) OS_STK Stk_Task_UDP_Client[TASK_UDP_CLIENT_STK_SIZE];
 __align(8) OS_STK Stk_Task_TCP_Client[TASK_TCP_CLIENT_STK_SIZE];
+__align(8) OS_STK Stk_Task_STATE_TEST[TASK_STATE_TEST_STK_SIZE];
 
 //显示屏
 __align(8) OS_STK Stk_Task_OLED_DISPLAY[TASK_OLED_DISPLAY_STK_SIZE];
@@ -67,15 +68,13 @@ taskRunTime runTime;
 注    意：
 ***********************************************************************/
 void Task_INPUT(void *pdata)
-{		
-//	char str[10];
-//	LcmClearBMP();	
+{			
   while(1)
 	{
-//		UltrasonicWave_StartMeasure();
-//		DHT11_Read_Data();
-//		LightIntensitySensor_measure();
-//		GET_CARDID();	 
+		UltrasonicWave_StartMeasure();
+		DHT11_Read_Data();
+		LightIntensitySensor_measure();
+		GET_CARDID();	 
 		OSTimeDlyHMSM(0, 0, 0, 200);
 	}
 }
@@ -95,9 +94,8 @@ void Task_OUTPUT(void *pdata)
 	{
 //		runTime.OutputStartTime = TIM_GetCounter(DELAY_TIMER);
 //		LED_Run();	
-////		BEEP_Run();	
 //		MOTOR_Run();
-//		BLUTOOTH_Run();
+		BLUTOOTH_Run();
 //		Zigbee_RUN();
 //		IR_Run();
 //		runTime.OutputEndTime = TIM_GetCounter(DELAY_TIMER);
@@ -169,8 +167,8 @@ void Task_OUTPUT(void *pdata)
 //		IR_LearnState++;
 //		if(4==IR_LearnState)IR_LearnState=0;	
 
-	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_State=1;
-	OSTimeDlyHMSM(0, 0, 6, 0);//延时2s
+//	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_State=1;
+	OSTimeDlyHMSM(0, 0, 2, 0);//延时2s
 	}
 }
 /***********************************************************************
@@ -242,7 +240,7 @@ void Task_UDP_Client(void *pdata)
 	/* UDP_client Init */
 	UDP_client_init();
 	while(1)
-	{  
+	{ 	
 		runTime.UdpStartTime = TIM_GetCounter(DELAY_TIMER);
 		while(tx_buf.numOfBuf > 0)
 		{
@@ -308,7 +306,6 @@ void Task_OLEDDisplay(void *pdata)
 //	GUI_Clear();
 
 //	GUI_DispStringHCenterAt("按照十进制整数格式输出，显示 a=1234  ",300,0);//("ALIENTEK XBF 汉字显示");
-//	while(1);
 	
 //	MainTask();
 	
@@ -341,13 +338,21 @@ void Task_OLEDDisplay(void *pdata)
 
 void Task_BEEP_MUSIC_Display(void *pdata)
 {
-	Beep_Config();
 	while(1){
 		musicPlay();
 	}
 }
 
-
+void Task_STATE_TEST(void *pdata){
+	
+	while(1){		
+		GPIO_SetBits(GPIOA,GPIO_Pin_5);		
+		OSTimeDlyHMSM(0, 0, 0, 100);//挂起100ms，以便其他线程运行
+		
+		GPIO_ResetBits(GPIOA,GPIO_Pin_5);				
+		OSTimeDlyHMSM(0, 0, 2, 0);//挂起100ms，以便其他线程运行
+	}	
+}
 
 
 

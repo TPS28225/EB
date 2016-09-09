@@ -565,7 +565,7 @@ static void _LCDBench(void) {
   GUI_DispString(", SWAPXY ");
   GUI_DispDecMin(SwapXY);
   GUI_SetLBorder(1);
-  GUI_SetFont(&GUI_Font32B_1);
+  GUI_SetFont(&GUI_Font6x8);
   GUI_DispChar('\n');
   _DispFillrate("\nFill: ", FillratePPS,         " Fill");
   _DispFillrate("\nF6x8: ", PixelrateF6x8,       " F6x8");
@@ -607,19 +607,19 @@ static void _LCDBench(void) {
 //void MainTask(void);
 unsigned int i=0;
 void MainTask(void) {
-//	_LCDBench();
-	GUI_SetFont(&GUI_Font32B_1);
+	_LCDBench();
+//	GUI_SetFont(&GUI_Font32B_1);
 //	GUI_SetTextMode(GUI_TM_TRANS);//GUI_TM_TRANS
 //	GUI_DrawBitmap(&bmEB_Face_1, 0, 0);	
 //	GUI_DispStringHCenterAt("GUI_TM_TRANS" , 160, 42);
-	OSTimeDlyHMSM(0, 0, 2, 0);	
-	GUI_DrawBitmap(&bmexam1, 0, 0);	
-	OSTimeDlyHMSM(0, 0, 2, 0);	
+//	OSTimeDlyHMSM(0, 0, 2, 0);	
+//	GUI_DrawBitmap(&bmexam1, 0, 0);	
+//	OSTimeDlyHMSM(0, 0, 2, 0);	
   while (1) {
-		GUI_DrawBitmap(&bmlight_on_360_50_66x76, 360, 50);	
+//		GUI_DrawBitmap(&bmlight_on_360_50_66x76, 360, 50);	
 //		GUI_DrawBitmap(&bmbeep_on_350_125_84x75, 0, 0);	
 //		GUI_DrawBitmap(&bmfan2_345_205_94x90, 0, 0);		
-		OSTimeDlyHMSM(0, 0, 1, 0);
+//		OSTimeDlyHMSM(0, 0, 1, 0);
 		
 //		GUI_DrawBitmap(&bmfan4_345_205_94x90, 0, 0);	
 //		OSTimeDlyHMSM(0, 0, 1, 0);
@@ -630,10 +630,10 @@ void MainTask(void) {
 //		GUI_DrawBitmap(&bmfan8_345_205_94x90, 0, 0);	
 //		OSTimeDlyHMSM(0, 0, 1, 0);
 //		
-		GUI_DrawBitmap(&bmlight_off_360_50_66x76, 360, 50);	
+//		GUI_DrawBitmap(&bmlight_off_360_50_66x76, 360, 50);	
 //		GUI_DrawBitmap(&bmbeep_off_350_125_84x75, 0, 0);	
 //		GUI_DrawBitmap(&bmfan2_345_205_94x90, 0, 0);		
-		OSTimeDlyHMSM(0, 0, 1, 0);
+		OSTimeDlyHMSM(0, 0, 10, 0);
 		
 //		GUI_DrawBitmap(&bmfan4_345_205_94x90, 0, 0);	
 //		OSTimeDlyHMSM(0, 0, 1, 0);
@@ -644,7 +644,7 @@ void MainTask(void) {
 //		GUI_DrawBitmap(&bmfan8_345_205_94x90, 0, 0);	
 //		OSTimeDlyHMSM(0, 0, 1, 0);
 		
-//		_LCDBench();
+		_LCDBench();
   }
 }
 

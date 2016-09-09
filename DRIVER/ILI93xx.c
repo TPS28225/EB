@@ -651,7 +651,7 @@ void TFTLCD_Init(void)
 	
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC,ENABLE);
   RCC_AHB3PeriphClockCmd(RCC_AHB3Periph_FSMC,ENABLE);	//使能FSMC时钟
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB|RCC_AHB1Periph_GPIOD|RCC_AHB1Periph_GPIOE,ENABLE);//使能PORTB,D,E以及AFIO复用功能时钟
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB|RCC_AHB1Periph_GPIOD|RCC_AHB1Periph_GPIOE|RCC_AHB1Periph_GPIOF,ENABLE);//使能PORTB,D,E以及AFIO复用功能时钟
 
  
  	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;				 //PB0 推挽输出 背光
@@ -662,7 +662,7 @@ void TFTLCD_Init(void)
  	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	
  	//PORTD复用推挽输出  
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_14|GPIO_Pin_15;				 //	//PORTD复用推挽输出  
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_14|GPIO_Pin_15;				 //	//PORTD复用推挽输出  
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      //推挽输出
@@ -673,6 +673,10 @@ void TFTLCD_Init(void)
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;				 //	//PORTD复用推挽输出  
  	GPIO_Init(GPIOE, &GPIO_InitStructure); 
 	
+		//PORTE复用推挽输出  
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;				 //	//PORTF复用推挽输出  
+ 	GPIO_Init(GPIOF, &GPIO_InitStructure); 
+	
 	  /* GPIOD configuration */
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource0 , GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource1 , GPIO_AF_FSMC);
@@ -682,7 +686,6 @@ void TFTLCD_Init(void)
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource8 , GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource9 , GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource10 , GPIO_AF_FSMC);
-  GPIO_PinAFConfig(GPIOD, GPIO_PinSource11 , GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource14 , GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOD, GPIO_PinSource15 , GPIO_AF_FSMC); 
 	
@@ -695,7 +698,9 @@ void TFTLCD_Init(void)
   GPIO_PinAFConfig(GPIOE, GPIO_PinSource12 , GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOE, GPIO_PinSource13 , GPIO_AF_FSMC);
   GPIO_PinAFConfig(GPIOE, GPIO_PinSource14 , GPIO_AF_FSMC);
-  GPIO_PinAFConfig(GPIOE, GPIO_PinSource15 , GPIO_AF_FSMC);   
+  GPIO_PinAFConfig(GPIOE, GPIO_PinSource15 , GPIO_AF_FSMC); 
+
+  GPIO_PinAFConfig(GPIOF, GPIO_PinSource13 , GPIO_AF_FSMC);
 
 	readWriteTiming.FSMC_AddressSetupTime = 0x10;	 //地址建立时间（ADDSET）为16个HCLK 1/36M=27ns
   readWriteTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（ADDHLD）模式A未用到	
@@ -706,9 +711,9 @@ void TFTLCD_Init(void)
   readWriteTiming.FSMC_AccessMode = FSMC_AccessMode_B;	 //模式A
     
 
-	writeTiming.FSMC_AddressSetupTime = 0x00;	 //地址建立时间（ADDSET）为1个HCLK  
+	writeTiming.FSMC_AddressSetupTime = 0x02;	 //地址建立时间（ADDSET）为1个HCLK  
   writeTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（B		
-  writeTiming.FSMC_DataSetupTime = 0x06;		 ////数据保存时间3个HCLK	
+  writeTiming.FSMC_DataSetupTime = 0x05;		 ////数据保存时间3个HCLK	
   writeTiming.FSMC_BusTurnAroundDuration = 0x00;
   writeTiming.FSMC_CLKDivision = 0x00;
   writeTiming.FSMC_DataLatency = 0x00;
@@ -736,7 +741,7 @@ void TFTLCD_Init(void)
  	FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM1, ENABLE);  // 使能BANK1 
 		
  
-	delay_ms(50); 					// delay 50 ms 
+	delay_ms(70); 					// delay 70 ms 
   
 
 //	LCD_WR_REG(0XD3);				   
@@ -1147,7 +1152,9 @@ void TFTLCD_Init(void)
 		LCD_WR_REG(0X20);//Exit invert mode
 
 		LCD_WR_REG(0X36);
-		LCD_WR_DATA(0X08);//原来是a
+		LCD_WR_DATA(0x38);//原来是38
+		
+		
 		
 		LCD_WR_REG(0X3A);
 		LCD_WR_DATA(0X55);//16位模式	  
@@ -1163,7 +1170,7 @@ void TFTLCD_Init(void)
 		LCD_WR_DATA(0X01);
 		LCD_WR_DATA(0XDF);
 		delay_ms(120);
-		LCD_WR_REG(0X29); 	 
+		LCD_WR_REG(0X29); 
  	}else if(lcddev.id==0x5310)
 	{ 
 		LCD_WR_REG(0xED);
@@ -2922,8 +2929,8 @@ void TFTLCD_Init(void)
 		LCD_SSD_BackLightSet(100);//背光设置为最亮
 	}		 
 	LCD_Display_Dir(1);		//横屏
-	LCD_LED_SET;				//点亮背光
-	LCD_Clear(WHITE);
+//	LCD_LED_SET;				//点亮背光
+	LCD_Clear(GREEN);
 }  
 //清屏函数
 //color:要清屏的填充色
@@ -2941,7 +2948,7 @@ void LCD_Clear(u16 color)
  		lcddev.dir=1;	 
   		lcddev.setxcmd=0X2B;
 		lcddev.setycmd=0X2A;  	 
- 	}else LCD_SetCursor(0x00,0x0000);	//设置光标位置 
+ 	}else LCD_SetCursor(0x00,0x00);	//设置光标位置 
 	LCD_WriteRAM_Prepare();     		//开始写入GRAM	 	  
 	for(index=0;index<totalpoint;index++)
 	{
