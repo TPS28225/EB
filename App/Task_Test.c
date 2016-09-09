@@ -291,12 +291,21 @@ void Task_OLEDDisplay(void *pdata)
 	f_mount(0, &fs);
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC,ENABLE);//要开启STenwim，必须先开CRC时钟
   GUI_Init();
+
+	GUI_SetBkColor(GUI_BLACK);
+	GUI_SetColor(0x00d1fef0);
+	GUI_SetFont(&GUI_Font16_ASCII);
+//	GUI_SetFont(&GUI_Fontyouyuan20);
+	GUI_SetTextMode(GUI_TM_TRANS);
+	GUI_UC_SetEncodeUTF8();
+	GUI_DispStringAt("CPU         STM32F207",10,10);
+	GUI_DispStringAt("LCD           480x320",10,30);
+	GUI_DispStringAt("EXRAM             OK!",10,50);	
+	GUI_DispStringAt("GUI                OK!",10,70);
+	GUI_DispStringAt("PLEASE WAITING...",10,90);
 	
 //	Create_XBF16("0:/SYSTEM/FONT/XBF20.xbf");	
-//	GUI_SetBkColor(GUI_BLACK);
-//	GUI_SetColor(0x00d1fef0);
-//	GUI_SetFont(&GUI_Font32_ASCII);
-//	GUI_SetTextMode(GUI_TM_TRANS);	GUI_UC_SetEncodeUTF8();
+//	GUI_UC_SetEncodeUTF8();
 //	GUI_DispStringHCenterAt("111111111",100,0);
 //	GUI_Clear();
 

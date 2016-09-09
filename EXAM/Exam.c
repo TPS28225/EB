@@ -40,25 +40,15 @@ void bmpdisplay_exam1(void)
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
-	
-	GUI_SetBkColor(GUI_BLACK);//背景
-	GUI_SetColor(GUI_RED);
-	GUI_SetFont(&GUI_Fontyouyuan20);
-	GUI_SetTextMode(GUI_TM_TRANS);
-	GUI_Clear();
-
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,	0);
-	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
-//	GUI_Delay(5000);	
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam1/exam_background.bmp",0,0,	0);
 	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
 	GUI_MEMDEV_Delete(hMem_Main);	
-//	GUI_Delay(1000);
 //创建图标
 	hMem_Sub_beep_off_350_125_84x75=Create_MEMDEV_Icon("0:/picture/exam1/beep_off_350_125_84x75.bmp",350,125);
 	hMem_Sub_beep_on_350_125_84x75=Create_MEMDEV_Icon("0:/picture/exam1/beep_on_350_125_84x75.bmp",350,125);	
@@ -165,22 +155,15 @@ void bmpdisplay_exam2(void)
 
 	GUI_MEMDEV_Handle hMem_Sub_word_background_1_125_120_82x40;//word_background_1_125_120_120x40
 	GUI_MEMDEV_Handle hMem_Sub_word_background_2_150_215_70x40;//word_background_2_150_215_70x40
-
-
 	
 //
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
-	
-
-
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,	0);
-	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
-//	GUI_Delay(5000);	
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam2/exam2_background.bmp",0,0,	0);
@@ -321,19 +304,8 @@ void bmpdisplay_exam3(void)
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
-	
-	GUI_SetBkColor(GUI_BLACK);
-	GUI_SetColor(0x00d1fef0);
-	GUI_SetFont(&GUI_Font32_ASCII);
-//	GUI_SetFont(&GUI_Fontyouyuan20);
-
-	GUI_SetTextMode(GUI_TM_TRANS);
-	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
-
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,	0);
-	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
 //	GUI_Delay(5000);	
 	
@@ -526,19 +498,8 @@ void bmpdisplay_exam4(void)
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
-	
-	GUI_SetBkColor(GUI_BLACK);
-	GUI_SetColor(0x00d1fef0);
-	GUI_SetFont(&GUI_Font24_ASCII);
-//	GUI_SetFont(&GUI_Fontyouyuan20);
-
-	GUI_SetTextMode(GUI_TM_TRANS);
-	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
-
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,	0);
-	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
 //	GUI_Delay(5000);	
 	
@@ -675,21 +636,9 @@ void bmpdisplay_exam5(void){
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
-	
-	GUI_SetBkColor(GUI_BLACK);
-	GUI_SetColor(0x00d1fef0);
-	GUI_SetFont(&GUI_Font24_ASCII);
-//	GUI_SetFont(&GUI_Fontyouyuan20);
-
-	GUI_SetTextMode(GUI_TM_TRANS);
-	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
-
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,	0);
-	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
-//	GUI_Delay(5000);	
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam5/exam5_background.bmp",0,0,0);
@@ -834,19 +783,8 @@ void bmpdisplay_exam6_bus(void){
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
-	
-	GUI_SetBkColor(GUI_BLACK);
-	GUI_SetColor(0x00d1fef0);
-	GUI_SetFont(&GUI_Font16_ASCII);
-//	GUI_SetFont(&GUI_Fontyouyuan20);
-
-	GUI_SetTextMode(GUI_TM_TRANS);
-	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
-
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
@@ -1020,21 +958,9 @@ void bmpdisplay_exam6_entrance_guard(void){
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
-	
-	GUI_SetBkColor(GUI_BLACK);
-	GUI_SetColor(0x00d1fef0);
-	GUI_SetFont(&GUI_Font16_ASCII);
-//	GUI_SetFont(&GUI_Fontyouyuan20);
-
-	GUI_SetTextMode(GUI_TM_TRANS);
-	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
-
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
-//	GUI_Delay(5000);	
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam6/exam6_entrance_guard_background.bmp",0,0,0);
@@ -1120,21 +1046,9 @@ void bmpdisplay_exam7(void){
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
-	
-	GUI_SetBkColor(GUI_BLACK);
-	GUI_SetColor(0x00d1fef0);
-	GUI_SetFont(&GUI_Font16_ASCII);
-//	GUI_SetFont(&GUI_Fontyouyuan20);
-
-	GUI_SetTextMode(GUI_TM_TRANS);
-	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
-
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
-//	GUI_Delay(5000);	
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam7/exam7_background.bmp",0,0,0);
@@ -1173,21 +1087,9 @@ void bmpdisplay_exam8(void){
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
-	
-	GUI_SetBkColor(GUI_BLACK);
-	GUI_SetColor(0x00d1fef0);
-	GUI_SetFont(&GUI_Font16_ASCII);
-//	GUI_SetFont(&GUI_Fontyouyuan20);
-
-	GUI_SetTextMode(GUI_TM_TRANS);
-	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
-
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
-//	GUI_Delay(5000);	
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam8/exam8_background.bmp",0,0,0);
@@ -1236,22 +1138,10 @@ void bmpdisplay_exam9(void){
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-
-	
-	GUI_SetBkColor(GUI_BLACK);
-	GUI_SetColor(0x00d1fef0);
-	GUI_SetFont(&GUI_Font16_ASCII);
-//	GUI_SetFont(&GUI_Fontyouyuan20);
-
-	GUI_SetTextMode(GUI_TM_TRANS);
-	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
-//	GUI_Delay(5000);	
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam9/exam9_background.bmp",0,0,0);

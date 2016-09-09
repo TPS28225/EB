@@ -19,7 +19,7 @@
  */
 //u32 testsram[250000] __attribute__((at(0X68000000)));//测试用数组
 //外部内存测试(最大支持1M字节内存测试)	    
-void fsmc_sram_test(void)
+u32 fsmc_sram_test(void)
 {  
 	u32 i=0,s;  	  
 	u8 temp=0;	   
@@ -37,22 +37,21 @@ void fsmc_sram_test(void)
 		if(i==0)sval=temp;
  		else if(temp<=sval)break;//后面读出的数据一定要比第一次读到的数据大.	   		   
 		s=(u16)(temp-sval+1)*4;//显示内存容量  
- 	}					 
+ 	}
+	return s;
 }	
 
 void BSP_Init(void)
 {
 	NVIC_Configuration();	
 	delay_init();
+	
 	FSMC_SRAM_Init();
-	fsmc_sram_test();
 	my_mem_init(SRAMEX);  	//初始化外部内存池	
-	LED_Configuration();
-	TFTLCD_Init();
-	
+	LED_Configuration();	
+	TFTLCD_Init();	
 //	BEEP_Configuration();
-	Beep_Config();
-	
+	Beep_Config();	
 	MOTOR_Configuration();
 	BLUTOOTH_Configuration();
 //	Zigbee_Configuration();	//引脚冲突，暂时屏蔽
