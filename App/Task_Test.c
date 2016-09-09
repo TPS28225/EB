@@ -298,6 +298,10 @@ void Task_OLEDDisplay(void *pdata)
 //	GUI_SetFont(&GUI_Fontyouyuan20);
 	GUI_SetTextMode(GUI_TM_TRANS);
 	GUI_UC_SetEncodeUTF8();
+	
+//	GUI_DispStringAt("F",400,50);
+//	while(1);
+	
 	GUI_DispStringAt("CPU         STM32F207",10,10);
 	GUI_DispStringAt("LCD           480x320",10,30);
 	GUI_DispStringAt("EXRAM             OK!",10,50);	

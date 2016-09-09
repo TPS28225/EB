@@ -84,7 +84,7 @@ void Task_StartUp(void *pdata)
 	//OLED显示任务
 	OSTaskCreate(Task_OLEDDisplay, (void *)0, &Stk_Task_OLED_DISPLAY[TASK_OLED_DISPLAY_STK_SIZE-1], OS_USER_PRIO_GET(9));
 	//声音任务
-//	OSTaskCreate(Task_BEEP_MUSIC_Display, (void *)0, &Stk_Task_BEEP_MUSIC[TASK_BEEP_MUSIC_STK_SIZE-1], OS_USER_PRIO_GET(10));
+	OSTaskCreate(Task_BEEP_MUSIC_Display, (void *)0, &Stk_Task_BEEP_MUSIC[TASK_BEEP_MUSIC_STK_SIZE-1], OS_USER_PRIO_GET(10));
 	//状态指示任务
 	OSTaskCreate(Task_STATE_TEST, (void *)0, &Stk_Task_STATE_TEST[TASK_STATE_TEST_STK_SIZE-1], OS_USER_PRIO_GET(11));	
 	

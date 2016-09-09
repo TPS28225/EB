@@ -199,17 +199,7 @@ void LCD_SetCursor(u16 Xpos, u16 Ypos)
 		LCD_WR_DATA(Xpos>>8);LCD_WR_DATA(Xpos&0XFF); 			 
 		LCD_WR_REG(lcddev.setycmd); 
 		LCD_WR_DATA(Ypos>>8);LCD_WR_DATA(Ypos&0XFF); 		
-	}else if(lcddev.id==0X8357){
-//		Xpos=479-Xpos;
-//		Ypos=319-Ypos;
-		LCD_WR_REG(lcddev.setxcmd);		
-//		LCD_WR_DATA(0);LCD_WR_DATA(0); 			
-		LCD_WR_DATA(Xpos>>8);LCD_WR_DATA(Xpos&0XFF); 			 
-		LCD_WR_REG(lcddev.setycmd); 
-//		LCD_WR_DATA(0);LCD_WR_DATA(0); 		
-		LCD_WR_DATA(Ypos>>8);LCD_WR_DATA(Ypos&0XFF); 
-	}
-	else if(lcddev.id==0X6804)
+	}else if(lcddev.id==0X6804)
 	{
 		if(lcddev.dir==1)Xpos=lcddev.width-1-Xpos;//∫·∆¡ ±¥¶¿Ì
 		LCD_WR_REG(lcddev.setxcmd); 
@@ -348,7 +338,7 @@ void LCD_Scan_Dir(u8 dir)
 	else if(lcddev.id==0x8357){
 		if(lcddev.dir==1){
 			LCD_WR_REG(0x36);  
-			LCD_WR_DATA(0x38);
+			LCD_WR_DATA(0x3B);
 			
 			LCD_WR_REG(0X2A);
 			LCD_WR_DATA(0X00);
