@@ -3,7 +3,7 @@
 
 void MOTOR_Run(void)
 {
-	static char Motor_Speed_Current=0;
+	static char Motor_Speed_Current=1;
 	if(Motor_Speed_Current!=OUTPUTDEVICE.Motor)	
 	{
 		Motor_Speed_Current = OUTPUTDEVICE.Motor;
@@ -30,7 +30,7 @@ void MOTOR_Run(void)
 
 void MOTOR_Configuration(void)
 {
-	MOTOR_PWM_Init(999,119);
+	MOTOR_PWM_Init(1000,119);
 }
 
 void MOTOR_PWM_Init(u32 arr,u32 psc)

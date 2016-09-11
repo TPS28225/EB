@@ -951,7 +951,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>DRIVER</GroupName>
+          <GroupName>I/O DEVICE</GroupName>
           <Files>
             <File>
               <FileName>LED.C</FileName>
@@ -1081,7 +1081,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>3rd</GroupName>
+          <GroupName>cJSON</GroupName>
           <Files>
             <File>
               <FileName>cJSON.c</FileName>

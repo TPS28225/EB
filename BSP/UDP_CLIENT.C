@@ -15,24 +15,7 @@ struct pbuf *udp_p;
 extern tx_buf_t  tx_buf;
 extern rx_buf_t  rx_buf;
 
-void msgReporter(char *msg, int length)
-{			
-	if(tx_buf.numOfBuf < MAX_RX_BUF)
-	{						
-		memcpy(&tx_buf.buffer[tx_buf.numOfBuf][0], msg, length);
-		tx_buf.buffer[tx_buf.numOfBuf][length] = 0;
-		tx_buf.numOfBuf++;		
-	}
-}
-void msgParser(void)
-{
-	char * msg;
-	while(rx_buf.numOfBuf > 0)
-	{
-		msg = rx_buf.buffer[--rx_buf.numOfBuf];	
-		parserJson(msg);
-	}
-}
+
 
 /***********************************************************************
 º¯ÊýÃû³Æ£ºudp_server_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p,struct ip_addr *addr, u16_t port)

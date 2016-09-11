@@ -8,6 +8,9 @@
 u16 BT_RX_Row_Counter = 0;
 u16 ZB_TX_Row_Counter = 0;
 
+extern tx_buf_t  tx_buf;
+extern rx_buf_t  rx_buf;
+
 char * makeJson()
 {
 	cJSON * pJsonRoot;
@@ -190,4 +193,22 @@ void parserJson(char * pMsg)
 	cJSON_Delete(pJson);
 }
 
+void msgReporter(char *msg, int length)
+{			
+	if(tx_buf.numOfBuf < MAX_RX_BUF)
+	{						
+		memcpy(&tx_buf.buffer[tx_buf.numOfBuf][0], msg, length);
+		tx_buf.buffer[tx_buf.numOfBuf][length] = 0;
+		tx_buf.numOfBuf++;		
+	}
+}
+void msgParser(void)
+{
+	char * msg;
+	while(rx_buf.numOfBuf > 0)
+	{
+		msg = rx_buf.buffer[--rx_buf.numOfBuf];	
+		parserJson(msg);
+	}
+}
 

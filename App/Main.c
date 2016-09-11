@@ -71,8 +71,8 @@ void Task_StartUp(void *pdata)
 	//									OS_TASK_OPT_STK_CHK + OS_TASK_OPT_STK_CLR);
 	
 	//以太网任务
-	//	OSTaskCreate(Task_TCP_Client, (void *)0, &Stk_Task_TCP_Client[TASK_TCP_CLIENT_STK_SIZE-1], OS_USER_PRIO_GET(2));//在移入真正的实验板后再开启
-	OSTaskCreate(Task_UDP_Client, (void *)0, &Stk_Task_UDP_Client[TASK_UDP_CLIENT_STK_SIZE-1], OS_USER_PRIO_GET(3));
+	OSTaskCreate(Task_TCP_Client, (void *)0, &Stk_Task_TCP_Client[TASK_TCP_CLIENT_STK_SIZE-1], OS_USER_PRIO_GET(2));//在移入真正的实验板后再开启
+//	OSTaskCreate(Task_UDP_Client, (void *)0, &Stk_Task_UDP_Client[TASK_UDP_CLIENT_STK_SIZE-1], OS_USER_PRIO_GET(3));
 	OSTaskCreate(Task_TX, (void *)0, &Stk_Task_TX[TASK_TEST_TX_STK_SIZE-1], OS_USER_PRIO_GET(4));
   OSTaskCreate(Task_RX, (void *)0, &Stk_Task_RX[TASK_TEST_RX_STK_SIZE-1], OS_USER_PRIO_GET(5));
 	//输出设备任务
@@ -83,8 +83,8 @@ void Task_StartUp(void *pdata)
 	OSTaskCreate(Task_KEY, (void *)0, &Stk_Task_KEY[TASK_TEST_KEY_STK_SIZE-1], OS_USER_PRIO_GET(6));
 	//OLED显示任务
 	OSTaskCreate(Task_OLEDDisplay, (void *)0, &Stk_Task_OLED_DISPLAY[TASK_OLED_DISPLAY_STK_SIZE-1], OS_USER_PRIO_GET(9));
-	//声音任务
-	OSTaskCreate(Task_BEEP_MUSIC_Display, (void *)0, &Stk_Task_BEEP_MUSIC[TASK_BEEP_MUSIC_STK_SIZE-1], OS_USER_PRIO_GET(10));
+//	//声音任务
+//	OSTaskCreate(Task_BEEP_MUSIC_Display, (void *)0, &Stk_Task_BEEP_MUSIC[TASK_BEEP_MUSIC_STK_SIZE-1], OS_USER_PRIO_GET(10));
 	//状态指示任务
 	OSTaskCreate(Task_STATE_TEST, (void *)0, &Stk_Task_STATE_TEST[TASK_STATE_TEST_STK_SIZE-1], OS_USER_PRIO_GET(11));	
 	

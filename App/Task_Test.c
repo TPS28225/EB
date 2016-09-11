@@ -93,11 +93,13 @@ void Task_OUTPUT(void *pdata)
   while(1)
 	{
 //		runTime.OutputStartTime = TIM_GetCounter(DELAY_TIMER);
-//		LED_Run();	
-//		MOTOR_Run();
+		LED_Run();	
+		MOTOR_Run();
 		BLUTOOTH_Run();
 //		Zigbee_RUN();
 //		IR_Run();
+		
+		
 //		runTime.OutputEndTime = TIM_GetCounter(DELAY_TIMER);
 //		if(runTime.OutputEndTime - runTime.OutputStartTime > runTime.OutputRunTime)
 //			runTime.OutputRunTime = runTime.OutputEndTime - runTime.OutputStartTime;	
@@ -194,7 +196,7 @@ void Task_TX(void *pdata)
 		runTime.TxEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.TxEndTime - runTime.TxStartTime > runTime.TxRunTime)
 			runTime.TxRunTime = runTime.TxEndTime - runTime.TxStartTime;	
-		OSTimeDlyHMSM(0, 0, 1, 0);
+		OSTimeDlyHMSM(0, 0, 5, 0);
 	}
 }
 /***********************************************************************
@@ -248,7 +250,7 @@ void Task_UDP_Client(void *pdata)
 			udp_p->len=udp_p->tot_len=strlen(tx_buf.buffer[tx_buf.numOfBuf]);
 		  udp_send(udp_pcb,udp_p);
 		}
-		LocalTime ++;
+		LocalTime +=10;
 		LwIP_Periodic_Handle(LocalTime);		
 		runTime.UdpEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.UdpEndTime - runTime.UdpStartTime > runTime.UdpRunTime)
@@ -279,9 +281,9 @@ void Task_TCP_Client(void *pdata)
 				tx_buf.numOfBuf--;				
 			}			
 		}		
-		LocalTime ++;
+		LocalTime +=10;
 		LwIP_Periodic_Handle(LocalTime);		
-		OSTimeDlyHMSM(0, 0, 0, 100);//挂起10ms，以便其他线程运行
+		OSTimeDlyHMSM(0, 0, 0, 10);//挂起10ms，以便其他线程运行
 	}
 }
 

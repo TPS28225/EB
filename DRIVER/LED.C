@@ -1,39 +1,15 @@
 #include "main.h"
 
-u8 led_count = 0;
 void LED_Run(void)
 {
-	led_count = ! led_count;
-	if(led_count == 0)
-	{
-		TIM_SetCompare3(TIM4, 0);	
-		TIM_SetCompare4(TIM4, 0);	
-		TIM_SetCompare2(TIM4, 0);	
-		TIM_SetCompare1(TIM4, 0);
-		TIM_SetCompare2(TIM3, 0);	
-		TIM_SetCompare1(TIM3, 0);	
-		TIM_SetCompare4(TIM3, 0);	
-		TIM_SetCompare3(TIM3, 0);			
-	}
-	else
-	{
-		TIM_SetCompare3(TIM4,100);	
-		TIM_SetCompare4(TIM4,100);	
-		TIM_SetCompare2(TIM4,100);	
-		TIM_SetCompare1(TIM4,100);
-		TIM_SetCompare2(TIM3,100);	
-		TIM_SetCompare1(TIM3,100);	
-		TIM_SetCompare4(TIM3,100);	
-		TIM_SetCompare3(TIM3,100);			
-	}
-//	TIM_SetCompare3(TIM4,OUTPUTDEVICE.LED[0]*10);	
-//	TIM_SetCompare4(TIM4,OUTPUTDEVICE.LED[1]*10);	
-//	TIM_SetCompare2(TIM4,OUTPUTDEVICE.LED[2]*10);	
-//	TIM_SetCompare1(TIM4,OUTPUTDEVICE.LED[3]*10);
-//	TIM_SetCompare2(TIM3,OUTPUTDEVICE.LED[4]*10);	
-//	TIM_SetCompare1(TIM3,OUTPUTDEVICE.LED[5]*10);	
-//	TIM_SetCompare4(TIM3,OUTPUTDEVICE.LED[6]*10);	
-//	TIM_SetCompare3(TIM3,OUTPUTDEVICE.LED[7]*10);	
+	TIM_SetCompare3(TIM4,OUTPUTDEVICE.LED[0]*10);	
+	TIM_SetCompare4(TIM4,OUTPUTDEVICE.LED[1]*10);	
+	TIM_SetCompare2(TIM4,OUTPUTDEVICE.LED[2]*10);	
+	TIM_SetCompare1(TIM4,OUTPUTDEVICE.LED[3]*10);
+	TIM_SetCompare2(TIM3,OUTPUTDEVICE.LED[4]*10);	
+	TIM_SetCompare1(TIM3,OUTPUTDEVICE.LED[5]*10);	
+	TIM_SetCompare4(TIM3,OUTPUTDEVICE.LED[6]*10);	
+	TIM_SetCompare3(TIM3,OUTPUTDEVICE.LED[7]*10);	
 }
 //u8 led_count = 0;
 //void LED_Run(void)

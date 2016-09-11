@@ -47,6 +47,7 @@ void BSP_Init(void)
 	delay_init();
 	
 	FSMC_SRAM_Init();
+	fsmc_sram_test();
 	my_mem_init(SRAMEX);  	//初始化外部内存池	
 	LED_Configuration();	
 	TFTLCD_Init();	

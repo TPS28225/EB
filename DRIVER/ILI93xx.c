@@ -662,14 +662,6 @@ void TFTLCD_Init(void)
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC,ENABLE);
   RCC_AHB3PeriphClockCmd(RCC_AHB3Periph_FSMC,ENABLE);	//使能FSMC时钟
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB|RCC_AHB1Periph_GPIOD|RCC_AHB1Periph_GPIOE|RCC_AHB1Periph_GPIOF,ENABLE);//使能PORTB,D,E以及AFIO复用功能时钟
-
- 
- 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;				 //PB0 推挽输出 背光
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      //推挽输出
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;        //上拉	
- 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	
  	//PORTD复用推挽输出  
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10|GPIO_Pin_14|GPIO_Pin_15;				 //	//PORTD复用推挽输出  
@@ -2939,7 +2931,6 @@ void TFTLCD_Init(void)
 		LCD_SSD_BackLightSet(100);//背光设置为最亮
 	}		 
 	LCD_Display_Dir(1);		//横屏
-//	LCD_LED_SET;				//点亮背光
 	LCD_Clear(BLACK);
 }  
 //清屏函数

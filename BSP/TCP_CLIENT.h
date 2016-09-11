@@ -7,9 +7,7 @@
 ***********************************************************************/
 #ifndef  _TCP_CLIENT_H_
 #define  _TCP_CLIENT_H_
-
-
-
+#include "main.h"
 
 /***************开发板ip及MAC定义*************************/
 #define BOARD_IP  			 192,168,87,252   		//开发板ip 
@@ -18,7 +16,7 @@
 #define BOARD_MAC_ADDR       0,0,0,0,0,1			//开发板MAC地址
 
 #define TCP_LOCAL_PORT     		1030 
-#define TCP_SERVER_PORT    		7298
+#define TCP_SERVER_PORT    		7289
 #define TCP_SERVER_IP   		192,168,87,105//服务器IP
 
 extern struct tcp_pcb *tcp_client_pcb;
