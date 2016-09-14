@@ -100,8 +100,8 @@ u8 DHT11_Read_Data(void)
  	u8 buf[5];
 	u8 i;
 	
-	INPUTDEVICE.humidity=buf[0];
-	INPUTDEVICE.temperature=buf[0];
+	INPUTDEVICE.humidity=0;
+	INPUTDEVICE.temperature=0;
 	
 	DHT11_Rst();
 	if(DHT11_Check()==0)
@@ -112,8 +112,10 @@ u8 DHT11_Read_Data(void)
 		}
 		if((buf[0]+buf[1]+buf[2]+buf[3])==buf[4])
 		{
-			INPUTDEVICE.humidity=buf[0];
-			INPUTDEVICE.temperature=buf[2];
+			if(buf[0]>100)	INPUTDEVICE.humidity=0;
+				else INPUTDEVICE.humidity=buf[0];
+			if(buf[2]>100)	INPUTDEVICE.humidity=0;
+				else INPUTDEVICE.temperature=buf[2];
 		}
 	}else return 1;
 	return 0;	    

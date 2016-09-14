@@ -34,7 +34,7 @@ void SPIx_Init(void)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_NOPULL;
+	GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_UP;
 	GPIO_InitStructure.GPIO_Pin = SDCARD_SCK_PIN | SDCARD_MOSI_PIN | SDCARD_MISO_PIN;
 	GPIO_Init(SDCARD_PORT, &GPIO_InitStructure);
 
@@ -46,6 +46,7 @@ void SPIx_Init(void)
 	GPIO_Init(SDCARD_PORT, &GPIO_InitStructure);	
 
 	/* SDCARD_SPI Config -------------------------------------------------------------*/
+	SPI_I2S_DeInit(SDCARD_SPI);
 	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
 	SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
 	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;

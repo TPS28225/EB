@@ -31,7 +31,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void ETH_GPIO_Config(void);
-static void ETH_NVIC_Config(void);
+//static void ETH_NVIC_Config(void);
 static void ETH_MACDMA_Config(void);
 static void Delay(uint32_t nCount)
 { 

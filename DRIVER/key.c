@@ -103,15 +103,6 @@ u8 SONG_FORMER_Counter=0;
 
 u8 Counter=0;
 
-//void EXTI9_5_IRQHandler(void)
-//{ 
-//	if(EXTI_GetITStatus(EXTI_Line7) != RESET)
-//	{
-//    SOUND_Counter++;
-//		EXTI_ClearITPendingBit(EXTI_Line7);  //清除EXTI7线路挂起位
-//	}		
-//}
-
 void KEY_RUN(void)
 {	
 
@@ -134,9 +125,9 @@ void KEY_RUN(void)
 	else
 	{
 		Counter = 0;
-		if(KEY1_Counter>1)INPUTDEVICE.KEY[0]=SET,OUTPUTDEVICE.Beep=1;
+		if(KEY1_Counter>1)INPUTDEVICE.KEY[0]=SET;//OUTPUTDEVICE.Beep=1;
 			else INPUTDEVICE.KEY[0]=RESET;
-		if(KEY2_Counter>1)INPUTDEVICE.KEY[1]=SET,OUTPUTDEVICE.Beep=0;
+		if(KEY2_Counter>1)INPUTDEVICE.KEY[1]=SET;//OUTPUTDEVICE.Beep=0;
 			else INPUTDEVICE.KEY[1]=RESET;
 		if(KEY3_Counter>1)INPUTDEVICE.KEY[2]=SET;
 			else INPUTDEVICE.KEY[2]=RESET;

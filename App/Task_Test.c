@@ -25,7 +25,7 @@ __align(8) OS_STK Stk_Task_BEEP_MUSIC[TASK_BEEP_MUSIC_STK_SIZE];
 tx_buf_t  tx_buf;
 rx_buf_t  rx_buf;
 
-char uniqueID[32];
+char uniqueID[33]={0};
 
 INPUTDEVICE_MEASURE INPUTDEVICE;
 OUTPUTDEVICE_CONTROL OUTPUTDEVICE;
@@ -74,8 +74,8 @@ void Task_INPUT(void *pdata)
 		UltrasonicWave_StartMeasure();
 		DHT11_Read_Data();
 		LightIntensitySensor_measure();
-		GET_CARDID();	 
-		OSTimeDlyHMSM(0, 0, 0, 200);
+//		GET_CARDID();	 
+		OSTimeDlyHMSM(0, 0, 1, 0);
 	}
 }
 void Task_KEY(void *pdata)
@@ -83,7 +83,7 @@ void Task_KEY(void *pdata)
   while(1)
 	{
 		KEY_RUN();
-		OSTimeDlyHMSM(0, 0, 0, 10);
+		OSTimeDlyHMSM(0, 0, 0, 30);
 	}
 }
 extern int IR_LearnState;
@@ -98,76 +98,12 @@ void Task_OUTPUT(void *pdata)
 		BLUTOOTH_Run();
 //		Zigbee_RUN();
 //		IR_Run();
-		
-		
+				
 //		runTime.OutputEndTime = TIM_GetCounter(DELAY_TIMER);
 //		if(runTime.OutputEndTime - runTime.OutputStartTime > runTime.OutputRunTime)
 //			runTime.OutputRunTime = runTime.OutputEndTime - runTime.OutputStartTime;	
 //		OSTimeDlyHMSM(0, 0, 1, 0);
-		
-//	//实验1例子	
-//		INPUTDEVICE.exist_people=1;
-//		INPUTDEVICE.sound_exceed_threshold=1;
-//		INPUTDEVICE.Magnetic_Door_Contact=1;
-//		INPUTDEVICE.temperature=30;
-//		OUTPUTDEVICE.LED[0]=1;
-//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//延时2s
-//		
-//		INPUTDEVICE.exist_people=0;
-//		INPUTDEVICE.sound_exceed_threshold=0;
-//		INPUTDEVICE.Magnetic_Door_Contact=0;
-//		INPUTDEVICE.temperature=20;
-//		OUTPUTDEVICE.LED[0]=0;
-//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//延时2s
-//		
-//	//实验2例子			
-//		OUTPUTDEVICE.LED[0]=1;	
-//		OUTPUTDEVICE.LED[1]=1;			
-//		OUTPUTDEVICE.LED[2]=1;			
-//		OUTPUTDEVICE.LED[3]=1;
-//		OUTPUTDEVICE.LED[7]=1;			
-//		INPUTDEVICE.sound_exceed_threshold=1;			
-//		INPUTDEVICE.LightIntensity=65535;
-//		
-//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//延时2s	
-//		
-//		OUTPUTDEVICE.LED[0]=0;	
-//		OUTPUTDEVICE.LED[1]=0;			
-//		OUTPUTDEVICE.LED[2]=0;			
-//		OUTPUTDEVICE.LED[3]=0;
-//		OUTPUTDEVICE.LED[7]=0;		
-//		INPUTDEVICE.sound_exceed_threshold=0;		
-//		INPUTDEVICE.LightIntensity=10;
-//		
-//		OSTimeDlyHMSM(0,0,1,0);//,OS_OPT_TIME_PERIODIC,&err);//延时2s	
 
-////	//实验3例子		
-//		INPUTDEVICE.humidity=70;
-//		INPUTDEVICE.temperature=30;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//延时2s	
-
-//		INPUTDEVICE.humidity=55;
-//		INPUTDEVICE.temperature=23;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//延时2s		
-//		
-//		INPUTDEVICE.humidity=40;
-//		INPUTDEVICE.temperature=15;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//延时2s		
-
-//	//实验4例子		
-//		INPUTDEVICE.Distance=7.011;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//延时2s	
-
-//		INPUTDEVICE.Distance=4.23;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//延时2s		
-//		
-//		INPUTDEVICE.Distance=1.345;
-//		OSTimeDlyHMSM(0, 0, 2, 0);//延时2s	
-
-
-//		OSTimeDlyHMSM(0, 0, 6, 0);//延时2s
-//		IR_LearnState++;
-//		if(4==IR_LearnState)IR_LearnState=0;	
 
 //	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_State=1;
 	OSTimeDlyHMSM(0, 0, 2, 0);//延时2s
@@ -260,7 +196,7 @@ void Task_UDP_Client(void *pdata)
 }
 
 void Task_TCP_Client(void *pdata)
-{
+{	
 	__IO uint32_t LocalTime = 0; 
 //	unsigned char *tcp_data;
 	struct tcp_pcb *pcb;	
@@ -275,7 +211,7 @@ void Task_TCP_Client(void *pdata)
 		if(pcb != 0)
 		{	
 			while(tx_buf.numOfBuf > 0)
-			{
+			{     
 				TCP_Client_Send_Data(pcb,(unsigned char*)tx_buf.buffer[tx_buf.numOfBuf-1],strlen(tx_buf.buffer[tx_buf.numOfBuf-1]));
 				//TCP_Client_Send_Data(pcb,(unsigned char*)tx_buf.buffer[tx_buf.numOfBuf-1],14);
 				tx_buf.numOfBuf--;				
@@ -286,7 +222,6 @@ void Task_TCP_Client(void *pdata)
 		OSTimeDlyHMSM(0, 0, 0, 10);//挂起10ms，以便其他线程运行
 	}
 }
-
 void Task_OLEDDisplay(void *pdata)
 {
 	u8 result;
@@ -295,53 +230,46 @@ void Task_OLEDDisplay(void *pdata)
 	f_mount(0, &fs);
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_CRC,ENABLE);//要开启STenwim，必须先开CRC时钟
   GUI_Init();
-
 	GUI_SetBkColor(GUI_BLACK);
-	GUI_SetColor(0x00d1fef0);
-	GUI_SetFont(&GUI_Font16_ASCII);
-//	GUI_SetFont(&GUI_Fontyouyuan20);
+	GUI_SetColor(GUI_WHITE);
 	GUI_SetTextMode(GUI_TM_TRANS);
 	GUI_UC_SetEncodeUTF8();
-	
-//	GUI_DispStringAt("F",400,50);
-//	while(1);
-	
+	GUI_UC_SetEncodeUTF8();
+	GUI_Clear();
+	GUI_SetFont(&GUI_Font16_1);
 	GUI_DispStringAt("CPU         STM32F207",10,10);
 	GUI_DispStringAt("LCD           480x320",10,30);
 	GUI_DispStringAt("EXRAM             OK!",10,50);	
-	GUI_DispStringAt("GUI                OK!",10,70);
-	GUI_DispStringAt("PLEASE WAITING...   ",10,90);
-	
-//	Create_XBF16("0:/SYSTEM/FONT/XBF20.xbf");	
-//	GUI_UC_SetEncodeUTF8();
-//	GUI_DispStringHCenterAt("111111111",100,0);
-//	GUI_Clear();
-
-//	GUI_SetFont(&XBF16_Font);
-//	GUI_SetColor(GUI_RED);
-//	GUI_SetTextMode(GUI_TM_TRANS);
-//	GUI_Clear();
-
-//	GUI_DispStringHCenterAt("按照十进制整数格式输出，显示 a=1234  ",300,0);//("ALIENTEK XBF 汉字显示");
-	
+	GUI_DispStringAt("GUI                   OK!",10,70);
+	GUI_DispStringAt("PLEASE WAITING...   ",10,90);	
 //	MainTask();
 	
-	OUTPUTDEVICE.Cureent_Exam_Num=9;
+	OUTPUTDEVICE.Cureent_Exam_Num=61;
 	while(1){
-		//检测SD卡，防止他干扰实验正常进行
-	result = f_open(&BMPFile,"0:/picture/face.bmp",FA_READ);	//打开文件
-	//文件打开错误
-	if(result != FR_OK) 	
-	{	
+			//检测SD卡，防止他干扰实验正常进行				
 		GUI_SetTextMode(GUI_TM_NORMAL);
-		GUI_DispStringAt("SDCARD FAULT.     ",10,90);
+		GUI_SetFont(&GUI_Font16_1);
+		GUI_Clear();
+		GUI_DispStringAt("CPU         STM32F207",10,10);
+		GUI_DispStringAt("LCD           480x320",10,30);
+		GUI_DispStringAt("EXRAM             OK!",10,50);	
+		GUI_DispStringAt("GUI                   OK!",10,70);
+		GUI_DispStringAt("PLEASE WAITING...   ",10,90);	
+		while(1){
+			result = f_open(&BMPFile,"0:/picture/face.bmp",FA_READ);	//打开文件
+			//文件打开错误
+			if(result != FR_OK) 	
+			{				
+				GUI_DispStringAt("SDCARD fault.             ",10,90);
+			}
+			else 	{
+				GUI_DispStringAt("SDCARD SUCCESS.     ",10,90);	
+				f_close(&BMPFile);	
+				break;
+			}
+		}		
 		GUI_SetTextMode(GUI_TM_TRANS);
-		GUI_DispStringAt("PLEASE RESTART.   ",10,110);
-		while(1);
-	}
-	f_close(&BMPFile);		//关闭BMPFile文件
-	
-	
+		
 		switch(OUTPUTDEVICE.Cureent_Exam_Num){	
 			case 1:bmpdisplay_exam1();break;
 			
@@ -362,7 +290,8 @@ void Task_OLEDDisplay(void *pdata)
 			case 8:bmpdisplay_exam8();break;
 
 			case 9:bmpdisplay_exam9();break;			
-		}		
+		}
+		OSTimeDlyHMSM(0, 0, 0, 200);//挂起200ms，以便其他线程运行
 	}	
 }
 
@@ -370,16 +299,20 @@ void Task_OLEDDisplay(void *pdata)
 void Task_BEEP_MUSIC_Display(void *pdata)
 {
 	while(1){
-		musicPlay();
+		BEEP_Run();
+		OSTimeDlyHMSM(0, 0, 0, 200);//挂起100ms，以便其他线程运行
 	}
 }
-
+	u32 Stak_OLED_Free=0xffffffff;
 void Task_STATE_TEST(void *pdata){
-	
+	OS_STK_DATA Stak_OLED;
+
 	while(1){		
 		GPIO_SetBits(GPIOA,GPIO_Pin_5);		
 		OSTimeDlyHMSM(0, 0, 0, 100);//挂起100ms，以便其他线程运行
-		
+		OSTaskStkChk(OS_USER_PRIO_GET(3), &Stak_OLED);
+		if(Stak_OLED.OSFree<Stak_OLED_Free)
+			Stak_OLED_Free=Stak_OLED.OSFree;
 		GPIO_ResetBits(GPIOA,GPIO_Pin_5);				
 		OSTimeDlyHMSM(0, 0, 2, 0);//挂起100ms，以便其他线程运行
 	}	

@@ -43,20 +43,19 @@ u32 fsmc_sram_test(void)
 
 void BSP_Init(void)
 {
+
 	NVIC_Configuration();	
 	delay_init();
-	
+	TFTLCD_Init();		
 	FSMC_SRAM_Init();
-	fsmc_sram_test();
-	my_mem_init(SRAMEX);  	//初始化外部内存池	
+	while(fsmc_sram_test()!=0x400);
+	my_mem_init(SRAMEX);//初始化外部内存池		
 	LED_Configuration();	
-	TFTLCD_Init();	
-//	BEEP_Configuration();
 	Beep_Config();	
 	MOTOR_Configuration();
 	BLUTOOTH_Configuration();
 //	Zigbee_Configuration();	//引脚冲突，暂时屏蔽
-//	UltrasonicWave_Configuration();	//不好用，应该是产生中断太频繁了，建议单独使用一个任务
+	UltrasonicWave_Configuration();	//不好用，应该是产生中断太频繁了，建议单独使用一个任务
 	KEY_init();
 	DHT11_Init();
 	LightIntensitySensor_Init();

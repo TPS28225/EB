@@ -169,7 +169,7 @@ int dispaly_icon(u8 *BMPFileName,u32 x,u32 y)
 	
 	result = f_open(&BMPFile,(const TCHAR*)BMPFileName,FA_READ);	//打开文件
 	//文件打开错误
-	if(result != FR_OK) 	return 1;
+	if(result != FR_OK) 	return 0;
 	
 	XSize = GUI_BMP_GetXSizeEx(BmpGetData,&BMPFile);	//获取图片的X轴大小
 	YSize = GUI_BMP_GetYSizeEx(BmpGetData,&BMPFile);	//获取图片的Y轴大小
@@ -188,20 +188,20 @@ int dispaly_icon(u8 *BMPFileName,u32 x,u32 y)
 
 GUI_MEMDEV_Handle Create_MEMDEV_Icon(u8 *BMPFileName,u32 x,u32 y)
 {
-		char result;
+	char result;
 	int XSize,YSize;
 	GUI_MEMDEV_Handle hMem_Sub;
 	
 	result = f_open(&BMPFile,(const TCHAR*)BMPFileName,FA_READ);	//打开文件
 	//文件打开错误
-	if(result != FR_OK) 	return 1;
+	if(result != FR_OK) 	return 0xffff;
 	
 	XSize = GUI_BMP_GetXSizeEx(BmpGetData,&BMPFile);	//获取图片的X轴大小
 	YSize = GUI_BMP_GetYSizeEx(BmpGetData,&BMPFile);	//获取图片的Y轴大小
-	
 	hMem_Sub = GUI_MEMDEV_Create(x, y, XSize, YSize);
 	GUI_MEMDEV_Select(hMem_Sub);	
 	GUI_BMP_DrawEx(BmpGetData,&BMPFile,x,y);//在指定位置显示BMP图片	
+	f_close(&BMPFile);		//关闭BMPFile文件	
 	GUI_MEMDEV_Select(0);	
 		
 	return hMem_Sub;

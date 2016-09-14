@@ -708,16 +708,16 @@ void TFTLCD_Init(void)
   readWriteTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（ADDHLD）模式A未用到	
   readWriteTiming.FSMC_DataSetupTime = 0xC0;		 // 数据保存时间为32个HCLK,因为液晶驱动IC的读数据的时候，速度不能太快，尤其对1289这个IC。
   readWriteTiming.FSMC_BusTurnAroundDuration = 0x00;
-  readWriteTiming.FSMC_CLKDivision = 0x00;
+  readWriteTiming.FSMC_CLKDivision = 0x02;
   readWriteTiming.FSMC_DataLatency = 0x00;
   readWriteTiming.FSMC_AccessMode = FSMC_AccessMode_B;	 //模式A
     
 
-	writeTiming.FSMC_AddressSetupTime = 0x02;	 //地址建立时间（ADDSET）为1个HCLK  
+	writeTiming.FSMC_AddressSetupTime = 0x02;	 //地址建立时间（ADDSET）为2个HCLK  
   writeTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（B		
-  writeTiming.FSMC_DataSetupTime = 0x05;		 ////数据保存时间3个HCLK	
+  writeTiming.FSMC_DataSetupTime = 0x05;		 ////数据保存时间5个HCLK	
   writeTiming.FSMC_BusTurnAroundDuration = 0x00;
-  writeTiming.FSMC_CLKDivision = 0x00;
+  writeTiming.FSMC_CLKDivision = 0x02;
   writeTiming.FSMC_DataLatency = 0x00;
   writeTiming.FSMC_AccessMode = FSMC_AccessMode_B;	 //模式A
 
@@ -904,207 +904,94 @@ void TFTLCD_Init(void)
 		delay_ms(120);
 		LCD_WR_REG(0x29); //display on	
 	}else if(lcddev.id==0X8357){
-/************第一种初始化****/		
-//	LCD_WR_REG(0xEE);//Set EQ  
-//		LCD_WR_DATA(0x02);  
-//		LCD_WR_DATA(0x01);  
-//		LCD_WR_DATA(0x02);  
-//		LCD_WR_DATA(0x01);  
 
-//	LCD_WR_REG(0xED);//Set DIR TIM  
-//		LCD_WR_DATA(0x00);  
-//		LCD_WR_DATA(0x00);  
-//		LCD_WR_DATA(0x9A);  
-//		LCD_WR_DATA(0x9A);  
-//		LCD_WR_DATA(0x9B);  
-//		LCD_WR_DATA(0x9B);  
-//		LCD_WR_DATA(0x00);  
-//		LCD_WR_DATA(0x00);  
-//		LCD_WR_DATA(0x00);  
-//		LCD_WR_DATA(0x00);  
-//		LCD_WR_DATA(0xAE);  
-//		LCD_WR_DATA(0xAE);  
-//		LCD_WR_DATA(0x01);  
-//		LCD_WR_DATA(0xA2);  
-//		LCD_WR_DATA(0x00);  
+		LCD_WR_REG(0x11);
+		delay_ms(20);
 
-//	LCD_WR_REG(0xB4);//Set RM, DM  
-//		LCD_WR_DATA(0x00);//  
+		LCD_WR_REG(0xEE);//Set EQ  
+			LCD_WR_DATA(0x02);  
+			LCD_WR_DATA(0x01);  
+			LCD_WR_DATA(0x02);  
+			LCD_WR_DATA(0x01);  
 
-//	LCD_WR_REG(0xC0); //Set Panel Driving
-//		LCD_WR_DATA(0x10); //REV SM GS //00
-//		LCD_WR_DATA(0x3B); // NL[5:0]  
-//		LCD_WR_DATA(0x00); //SCN[6:0]  
-//		LCD_WR_DATA(0x02); //NDL 0 PTS[2:0]
-//		LCD_WR_DATA(0x11); //PTG ISC[3:0]  
+		LCD_WR_REG(0xED);//Set DIR TIM  
+			LCD_WR_DATA(0x00);  
+			LCD_WR_DATA(0x00);  
+			LCD_WR_DATA(0x9A);  
+			LCD_WR_DATA(0x9A);  
+			LCD_WR_DATA(0x9B);  
+			LCD_WR_DATA(0x9B);  
+			LCD_WR_DATA(0x00);  
+			LCD_WR_DATA(0x00);  
+			LCD_WR_DATA(0x00);  
+			LCD_WR_DATA(0x00);  
+			LCD_WR_DATA(0xAE);  
+			LCD_WR_DATA(0xAE);  
+			LCD_WR_DATA(0x01);  
+			LCD_WR_DATA(0xA2);  
+			LCD_WR_DATA(0x00); 
 
-//	LCD_WR_REG(0xC1);//
-//		LCD_WR_DATA(0x10);//line inversion
+		LCD_WR_REG(0xD0);
+			LCD_WR_DATA(0x07);
+			LCD_WR_DATA(0x42);
+			LCD_WR_DATA(0x18);
+		
+		LCD_WR_REG(0xD1);/*****************非常重要！！！***************/
+			LCD_WR_DATA(0x00);//00
+			LCD_WR_DATA(0x07);//07
+			LCD_WR_DATA(0x13);
+		
+		LCD_WR_REG(0xD2);
+			LCD_WR_DATA(0x01);
+			LCD_WR_DATA(0x02);
+		
+		LCD_WR_REG(0xC0);
+			LCD_WR_DATA(0x10);
+			LCD_WR_DATA(0x3B);
+			LCD_WR_DATA(0x00);
+			LCD_WR_DATA(0x02);
+			LCD_WR_DATA(0x11);
+		
+		LCD_WR_REG(0xC5);
+			LCD_WR_DATA(0x03);
+		
+		LCD_WR_REG(0xC8);//和伽马校正有关
+			LCD_WR_DATA(0x00);
+			LCD_WR_DATA(0x32);
+			LCD_WR_DATA(0x36);
+			LCD_WR_DATA(0x45);
+			LCD_WR_DATA(0x06);
+			LCD_WR_DATA(0x16);
+			LCD_WR_DATA(0x37);
+			LCD_WR_DATA(0x75);
+			LCD_WR_DATA(0x77);
+			LCD_WR_DATA(0x54);
+			LCD_WR_DATA(0x0C);
+			LCD_WR_DATA(0x00);
 
-//	LCD_WR_REG(0xC8);//Set Gamma
-//  
-//		LCD_WR_DATA(0x00); //KP1,KP0
-//		LCD_WR_DATA(0x46); //KP3,KP2
-//		LCD_WR_DATA(0x12); //KP5,KP4
-//		
-//		LCD_WR_DATA(0x20); //RP1,RP0
-//		LCD_WR_DATA(0x0c); //VRP0 01
-//		LCD_WR_DATA(0x00); //VRP1
-//		
-//		LCD_WR_DATA(0x56); //KN1,KN0
-//		LCD_WR_DATA(0x12); //KN3,KN2
-//		LCD_WR_DATA(0x67); //KN5,KN4
+		LCD_WR_REG(0x36);
+			LCD_WR_DATA(0x38);
+		
+		LCD_WR_REG(0x3A);
+			LCD_WR_DATA(0x55);
+		
+		LCD_WR_REG(0x2A);
+			LCD_WR_DATA(0x00);
+			LCD_WR_DATA(0x00);
+			LCD_WR_DATA(0x01);
+			LCD_WR_DATA(0x3F);
+		
+		LCD_WR_REG(0x2B);
+			LCD_WR_DATA(0x00);
+			LCD_WR_DATA(0x00);
+			LCD_WR_DATA(0x01);
+			LCD_WR_DATA(0xE0);
 
-//		LCD_WR_DATA(0x02); //RN1,RN0
-//		LCD_WR_DATA(0x00); //VRN0
-//		LCD_WR_DATA(0x0c); //VRN1 01
-
-//	LCD_WR_REG(0xD0);//Set Power  
-//		LCD_WR_DATA(0x44);//DDVDH :5.28
-//		LCD_WR_DATA(0x42); // BT VGH:15.84 VGL:-7.92
-//		LCD_WR_DATA(0x06);//VREG1 4.625V
-
-//	LCD_WR_REG(0xD1);//Set VCOM  
-//		LCD_WR_DATA(0x43); //VCOMH
-//		LCD_WR_DATA(0x16);
-
-//	LCD_WR_REG(0xD2);  
-//		LCD_WR_DATA(0x04);  
-//		LCD_WR_DATA(0x22); //12
-
-//	LCD_WR_REG(0xD3);  
-//		LCD_WR_DATA(0x04);  
-//		LCD_WR_DATA(0x12);  
-
-//	LCD_WR_REG(0xD4);  
-//		LCD_WR_DATA(0x07);  
-//		LCD_WR_DATA(0x12);  
-
-//	LCD_WR_REG(0xE9); //Set Panel
-//		LCD_WR_DATA(0x00);
-
-//	LCD_WR_REG(0xC5); //Set Frame rate
-//		LCD_WR_DATA(0x08); //61.51Hz
-
-//	LCD_WR_REG(0X36);
-//		LCD_WR_DATA(0X3b);
-
-//	LCD_WR_REG(0X3A);
-//		LCD_WR_DATA(0X55);
-
-//	LCD_WR_REG(0X2A);
-//		LCD_WR_DATA(0X00);
-//		LCD_WR_DATA(0X00);
-//		LCD_WR_DATA(0X01);
-//		LCD_WR_DATA(0xDF);
-
-//	LCD_WR_REG(0x2B);
-//		LCD_WR_DATA(0X00);
-//		LCD_WR_DATA(0X00);
-//		LCD_WR_DATA(0X01);
-//		LCD_WR_DATA(0x3F);
-//	
-//	delay_ms(120);
-
-//	LCD_WR_REG(0x11);//Sleep Out  
-//	delay_ms(120);  
-
-//	LCD_WR_REG(0x35);
-//	LCD_WR_DATA(0x00);//TE ON
-
-//	LCD_WR_REG(0x29); //Display On
-//	delay_ms(5);
-
-
-
-
-/************第二种初始化****/
-	LCD_WR_REG(0x11);
-	delay_ms(20);
-
-	LCD_WR_REG(0xEE);//Set EQ  
-		LCD_WR_DATA(0x02);  
-		LCD_WR_DATA(0x01);  
-		LCD_WR_DATA(0x02);  
-		LCD_WR_DATA(0x01);  
-
-	LCD_WR_REG(0xED);//Set DIR TIM  
-		LCD_WR_DATA(0x00);  
-		LCD_WR_DATA(0x00);  
-		LCD_WR_DATA(0x9A);  
-		LCD_WR_DATA(0x9A);  
-		LCD_WR_DATA(0x9B);  
-		LCD_WR_DATA(0x9B);  
-		LCD_WR_DATA(0x00);  
-		LCD_WR_DATA(0x00);  
-		LCD_WR_DATA(0x00);  
-		LCD_WR_DATA(0x00);  
-		LCD_WR_DATA(0xAE);  
-		LCD_WR_DATA(0xAE);  
-		LCD_WR_DATA(0x01);  
-		LCD_WR_DATA(0xA2);  
-		LCD_WR_DATA(0x00); 
-
-	LCD_WR_REG(0xD0);
-		LCD_WR_DATA(0x07);
-		LCD_WR_DATA(0x42);
-		LCD_WR_DATA(0x18);
-	
-	LCD_WR_REG(0xD1);/*****************非常重要！！！***************/
-		LCD_WR_DATA(0x00);//00
-		LCD_WR_DATA(0x07);//07
-		LCD_WR_DATA(0x13);
-	
-	LCD_WR_REG(0xD2);
-		LCD_WR_DATA(0x01);
-		LCD_WR_DATA(0x02);
-	
-	LCD_WR_REG(0xC0);
-		LCD_WR_DATA(0x10);
-		LCD_WR_DATA(0x3B);
-		LCD_WR_DATA(0x00);
-		LCD_WR_DATA(0x02);
-		LCD_WR_DATA(0x11);
-	
-	LCD_WR_REG(0xC5);
-		LCD_WR_DATA(0x03);
-	
-	LCD_WR_REG(0xC8);//和伽马校正有关
-		LCD_WR_DATA(0x00);
-		LCD_WR_DATA(0x32);
-		LCD_WR_DATA(0x36);
-		LCD_WR_DATA(0x45);
-		LCD_WR_DATA(0x06);
-		LCD_WR_DATA(0x16);
-		LCD_WR_DATA(0x37);
-		LCD_WR_DATA(0x75);
-		LCD_WR_DATA(0x77);
-		LCD_WR_DATA(0x54);
-		LCD_WR_DATA(0x0C);
-		LCD_WR_DATA(0x00);
-	
-	LCD_WR_REG(0x36);
-		LCD_WR_DATA(0x0A);
-	
-	LCD_WR_REG(0x3A);
-		LCD_WR_DATA(0x55);
-	
-	LCD_WR_REG(0x2A);
-		LCD_WR_DATA(0x00);
-		LCD_WR_DATA(0x00);
-		LCD_WR_DATA(0x01);
-		LCD_WR_DATA(0x3F);
-	
-	LCD_WR_REG(0x2B);
-		LCD_WR_DATA(0x00);
-		LCD_WR_DATA(0x00);
-		LCD_WR_DATA(0x01);
-		LCD_WR_DATA(0xE0);
-	delay_ms(120);
-	
-	LCD_WR_REG(0x29);
-	
-	LCD_WR_REG(0x002c); 
+		delay_ms(120);
+		
+		LCD_WR_REG(0x29);
+		
+		LCD_WR_REG(0x002c); 
 	}else if(lcddev.id==0x6804) //6804初始化
 	{
 		LCD_WR_REG(0X11);
@@ -2931,7 +2818,9 @@ void TFTLCD_Init(void)
 		LCD_SSD_BackLightSet(100);//背光设置为最亮
 	}		 
 	LCD_Display_Dir(1);		//横屏
-	LCD_Clear(BLACK);
+//	while(1)
+		LCD_Clear(WHITE);
+	
 }  
 //清屏函数
 //color:要清屏的填充色

@@ -1157,23 +1157,6 @@
         </Group>
         <Group>
           <GroupName>STemwin_Demo</GroupName>
-          <Files>
-            <File>
-              <FileName>BASIC_DriverPerformance.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin\GUIDemo\BASIC_DriverPerformance.c</FilePath>
-            </File>
-            <File>
-              <FileName>ccc2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin\GUIDemo\ccc2.c</FilePath>
-            </File>
-            <File>
-              <FileName>ccc3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\STemWin\GUIDemo\ccc3.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>EXAM</GroupName>
@@ -1187,6 +1170,16 @@
               <FileName>bmpdisplay.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\EXAM\bmpdisplay.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>TXT</GroupName>
+          <Files>
+            <File>
+              <FileName>example.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\example.txt</FilePath>
             </File>
           </Files>
         </Group>

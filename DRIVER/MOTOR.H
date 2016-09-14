@@ -13,8 +13,8 @@
 #define MOTOR_GPIO  GPIOA
 #define MOTOR_PIN   GPIO_Pin_12
 
-#define MOTOR_ON    GPIO_SetBits(MOTOR_GPIO,MOTOR_PIN)
-#define MOTOR_OFF   GPIO_ResetBits(MOTOR_GPIO,MOTOR_PIN)
+#define MOTOR_ON    GPIO_ResetBits(MOTOR_GPIO,MOTOR_PIN)
+#define MOTOR_OFF   GPIO_SetBits(MOTOR_GPIO,MOTOR_PIN)
 
 
 void MOTOR_Run(void);

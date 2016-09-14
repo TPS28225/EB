@@ -52,8 +52,8 @@ void Usart4_Init(u32 bound, u16 wordLength, u16 stopBit, u16 parity)
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;//收发模式
   USART_Init(BLUTOOTH_USART, &USART_InitStructure); ; //初始化串口
    
-  USART_ITConfig(BLUTOOTH_USART, USART_IT_RXNE, ENABLE);//开启中断
-	USART_ClearITPendingBit(BLUTOOTH_USART, USART_IT_TC);
+//  USART_ITConfig(BLUTOOTH_USART, USART_IT_RXNE, ENABLE);//开启中断
+//	USART_ClearITPendingBit(BLUTOOTH_USART, USART_IT_TC);
   USART_Cmd(BLUTOOTH_USART, ENABLE);                    //使能串口 
 }
 

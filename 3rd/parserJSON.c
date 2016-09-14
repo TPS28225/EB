@@ -41,27 +41,31 @@ char * makeJson()
 	{
 		cJSON_AddStringToObject(pSubJson,"zigbee",OSQPend(q_msg_zigbee_rx,0,&err));
 	}
-	cJSON_AddNumberToObject(pSubJson,"key1",INPUTDEVICE.KEY[0]);
-	cJSON_AddNumberToObject(pSubJson,"key2",INPUTDEVICE.KEY[1]);
-	cJSON_AddNumberToObject(pSubJson,"key3",INPUTDEVICE.KEY[2]);
-	cJSON_AddNumberToObject(pSubJson,"key4",INPUTDEVICE.KEY[3]);
-	cJSON_AddNumberToObject(pSubJson,"led1",OUTPUTDEVICE.LED[0]);
-	cJSON_AddNumberToObject(pSubJson,"led2",OUTPUTDEVICE.LED[1]);
-	cJSON_AddNumberToObject(pSubJson,"led3",OUTPUTDEVICE.LED[2]);
-	cJSON_AddNumberToObject(pSubJson,"led4",OUTPUTDEVICE.LED[3]);
-	cJSON_AddNumberToObject(pSubJson,"led5",OUTPUTDEVICE.LED[4]);
-	cJSON_AddNumberToObject(pSubJson,"led6",OUTPUTDEVICE.LED[5]);
-	cJSON_AddNumberToObject(pSubJson,"led7",OUTPUTDEVICE.LED[6]);
-	cJSON_AddNumberToObject(pSubJson,"led8",OUTPUTDEVICE.LED[7]);
-	cJSON_AddNumberToObject(pSubJson, "beep",OUTPUTDEVICE.Beep);
-	cJSON_AddNumberToObject(pSubJson, "dcmotor",OUTPUTDEVICE.Motor);
+	cJSON_AddItemToObject(pSubJson, "key", PThdSubJson = cJSON_CreateObject());
+	cJSON_AddNumberToObject(PThdSubJson,"key1",INPUTDEVICE.KEY[0]);
+	cJSON_AddNumberToObject(PThdSubJson,"key2",INPUTDEVICE.KEY[1]);
+	cJSON_AddNumberToObject(PThdSubJson,"key3",INPUTDEVICE.KEY[2]);
+	cJSON_AddNumberToObject(PThdSubJson,"key4",INPUTDEVICE.KEY[3]);
+	
+	cJSON_AddItemToObject(pSubJson, "led", PThdSubJson = cJSON_CreateObject());	
+	cJSON_AddNumberToObject(PThdSubJson,"led1",OUTPUTDEVICE.LED[0]);	
+	cJSON_AddNumberToObject(PThdSubJson,"led2",OUTPUTDEVICE.LED[1]);
+	cJSON_AddNumberToObject(PThdSubJson,"led3",OUTPUTDEVICE.LED[2]);
+	cJSON_AddNumberToObject(PThdSubJson,"led4",OUTPUTDEVICE.LED[3]);
+	cJSON_AddNumberToObject(PThdSubJson,"led5",OUTPUTDEVICE.LED[4]);
+	cJSON_AddNumberToObject(PThdSubJson,"led6",OUTPUTDEVICE.LED[5]);
+	cJSON_AddNumberToObject(PThdSubJson,"led7",OUTPUTDEVICE.LED[6]);
+	cJSON_AddNumberToObject(PThdSubJson,"led8",OUTPUTDEVICE.LED[7]);
+	
 	cJSON_AddItemToObject(pSubJson, "ir", PThdSubJson = cJSON_CreateObject());
 	cJSON_AddNumberToObject(PThdSubJson,"state",INPUTDEVICE.IR_State);
 	if(INPUTDEVICE.IR_State == 5)
 	{
 		cJSON_AddStringToObject(PThdSubJson,"code",INPUTDEVICE.IR_Code);
 		IR_LearnEnable(0);
-	}
+	}	
+	cJSON_AddNumberToObject(pSubJson, "beep",OUTPUTDEVICE.Beep);
+	cJSON_AddNumberToObject(pSubJson, "dcmotor",OUTPUTDEVICE.Motor);	
 	p = cJSON_PrintUnformatted(pJsonRoot);
 	cJSON_Delete(pJsonRoot);
 	
@@ -94,56 +98,66 @@ void parserJson(char * pMsg)
 				pSub = cJSON_GetObjectItem(pJson, "data");
 				if(pSub != NULL)
 				{
-					pSubSub = cJSON_GetObjectItem(pSub, "led1");
+					
+					pSubSub = cJSON_GetObjectItem(pSub, "test");
 					if(pSubSub != NULL)
 					{
-						OUTPUTDEVICE.LED[0] = pSubSub->valueint;
-					}
-					pSubSub = cJSON_GetObjectItem(pSub, "led2");
+						OUTPUTDEVICE.Cureent_Exam_Num = pSubSub->valueint;
+					}					
+					pSubSub = cJSON_GetObjectItem(pSub, "led");
 					if(pSubSub != NULL)
 					{
-						OUTPUTDEVICE.LED[1] = pSubSub->valueint;
-					}		
-					pSubSub = cJSON_GetObjectItem(pSub, "led3");
-					if(pSubSub != NULL)
-					{
-						OUTPUTDEVICE.LED[2] = pSubSub->valueint;
-					}	
-					pSubSub = cJSON_GetObjectItem(pSub, "led4");
-					if(pSubSub != NULL)
-					{
-						OUTPUTDEVICE.LED[3] = pSubSub->valueint;
-					}	
-					pSubSub = cJSON_GetObjectItem(pSub, "led5");
-					if(pSubSub != NULL)
-					{
-						OUTPUTDEVICE.LED[4] = pSubSub->valueint;
-					}	
-					pSubSub = cJSON_GetObjectItem(pSub, "led6");
-					if(pSubSub != NULL)
-					{
-						OUTPUTDEVICE.LED[5] = pSubSub->valueint;
-					}	
-					pSubSub = cJSON_GetObjectItem(pSub, "led7");
-					if(pSubSub != NULL)
-					{
-						OUTPUTDEVICE.LED[6] = pSubSub->valueint;
-					}	
-					pSubSub = cJSON_GetObjectItem(pSub, "led8");
-					if(pSubSub != NULL)
-					{
-						OUTPUTDEVICE.LED[7] = pSubSub->valueint;
-					}							
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "led1");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.LED[0] = pSubSubSub->valueint;
+						}
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "led2");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.LED[1] = pSubSubSub->valueint;
+						}		
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "led3");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.LED[2] = pSubSubSub->valueint;
+						}	
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "led4");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.LED[3] = pSubSubSub->valueint;
+						}	
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "led5");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.LED[4] = pSubSubSub->valueint;
+						}	
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "led6");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.LED[5] = pSubSubSub->valueint;
+						}	
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "led7");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.LED[6] = pSubSubSub->valueint;
+						}	
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "led8");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.LED[7] = pSubSubSub->valueint;
+						}	
+					}						
 
 					pSubSub = cJSON_GetObjectItem(pSub, "beep");
 					if(pSubSub != NULL)
 					{
-							OUTPUTDEVICE.Beep = pSubSub->valueint;
+						OUTPUTDEVICE.Beep = pSubSub->valueint;
 					}	
 					pSubSub = cJSON_GetObjectItem(pSub, "dcmotor");
 					if(pSubSub != NULL)
 					{
-							OUTPUTDEVICE.Motor = pSubSub->valueint;						
+						OUTPUTDEVICE.Motor = pSubSub->valueint;						
 					}
 					pSubSub = cJSON_GetObjectItem(pSub, "ir");
 					if(pSubSub != NULL)
@@ -158,6 +172,31 @@ void parserJson(char * pMsg)
 						{
 							strncpy(OUTPUTDEVICE.IR_Code,pSubSubSub->valuestring,IRCODE_ARRY_NUM);
 						}								
+					}
+//							"rfid":{
+//			"id":"FF03DC6B",
+//			"data":10,   //(?????)
+//			"enable":0,  //????:0???/1???   ?????
+//			"ack":" "    //??		 
+//		}
+					pSubSub = cJSON_GetObjectItem(pSub, "rfid");
+					if(pSubSub != NULL)
+					{
+						pSubSub = cJSON_GetObjectItem(pSub, "data");
+						if(pSubSub != NULL)
+						{
+							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Data = pSubSubSub->valueint;							
+						}
+						pSubSub = cJSON_GetObjectItem(pSub, "enable");
+						if(pSubSub != NULL)
+						{
+							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass = pSubSubSub->valueint;							
+						}
+						pSubSub = cJSON_GetObjectItem(pSub, "enable");
+						if(pSubSub != NULL)
+						{
+							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass = pSubSubSub->valueint;							
+						}
 					}
 					pSubSub = cJSON_GetObjectItem(pSub, "zigbee");
 					if(pSubSub != NULL)

@@ -11,8 +11,8 @@
 #define	ECHO_PIN       						GPIO_Pin_11	//ECHO  
 #define ECHO_PORT_CLK 						RCC_AHB1Periph_GPIOF
 
-#define UltrasonicWave_TIMER			TIM9
-#define UltrasonicWave_TIMER_CLK 	RCC_APB2Periph_TIM9
+#define UltrasonicWave_TIMER			TIM10
+#define UltrasonicWave_TIMER_CLK 	RCC_APB2Periph_TIM10
 
 #define UltrasonicWave_EXIT_CLK 	RCC_APB2Periph_SYSCFG
 

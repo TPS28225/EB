@@ -49,15 +49,14 @@ void MOTOR_PWM_Init(u32 arr,u32 psc)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_Init(MOTOR_GPIO, &GPIO_InitStructure);	
+	GPIO_SetBits(GPIOA, GPIO_Pin_12);
 	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_11|GPIO_Pin_12;           //GPIOA8 11 12
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_11;           //GPIOA8 11
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;        //复用功能
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;	//速度100MHz
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      //推挽复用输出
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;        //上拉
-	GPIO_Init(GPIOA,&GPIO_InitStructure);              //初始化PA8 11 12
-	
-	GPIO_ResetBits(GPIOA, GPIO_Pin_12);
+	GPIO_Init(GPIOA,&GPIO_InitStructure);              //初始化PA8 11
 	
 	TIM_TimeBaseStructure.TIM_Prescaler=psc;  //定时器分频
 	TIM_TimeBaseStructure.TIM_CounterMode=TIM_CounterMode_Up; //向上计数模式

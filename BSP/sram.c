@@ -140,7 +140,7 @@ void FSMC_SRAM_Init(void)
   p.FSMC_AddressHoldTime = 0;
   p.FSMC_DataSetupTime = 5;
   p.FSMC_BusTurnAroundDuration = 1;
-  p.FSMC_CLKDivision = 0;
+  p.FSMC_CLKDivision = 2;
   p.FSMC_DataLatency = 0;
   p.FSMC_AccessMode = FSMC_AccessMode_A;
 

@@ -135,11 +135,16 @@ void Zigbee_Tx(char *buf,u16 len)
 ***********************************************************************/
 void UART5_IRQHandler(void)  
 {
+	OS_CPU_SR cpu_sr;
+	OS_ENTER_CRITICAL();    // 关中断                               
+	OSIntNesting++;	   		//中断嵌套层数，通知ucos
+	OS_EXIT_CRITICAL();	   	//开中断
 	if(USART_GetITStatus(ZIGBEE_USART, USART_IT_RXNE) != RESET)//接收到了数据
 	{
 		Zigbee_Rx();
 		USART_ClearITPendingBit(ZIGBEE_USART, USART_IT_RXNE);
 	}
+	OSIntExit();//中断退出，通知ucos，（该句必须加）		
 }
 
 /***********************************************************************
@@ -152,7 +157,11 @@ void UART5_IRQHandler(void)
 注    意：
 ***********************************************************************/  
 void TIM5_IRQHandler(void)
-{ 	
+{ 
+	OS_CPU_SR cpu_sr;
+	OS_ENTER_CRITICAL();    // 关中断                               
+	OSIntNesting++;	   		//中断嵌套层数，通知ucos
+	OS_EXIT_CRITICAL();	   	//开中断	
 	if(TIM_GetITStatus(ZIGBEE_TIMER, TIM_IT_Update) != RESET)//是更新中断
 	{	 			   
 		if((((OS_Q*)(q_msg_zigbee_rx->OSEventPtr))->OSQEntries)<ZIGBEE_RX_ARRY_NUM)
@@ -166,7 +175,8 @@ void TIM5_IRQHandler(void)
 		TIM_Cmd(ZIGBEE_TIMER, DISABLE);  	//失能TIMx			
 		TIM_SetCounter(ZIGBEE_TIMER,0);		//计数器清空
 		TIM_ClearITPendingBit(ZIGBEE_TIMER, TIM_IT_Update);  //清除TIMx更新中断标志     
-	}	    
+	}
+	OSIntExit();//中断退出，通知ucos，（该句必须加）		
 }
 
 

@@ -25,7 +25,6 @@
 #include "stm32f2xx_it.h"
 #include "main.h"
 #include "stm32f2x7_eth.h"
-
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -175,5 +174,7 @@ void ETH_IRQHandler(void)
 /*void PPP_IRQHandler(void)
 {
 }*/
+
+
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

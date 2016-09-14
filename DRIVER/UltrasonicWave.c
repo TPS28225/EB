@@ -15,10 +15,8 @@
 
 #include "main.h"
 #include "UltrasonicWave.h"
-
-static FlagStatus ECHO_COUNT_START = RESET;
-static FlagStatus ECHO_PIN_STATE = RESET;
- 
+FlagStatus ECHO_COUNT_START = RESET;
+FlagStatus ECHO_PIN_STATE = RESET; 
 /*
  * 函数名：UltrasonicWave_Configuration
  * 描述  ：超声波模块的初始化
@@ -35,6 +33,8 @@ void UltrasonicWave_Configuration(void)
 	RCC_AHB1PeriphClockCmd(TRIG_PORT_CLK, ENABLE); 						 			
 	GPIO_InitStructure.GPIO_Pin = TRIG_PIN;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_Init(TRIG_PORT, &GPIO_InitStructure);
 
@@ -68,50 +68,7 @@ void UltrasonicWave_Configuration(void)
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  //TIM向上计数模式
 	TIM_TimeBaseInit(UltrasonicWave_TIMER, &TIM_TimeBaseStructure); //根据TIM_TimeBaseInitStruct中指定的参数初始化TIMx的时间基数单位
 	TIM_SetCounter(UltrasonicWave_TIMER,0);
-	TIM_Cmd(UltrasonicWave_TIMER, DISABLE);			                                 //定时器2失能
-
-}
-
-void EXTI15_10_IRQHandler(void)
-{
-	float UltrasonicWave_Distance=0;      //计算出的距离  
-
-	if(EXTI_GetITStatus(EXTI_Line11) != RESET)
-	{
-    ECHO_PIN_STATE=(FlagStatus)GPIO_ReadInputDataBit(ECHO_PORT, ECHO_PIN); 
-		
-		if((ECHO_PIN_STATE==SET)&&ECHO_COUNT_START == RESET)                
-		{
-			ECHO_COUNT_START = SET;
-			TIM_SetCounter(UltrasonicWave_TIMER,0); 
-			TIM_Cmd(UltrasonicWave_TIMER, ENABLE);    //开启时钟			
-		}
-		else if((ECHO_PIN_STATE==RESET)&&(ECHO_COUNT_START == SET))                
-		{
-			ECHO_COUNT_START = RESET;
-			TIM_Cmd(UltrasonicWave_TIMER, DISABLE);   
-			UltrasonicWave_Distance = TIM_GetCounter(UltrasonicWave_TIMER)*0.17;									 //计算距离&&UltrasonicWave_Distance<150
-		}		
-		else if((ECHO_PIN_STATE==SET)&&(ECHO_COUNT_START == SET))
- 		{	
-			ECHO_COUNT_START = RESET;						
-			TIM_Cmd(UltrasonicWave_TIMER, DISABLE);			                                 //定时器2失能
-			TIM_SetCounter(UltrasonicWave_TIMER,0);
-		}
-		else if((ECHO_PIN_STATE==RESET)&&(ECHO_COUNT_START == RESET))
- 		{	
-			ECHO_COUNT_START = RESET;
-			TIM_Cmd(UltrasonicWave_TIMER, DISABLE);			                                 //定时器2失能
-			TIM_SetCounter(UltrasonicWave_TIMER,0);
-		}
-
-		if(UltrasonicWave_Distance>0)
-		{
-			INPUTDEVICE.Distance=UltrasonicWave_Distance;
-		}
-			
-		EXTI_ClearITPendingBit(EXTI_Line11);  //清除EXTI11线路挂起位
-	}
+	TIM_Cmd(UltrasonicWave_TIMER, DISABLE);			                                 //定时器失能
 
 }
 
@@ -129,30 +86,56 @@ void UltrasonicWave_StartMeasure(void)
 		GPIO_SetBits(TRIG_PORT,TRIG_PIN);//送>10US的高电平ltrasonicWave_PORT,TRIG_PIN这两个在define中有?
 		delay_us(20);		                      //延时20US
 		GPIO_ResetBits(TRIG_PORT,TRIG_PIN);
+		delay_us(30);	
 	}
 }
 
-//void UltrasonicWave_MeasureDistance(void)
-//{
-//  GPIO_SetBits(UltrasonicWave_PORT,TRIG_PIN); 		  //送>10US的高电平ltrasonicWave_PORT,TRIG_PIN这两个在define中有?
-//  delay_us(20);		                      //延时20US
-//  GPIO_ResetBits(UltrasonicWave_PORT,TRIG_PIN);
-//	
-//	while(GPIO_ReadInputDataBit(UltrasonicWave_PORT,ECHO_PIN)==RESET);	                 //等待低电平	
-//	
-//	TIM_SetCounter(UltrasonicWave_TIMER,0);
-//	TIM_Cmd(UltrasonicWave_TIMER, ENABLE);                                             //开启时钟
+void EXTI15_10_IRQHandler(void)
+{
+	OS_CPU_SR cpu_sr;
+	float UltrasonicWave_Distance=0;      //计算出的距离  
+	OS_ENTER_CRITICAL();    // 关中断                               
+	OSIntNesting++;	   		//中断嵌套层数，通知ucos
+	OS_EXIT_CRITICAL();	   	//开中断
+	if(EXTI_GetITStatus(EXTI_Line11) != RESET)
+	{
+    ECHO_PIN_STATE=(FlagStatus)GPIO_ReadInputDataBit(ECHO_PORT, ECHO_PIN); 
+		
+		if((ECHO_PIN_STATE==SET)&&ECHO_COUNT_START == RESET)                
+		{
+			ECHO_COUNT_START = SET;
+			TIM_SetCounter(UltrasonicWave_TIMER,0); 
+			TIM_Cmd(UltrasonicWave_TIMER, ENABLE);    //开启时钟			
+		}
+		else if((ECHO_PIN_STATE==RESET)&&(ECHO_COUNT_START == SET))                
+		{
+			ECHO_COUNT_START = RESET;
+			TIM_Cmd(UltrasonicWave_TIMER, DISABLE);   
+			UltrasonicWave_Distance = TIM_GetCounter(UltrasonicWave_TIMER)*0.0017;									 //计算距离&&UltrasonicWave_Distance<150
+		}		
+		else if((ECHO_PIN_STATE==SET)&&(ECHO_COUNT_START == SET))
+ 		{	
+			ECHO_COUNT_START = RESET;						
+			TIM_Cmd(UltrasonicWave_TIMER, DISABLE);			                                 //定时器2失能
+			TIM_SetCounter(UltrasonicWave_TIMER,0);
+		}
+		else if((ECHO_PIN_STATE==RESET)&&(ECHO_COUNT_START == RESET))
+ 		{	
+			ECHO_COUNT_START = RESET;
+			TIM_Cmd(UltrasonicWave_TIMER, DISABLE);			                                 //定时器2失能
+			TIM_SetCounter(UltrasonicWave_TIMER,0);
+		}
 
-//	while(GPIO_ReadInputDataBit(UltrasonicWave_PORT,ECHO_PIN)==SET);	                 //等待低电平
+		if(UltrasonicWave_Distance>0)
+		{
+			if(UltrasonicWave_Distance>20)INPUTDEVICE.Distance=20;
+			else INPUTDEVICE.Distance = UltrasonicWave_Distance;
 
-//	TIM_Cmd(UltrasonicWave_TIMER, DISABLE);			                                 //定时器2失能
-//	UltrasonicWave_Distance=TIM_GetCounter(UltrasonicWave_TIMER)*5*34/200.0;									 //计算距离&&UltrasonicWave_Distance<150
-//		
-//	if(UltrasonicWave_Distance>0)
-//	{
-////		printf("distance:%f cm",UltrasonicWave_Distance);	
-//		
-//	}		
-//}
+		}
+			
+		EXTI_ClearITPendingBit(EXTI_Line11);  //清除EXTI11线路挂起位
+	}
+	OSIntExit();//中断退出，通知ucos，（该句必须加）	
+}
 
 /******************* (C) 1209 Lab *****END OF FILE************/

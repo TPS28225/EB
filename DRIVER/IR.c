@@ -55,7 +55,7 @@ void IR_Run(void)
 void IR_Configuration(void)
 {
 	IR_EXTI_Init();
-	TIM7_Int_Init(417,1);  
+//	TIM7_Int_Init(417,1);  
   TIM6_Int_Init(9,59);
 	
 	
@@ -151,7 +151,7 @@ void TIM7_IRQHandler(void)
 				GPIO_SetBits(GPIOG, GPIO_Pin_7);
 			}
 		}
-  }	
+  }			
 }
 
 /***********************************************************************
@@ -267,6 +267,10 @@ void EXTI6_Int(u8 en)
 
 void EXTI9_5_IRQHandler(void)
 {
+	OS_CPU_SR cpu_sr;
+	OS_ENTER_CRITICAL();    // 关中断                               
+	OSIntNesting++;	   		//中断嵌套层数，通知ucos
+	OS_EXIT_CRITICAL();	   	//开中断
 	if(EXTI_GetITStatus(EXTI_Line6) != RESET)
 	{
 		EXTI_ClearITPendingBit(EXTI_Line6);  
@@ -295,11 +299,16 @@ void EXTI9_5_IRQHandler(void)
 	{
     SOUND_Counter++;
 		EXTI_ClearITPendingBit(EXTI_Line7);  //清除EXTI7线路挂起位
-	}	
+	}
+	OSIntExit();//中断退出，通知ucos，（该句必须加）			
 }
 
 void TIM8_BRK_TIM12_IRQHandler(void)
 { 	
+	OS_CPU_SR cpu_sr;
+	OS_ENTER_CRITICAL();    // 关中断                               
+	OSIntNesting++;	   		//中断嵌套层数，通知ucos
+	OS_EXIT_CRITICAL();	   	//开中断	
 	if(TIM_GetITStatus(TIM12, TIM_IT_Update) != RESET)
 	{	
 		TIM_ClearITPendingBit(TIM12, TIM_IT_Update);  
@@ -320,7 +329,8 @@ void TIM8_BRK_TIM12_IRQHandler(void)
 			}
 		}
 		TIM12_Set(1);
-	}	    
+	}
+	OSIntExit();//中断退出，通知ucos，（该句必须加）				
 }
 //学习超时定时器
 void TIM12_Set(u8 sta)
