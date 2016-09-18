@@ -89,7 +89,7 @@ void bmpdisplay_exam1(void)
 			Temp_Counter++;
 			if(7<=Temp_Counter)	Temp_Counter=0;		
 		}				 
-		else{
+		else	{
 			if(0!=Light_Beep_On_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_beep_off_350_125_84x75, 350, 125);	
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_light_off_360_50_66x76 ,360,50);
@@ -462,8 +462,8 @@ void bmpdisplay_exam3(void)
 
 void bmpdisplay_exam4(void)
 {
-	char result;
-	static FIL BMPFile;	
+//	char result;
+//	static FIL BMPFile;	
 	int Distance_Counter=7;
 	int Water_flash_Counter=0;
 	int Delete_Counter=0;
@@ -524,24 +524,6 @@ void bmpdisplay_exam4(void)
 	hMem_Sub_bridge_272_175_171x54[5]=Create_MEMDEV_Icon("0:/picture/exam4/bridge6_272_175_171x54.bmp",272,175);	
 	hMem_Sub_bridge_272_175_171x54[6]=Create_MEMDEV_Icon("0:/picture/exam4/bridge7_272_175_171x54.bmp",272,175);
 	hMem_Sub_bridge_272_175_171x54[7]=Create_MEMDEV_Icon("0:/picture/exam4/bridge8_272_175_171x54.bmp",272,175);	
-
-
-//	while(1){
-//		result = f_open(&BMPFile,"0:/picture/exam4/bridge1_272_175_171x54.bmp",FA_READ);	//打开文件
-//	//文件打开错误
-//		if(result != FR_OK) 	cccc_OF++;
-//		hMem_Main = GUI_MEMDEV_Create(200, 100, 5, 5);
-//		if(result == FR_OK) 		f_close(&BMPFile);		//关闭BMPFile文件
-//		GUI_MEMDEV_Delete(hMem_Main);
-//		if(hMem_Main!=0)cccc_S++;
-//		else 
-//		{	
-//			cccc_F++;		
-//			while(1)
-//				fsmc_sram_test();;
-//		}
-//		cccc++;
-//	}
 
 	hMem_Sub_water_53_xx_151x29[0]=Create_MEMDEV_Icon("0:/picture/exam4/water1_53_xx_151x29.bmp",51,199);	
 	hMem_Sub_water_53_xx_151x29[1]=Create_MEMDEV_Icon("0:/picture/exam4/water2_53_xx_151x29.bmp",51,199);
@@ -1144,7 +1126,7 @@ void bmpdisplay_exam9(void){
 //	int picture_falg=0;
 	
 	GUI_MEMDEV_Handle hMem_Main;	
-	GUI_MEMDEV_Handle hMem_Sub_comm_105_125_278x20[6];
+	GUI_MEMDEV_Handle hMem_Sub_comm_104_121_279x30[6];
 //
 // Create the memory device
 //
@@ -1160,44 +1142,27 @@ void bmpdisplay_exam9(void){
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
 	GUI_MEMDEV_Delete(hMem_Main);	
 	
-	hMem_Sub_comm_105_125_278x20[0]=Create_MEMDEV_Icon("0:/picture/exam9/comm1_105_125_278x20.bmp",105,125);	
-	hMem_Sub_comm_105_125_278x20[1]=Create_MEMDEV_Icon("0:/picture/exam9/comm2_105_125_278x20.bmp",105,125);	
-	hMem_Sub_comm_105_125_278x20[2]=Create_MEMDEV_Icon("0:/picture/exam9/comm3_105_125_278x20.bmp",105,125);
-	hMem_Sub_comm_105_125_278x20[3]=Create_MEMDEV_Icon("0:/picture/exam9/comm4_105_125_278x20.bmp",105,125);
-	hMem_Sub_comm_105_125_278x20[4]=Create_MEMDEV_Icon("0:/picture/exam9/comm5_105_125_278x20.bmp",105,125);
-	hMem_Sub_comm_105_125_278x20[5]=Create_MEMDEV_Icon("0:/picture/exam9/comm6_105_125_278x20.bmp",105,125);
+	hMem_Sub_comm_104_121_279x30[0]=Create_MEMDEV_Icon("0:/picture/exam9/comm1_104_121_279x30.bmp",104,121);	
+	hMem_Sub_comm_104_121_279x30[1]=Create_MEMDEV_Icon("0:/picture/exam9/comm2_104_121_279x30.bmp",104,121);	
+	hMem_Sub_comm_104_121_279x30[2]=Create_MEMDEV_Icon("0:/picture/exam9/comm3_104_121_279x30.bmp",104,121);
+	hMem_Sub_comm_104_121_279x30[3]=Create_MEMDEV_Icon("0:/picture/exam9/comm4_104_121_279x30.bmp",104,121);
+	hMem_Sub_comm_104_121_279x30[4]=Create_MEMDEV_Icon("0:/picture/exam9/comm5_104_121_279x30.bmp",104,121);
+	hMem_Sub_comm_104_121_279x30[5]=Create_MEMDEV_Icon("0:/picture/exam9/comm6_104_121_279x30.bmp",104,121);
 	
 	while(1){
-//双向
-//		if(0==picture_falg){		
-//			picture_counter++;
-//			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_105_125_278x20[picture_counter],105,125);			
-
-//			if(picture_counter>=5){
-//				picture_falg=1;
-//			}
-//		}
-//		else if(1==picture_falg){
-//			picture_counter--;
-//			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_105_125_278x20[picture_counter],105,125);			
-//			if(picture_counter==0){
-//				picture_falg=0;		
-//			}
-//		}
-//单向
-		GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_105_125_278x20[picture_counter],105,125);			
+		GUI_MEMDEV_CopyToLCDAt(hMem_Sub_comm_104_121_279x30[picture_counter],104,121);			
 		picture_counter++;
 		if(picture_counter>5){
 			picture_counter=0;
 		}		
 		
 		if(9!=OUTPUTDEVICE.Cureent_Exam_Num){
-			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[0]);
-			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[1]);
-			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[2]);
-			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[3]);
-			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[4]);
-			Delete_MEMDEV_Icon(hMem_Sub_comm_105_125_278x20[5]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_104_121_279x30[0]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_104_121_279x30[1]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_104_121_279x30[2]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_104_121_279x30[3]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_104_121_279x30[4]);
+			Delete_MEMDEV_Icon(hMem_Sub_comm_104_121_279x30[5]);
 			break;
 		}
 		GUI_Delay(20);		
