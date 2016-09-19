@@ -10,10 +10,11 @@
 
 
 /***************开发板ip及MAC定义*************************/
-#define BOARD_IP  			 	192,168,87,252   		//开发板ip 
-#define BOARD_NETMASK   	 	255,255,255,0   		//开发板子网掩码
-#define BOARD_WG		   	 	 192,168,87,1   			//开发板子网关
-#define BOARD_MAC_ADDR      	0,0,0,0,0,1				//开发板MAC地址
+/***************真正起作用的在main.h里********************/
+//#define BOARD_IP  			 	192,168,87,252   		//开发板ip 
+//#define BOARD_NETMASK   	 	255,255,255,0   		//开发板子网掩码
+//#define BOARD_WG		   	 	 192,168,87,1   			//开发板子网关
+//#define BOARD_MAC_ADDR      	0,0,0,0,0,1				//开发板MAC地址
 
 #define UDP_CLIENT_PORT			1030
 #define UDP_REMOTE_PORT			1031

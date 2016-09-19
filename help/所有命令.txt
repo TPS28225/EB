@@ -1,0 +1,61 @@
+	1//注册包
+	{
+    "devId":'054f631D587A005b',
+    "devName":'zongheng_kongkai',//存放适配器类名称,便于服务端动态调用解析类模块
+    "type":"reg"
+	}
+	2客户端发起连接请求 
+   Json描述:
+    {
+      "type": "login",
+      "client_name": "XXX",
+      "group_id": "1"
+    }
+	3客户端回应心跳 pong
+	Json描述:
+    {
+    	"type": "pong",
+    }
+	4服务端推送数据
+	Json描述:
+    {
+      "type": "cmd",
+      "from_client_id": xxx,
+      "to_client_id": "all/client_id",
+      "content": ""
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

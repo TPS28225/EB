@@ -10,14 +10,15 @@
 #include "main.h"
 
 /***************开发板ip及MAC定义*************************/
-#define BOARD_IP  			 192,168,87,252   		//开发板ip 
-#define BOARD_NETMASK   	 255,255,255,0   		//开发板子网掩码
-#define BOARD_WG		   	  192,168,87,1 			//开发板子网关
-#define BOARD_MAC_ADDR       0,0,0,0,0,1			//开发板MAC地址
+/***************真正起作用的在main.h里********************/
+//#define BOARD_IP  			 192,168,87,252   		//开发板ip 
+//#define BOARD_NETMASK   	 255,255,255,0   		//开发板子网掩码
+//#define BOARD_WG		   	  192,168,87,1 			//开发板子网关
+//#define BOARD_MAC_ADDR       0,0,0,0,0,1			//开发板MAC地址
 
 #define TCP_LOCAL_PORT     		1030 
-#define TCP_SERVER_PORT    		7289
-#define TCP_SERVER_IP   		115.28.86.143 //192,168,87,105//服务器IP
+#define TCP_SERVER_PORT    		7298
+#define TCP_SERVER_IP   		192,168,87,105//115,28,86,143 //192,168,87,105//服务器IP
 
 extern struct tcp_pcb *tcp_client_pcb;
 

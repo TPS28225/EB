@@ -27,6 +27,8 @@ extern OS_EVENT * q_msg_zigbee_rx;
 extern OS_EVENT * q_msg_zigbee_tx;
 extern OS_EVENT * q_msg_bluetooth_tx;	
 
+extern int pong_flag;
+
 extern void * MsgGrp_q_msg_zigbee_rx[ZIGBEE_RX_ARRY_NUM];
 extern void * MsgGrp_q_msg_zigbee_tx[ZIGBEE_TX_ARRY_NUM];
 extern void * MsgGrpq_msg_bluetooth_tx[BLUETOOTH_TX_ARRY_NUM];

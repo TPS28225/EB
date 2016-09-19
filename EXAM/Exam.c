@@ -109,7 +109,7 @@ void bmpdisplay_exam1(void)
 			}				
 		}
 		//灯
-		if(1==OUTPUTDEVICE.LED[0]){
+		if(0!=OUTPUTDEVICE.LED[0]){
 			if(1!=Light_On_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_light_on_360_50_66x76 ,360,50); 
 				Light_On_Flag=1;			 
@@ -802,6 +802,7 @@ void bmpdisplay_exam6_bus(void){
   int RFID_CARDID_Record=0;
 	int RFID_CARDDATA_Record=0;
 	int RFID_CARDOPERATION_Record=0;
+	int BEEP_state_Record=0;	
 	CARD_Info RFID_CARDID_Inf_Temp;
 	char RFID_CARDID_str[20];
 	char remaining_sum_str[10];	
@@ -866,7 +867,7 @@ void bmpdisplay_exam6_bus(void){
 			else {
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_not_enough_145_157_63x23,145,157);
 			}	
-			GUI_Delay(50);
+			GUI_Delay(20);
 			
 			switch(OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation){
 				case 1:
@@ -899,9 +900,30 @@ void bmpdisplay_exam6_bus(void){
 					if(RFID_CARDDATA_Record>0){				
 						RFID_CARDID_Inf_Temp.rfid_card_Info.Data=--RFID_CARDDATA_Record;
 						Write_Block(5,RFID_CARDID_Inf_Temp.CARD_Info_Str);
-						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_remaining_sum_background_145_160_42x18,145,160);
-						sprintf(remaining_sum_str,"%d",RFID_CARDDATA_Record);
-						GUI_DispStringHCenterAt(remaining_sum_str,166,159);
+						if(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){	
+							if(INPUTDEVICE.RFID_CARD.rfid_card_Info.Data==RFID_CARDDATA_Record){
+								BEEP_state_Record=OUTPUTDEVICE.Beep;
+								OUTPUTDEVICE.Beep=5;
+								GUI_MEMDEV_CopyToLCDAt(hMem_Sub_remaining_sum_background_145_160_42x18,145,160);
+								sprintf(remaining_sum_str,"%d",RFID_CARDDATA_Record);
+								GUI_DispStringHCenterAt(remaining_sum_str,166,159);
+								GUI_Delay(10);	
+								OUTPUTDEVICE.Beep=BEEP_state_Record;
+							}
+							else{
+								BEEP_state_Record=OUTPUTDEVICE.Beep;
+								OUTPUTDEVICE.Beep=1;
+								GUI_Delay(120);	
+								OUTPUTDEVICE.Beep=BEEP_state_Record;						
+							}
+						}
+						else{
+							BEEP_state_Record=OUTPUTDEVICE.Beep;
+							OUTPUTDEVICE.Beep=1;
+							GUI_Delay(120);	
+							OUTPUTDEVICE.Beep=BEEP_state_Record;						
+						}
+
 					}
 					else {
 						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_not_enough_145_157_63x23,145,157);
@@ -910,7 +932,7 @@ void bmpdisplay_exam6_bus(void){
 					//禁止充值
 					OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Charge_Enable=0;	
 					while(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str))
-						GUI_Delay(50);										
+						GUI_Delay(20);										
 					break;
 				default:
 					OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation=2;//错误的情况下进入刷卡模式		

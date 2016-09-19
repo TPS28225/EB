@@ -34,6 +34,8 @@ OS_EVENT * q_msg_zigbee_rx;
 OS_EVENT * q_msg_zigbee_tx;	
 OS_EVENT * q_msg_bluetooth_tx;
 
+int pong_flag=0;
+
 void * MsgGrp_q_msg_zigbee_rx[ZIGBEE_RX_ARRY_NUM];
 void * MsgGrp_q_msg_zigbee_tx[ZIGBEE_TX_ARRY_NUM];
 void * MsgGrpq_msg_bluetooth_tx[BLUETOOTH_TX_ARRY_NUM];
@@ -74,7 +76,7 @@ void Task_INPUT(void *pdata)
 		UltrasonicWave_StartMeasure();
 		DHT11_Read_Data();
 		LightIntensitySensor_measure();
-		OSTimeDlyHMSM(0, 0, 1, 0);
+		OSTimeDlyHMSM(0, 0, 2, 0);
 	}
 }
 void Task_KEY(void *pdata)
@@ -116,19 +118,40 @@ void Task_OUTPUT(void *pdata)
 ***********************************************************************/
 
 void Task_TX(void *pdata)
-{		
+{	
+	char *msg;
+	
+	OSTimeDlyHMSM(0, 0, 2, 0);	
+	//这里LOGIN和REG换了下顺序，是为了让接收方收到的顺序正确
+	msg = makeJson(LOGIN);
+	strlen(msg);
+	msgReporter(msg,strlen(msg));
+	free(msg);
+
+	msg = makeJson(REG);
+	strlen(msg);
+	msgReporter(msg,strlen(msg));
+	free(msg);
+	
+
+	
   while(1)
 	{
-		char *msg;
 		runTime.TxStartTime = TIM_GetCounter(DELAY_TIMER);
-		msg = makeJson();
+		if(0<pong_flag){		
+			msg = makeJson(PONG);
+			pong_flag=0;
+		}
+		else{
+			msg = makeJson(RPT);
+		}
 		strlen(msg);
 		msgReporter(msg,strlen(msg));
 		free(msg);
 		runTime.TxEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.TxEndTime - runTime.TxStartTime > runTime.TxRunTime)
 			runTime.TxRunTime = runTime.TxEndTime - runTime.TxStartTime;	
-		OSTimeDlyHMSM(0, 0, 5, 0);
+		OSTimeDlyHMSM(0, 0, 2, 0);
 	}
 }
 /***********************************************************************

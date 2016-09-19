@@ -143,7 +143,7 @@ void BEEP_Run(void)
 		count = ! count;
 		if(count==0)
 		{
-			buzzerSound(TT/4);
+			buzzerSound(TT/3);
 		}
 		else
 			buzzerQuiet();// ·äÃùÆ÷¾²Òô
@@ -159,6 +159,10 @@ void BEEP_Run(void)
 	else if(OUTPUTDEVICE.Beep == 4)
 	{
 		musicPlay(MyScore3); 
+	}
+	else if(OUTPUTDEVICE.Beep == 5)
+	{
+		buzzerSound(TT/5);
 	}
 }
 
