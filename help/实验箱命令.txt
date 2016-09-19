@@ -1,0 +1,1 @@
+{"devId":"PwAeABhHMjIxNDkyPwAeABhHMjIxNDky","type":"cmd","data":{"test":61,"led":{"led1":1,"led2":1,"led3":3,"led4":4,"led5":0,"led6":1,"led7":0,"led8":3},"ir":{"state":1},"beep":0,"dcmotor":0,"rfid":{"operation":1,"charge_enable":1,"data":99}}}

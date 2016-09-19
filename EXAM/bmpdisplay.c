@@ -91,45 +91,45 @@ static int BmpGetData(void * p, const U8 ** ppData, unsigned NumBytesReq, U32 Of
 //member:  缩放比例的分子项
 //denom:缩放比例的分母项
 //返回值:0 显示正常,其他 失败
-int dispbmp(u8 *BMPFileName,u8 mode,u32 x,u32 y)
-{
-	u16 bread;
-	char *bmpbuffer;
-	char result;
-	GUI_COLOR forecolor,bkcolor;
-	
-	#if SYSTEM_SUPPORT_UCOS
-		OS_CPU_SR cpu_sr;
-	#endif
+//int dispbmp(u8 *BMPFileName,u8 mode,u32 x,u32 y)
+//{
+//	u16 bread;
+//	char *bmpbuffer;
+//	char result;
+//	GUI_COLOR forecolor,bkcolor;
+//	
+//	#if SYSTEM_SUPPORT_UCOS
+//		OS_CPU_SR cpu_sr;
+//	#endif
 
-	forecolor=GUI_GetColor();			//获取当前前景色
-	bkcolor=GUI_GetBkColor();			//获取当前背景色
-	result = f_open(&BMPFile,(const TCHAR*)BMPFileName,FA_READ);	//打开文件
-	//文件打开错误或者文件大于BMPMEMORYSIZE
-	if((result != FR_OK) || (BMPFile.fsize>BMPMEMORYSIZE)) 	return 1;
+//	forecolor=GUI_GetColor();			//获取当前前景色
+//	bkcolor=GUI_GetBkColor();			//获取当前背景色
+//	result = f_open(&BMPFile,(const TCHAR*)BMPFileName,FA_READ);	//打开文件
+//	//文件打开错误或者文件大于BMPMEMORYSIZE
+//	if((result != FR_OK) || (BMPFile.fsize>BMPMEMORYSIZE)) 	return 1;
 
-	bmpbuffer = mymalloc(SRAMEX,BMPFile.fsize);//申请内存
-	if(bmpbuffer == NULL) return 2;
-	
-	#if SYSTEM_SUPPORT_UCOS
-		OS_ENTER_CRITICAL();	//临界区
-	#endif
-		
-	result = f_read(&BMPFile,bmpbuffer,BMPFile.fsize,(UINT *)&bread); //读取数据
-	if(result != FR_OK) return 3;
-	
-	#if SYSTEM_SUPPORT_UCOS
-		OS_EXIT_CRITICAL();	//退出临界区
-	#endif
-	
-	GUI_BMP_Draw(bmpbuffer,x,y);
-	
-	f_close(&BMPFile);		//关闭BMPFile文件
-	myfree(SRAMEX,bmpbuffer);	//释放内存
-	GUI_SetColor(forecolor);		//恢复前景色
-	GUI_SetBkColor(bkcolor);		//恢复背景色
-	return 0;
-}
+//	bmpbuffer = mymalloc(SRAMEX,BMPFile.fsize);//申请内存
+//	if(bmpbuffer == NULL) return 2;
+//	
+//	#if SYSTEM_SUPPORT_UCOS
+//		OS_ENTER_CRITICAL();	//临界区
+//	#endif
+//		
+//	result = f_read(&BMPFile,bmpbuffer,BMPFile.fsize,(UINT *)&bread); //读取数据
+//	if(result != FR_OK) return 3;
+//	
+//	#if SYSTEM_SUPPORT_UCOS
+//		OS_EXIT_CRITICAL();	//退出临界区
+//	#endif
+//	
+//	GUI_BMP_Draw(bmpbuffer,x,y);
+//	
+//	f_close(&BMPFile);		//关闭BMPFile文件
+//	myfree(SRAMEX,bmpbuffer);	//释放内存
+//	GUI_SetColor(forecolor);		//恢复前景色
+//	GUI_SetBkColor(bkcolor);		//恢复背景色
+//	return 0;
+//}
 
 //在指定位置显示无需加载到RAM中的BMP图片(需文件系统支持！对于小RAM，推荐使用此方法！)
 //BMPFileName:图片在SD卡或者其他存储设备中的路径

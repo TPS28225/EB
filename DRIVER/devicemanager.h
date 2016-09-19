@@ -18,7 +18,8 @@
 typedef struct {
 	int RFID_CARDID;
 	u16 Data;
-	u8  Card_State_Operation;	//专用在判断公交卡将处于刷卡状态还是充值状态
+	u8  Card_Operation;	//专用在判断公交卡将处于刷卡状态还是充值状态
+	u8 	Card_Charge_Enable;
 	u8  entrance_guard_pass;	
 	u8  ACK[3];
 }CARD_Property;

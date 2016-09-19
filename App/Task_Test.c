@@ -74,7 +74,6 @@ void Task_INPUT(void *pdata)
 		UltrasonicWave_StartMeasure();
 		DHT11_Read_Data();
 		LightIntensitySensor_measure();
-//		GET_CARDID();	 
 		OSTimeDlyHMSM(0, 0, 1, 0);
 	}
 }
@@ -102,10 +101,7 @@ void Task_OUTPUT(void *pdata)
 //		runTime.OutputEndTime = TIM_GetCounter(DELAY_TIMER);
 //		if(runTime.OutputEndTime - runTime.OutputStartTime > runTime.OutputRunTime)
 //			runTime.OutputRunTime = runTime.OutputEndTime - runTime.OutputStartTime;	
-//		OSTimeDlyHMSM(0, 0, 1, 0);
 
-
-//	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_State=1;
 	OSTimeDlyHMSM(0, 0, 2, 0);//延时2s
 	}
 }
@@ -244,7 +240,7 @@ void Task_OLEDDisplay(void *pdata)
 	GUI_DispStringAt("PLEASE WAITING...   ",10,90);	
 //	MainTask();
 	
-	OUTPUTDEVICE.Cureent_Exam_Num=61;
+	OUTPUTDEVICE.Cureent_Exam_Num=4;
 	while(1){
 			//检测SD卡，防止他干扰实验正常进行				
 		GUI_SetTextMode(GUI_TM_NORMAL);

@@ -43,7 +43,6 @@
 ".\debug\stm32f2xx_wwdg.o"
 ".\debug\system_stm32f2xx.o"
 ".\debug\startup_stm32f2xx.o"
-".\debug\malloc.o"
 ".\debug\os_cpu_a.o"
 ".\debug\os_cpu_c.o"
 ".\debug\os_dbg.o"

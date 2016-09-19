@@ -49,7 +49,7 @@ void BSP_Init(void)
 	TFTLCD_Init();		
 	FSMC_SRAM_Init();
 	while(fsmc_sram_test()!=0x400);
-	my_mem_init(SRAMEX);//初始化外部内存池		
+	//my_mem_init(SRAMEX);//初始化外部内存池		
 	LED_Configuration();	
 	Beep_Config();	
 	MOTOR_Configuration();

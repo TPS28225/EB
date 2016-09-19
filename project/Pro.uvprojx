@@ -662,13 +662,6 @@
         </Group>
         <Group>
           <GroupName>Malloc</GroupName>
-          <Files>
-            <File>
-              <FileName>malloc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Malloc\malloc.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>UCOS/Port</GroupName>

@@ -62,8 +62,9 @@ Purpose     : Display controller initialization
 //
 // Define the available number of bytes available for the GUI
 //
-#define GUI_NUMBYTES  (1024*800)
-#define GUI_BLOCKSIZE 0X80
+//u32 aMemory[250000] __attribute__((at(0X68000000)));//测试用数组
+#define GUI_NUMBYTES  (1024*1023)
+#define GUI_BLOCKSIZE 1024
 /*********************************************************************
 *
 *       Public code
@@ -86,8 +87,8 @@ void GUI_X_Config(void) {
   //
   // Assign memory to emWin
   //
-		U32 *aMemory = mymalloc(SRAMEX,GUI_NUMBYTES); //从外部SRAM中分配GUI_NUMBYTES字节的内存
-		GUI_ALLOC_AssignMemory((void*)aMemory, GUI_NUMBYTES); //为存储管理系统分配一个存储块
+//		U32 *aMemory = mymalloc(SRAMEX,GUI_NUMBYTES); //从外部SRAM中分配GUI_NUMBYTES字节的内存
+		GUI_ALLOC_AssignMemory((void*)(0X68000000), GUI_NUMBYTES); //为存储管理系统分配一个存储块
 		GUI_ALLOC_SetAvBlockSize(GUI_BLOCKSIZE); //设置存储快的平均尺寸,该区越大,可用的存储快数量越少
 		GUI_SetDefaultFont(GUI_FONT_6X8); //设置默认字体
   //

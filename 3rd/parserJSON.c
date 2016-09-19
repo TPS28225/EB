@@ -90,7 +90,8 @@ void parserJson(char * pMsg)
 	pSub = cJSON_GetObjectItem(pJson, "devId");
 	if(pSub != NULL)
 	{
-		if(!strcmp(uniqueID,pSub->valuestring))
+		//if(!strcmp(uniqueID,pSub->valuestring))		
+		if(!strcmp("NQAyAAtRNTMzODQwNQAyAAtRNTMzODQw",pSub->valuestring))
 		{
 			pSub = cJSON_GetObjectItem(pJson, "type");
 			if(!strcmp("cmd",pSub->valuestring))
@@ -159,6 +160,7 @@ void parserJson(char * pMsg)
 					{
 						OUTPUTDEVICE.Motor = pSubSub->valueint;						
 					}
+					
 					pSubSub = cJSON_GetObjectItem(pSub, "ir");
 					if(pSubSub != NULL)
 					{
@@ -173,6 +175,7 @@ void parserJson(char * pMsg)
 							strncpy(OUTPUTDEVICE.IR_Code,pSubSubSub->valuestring,IRCODE_ARRY_NUM);
 						}								
 					}
+
 //							"rfid":{
 //			"id":"FF03DC6B",
 //			"data":10,   //(?????)
@@ -182,21 +185,27 @@ void parserJson(char * pMsg)
 					pSubSub = cJSON_GetObjectItem(pSub, "rfid");
 					if(pSubSub != NULL)
 					{
-						pSubSub = cJSON_GetObjectItem(pSub, "data");
-						if(pSubSub != NULL)
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "operation");
+						if(pSubSubSub != NULL)
 						{
-							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Data = pSubSubSub->valueint;							
+							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation = pSubSubSub->valueint;
 						}
-						pSubSub = cJSON_GetObjectItem(pSub, "enable");
-						if(pSubSub != NULL)
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "charge_enable");
+						if(pSubSubSub != NULL)
 						{
-							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass = pSubSubSub->valueint;							
-						}
-						pSubSub = cJSON_GetObjectItem(pSub, "enable");
-						if(pSubSub != NULL)
+							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Charge_Enable = pSubSubSub->valueint;
+						}	
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "data");
+						if(pSubSubSub != NULL)
 						{
-							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass = pSubSubSub->valueint;							
+							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Data = pSubSubSub->valueint;
 						}
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "pass_enable");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass = pSubSubSub->valueint;
+						}
+						
 					}
 					pSubSub = cJSON_GetObjectItem(pSub, "zigbee");
 					if(pSubSub != NULL)

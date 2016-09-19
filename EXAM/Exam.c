@@ -27,8 +27,10 @@ void bmpdisplay_exam1(void)
 	int Temp_Counter=0;
 	int Delete_Counter=0;
 	
-	int Light_Beep_On_Flag=3;
-
+	int Light_On_Flag=3;
+	int Beep_On_Flag=3;
+	int People_Exist_Flag=3;
+	
 	GUI_MEMDEV_Handle hMem_Main;
 
 	GUI_MEMDEV_Handle hMem_Sub_beep_off_350_125_84x75;
@@ -76,29 +78,58 @@ void bmpdisplay_exam1(void)
 	GUI_UC_SetEncodeUTF8();
 	
 	while(1)	{	
+		//直接判断有无人
 		if(1==INPUTDEVICE.exist_people || 1==INPUTDEVICE.Magnetic_Door_Contact){
-			if(1!=Light_Beep_On_Flag){
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_beep_on_350_125_84x75, 350, 125);	
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_light_on_360_50_66x76 ,360,50); 
+			if(1!=People_Exist_Flag){ 
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);				 
 				GUI_DispStringAt(_apStrings_youren[0], 175, 112);	
-				Light_Beep_On_Flag=1;			 
+				People_Exist_Flag=1;			 
 			}
-		 
-			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_fan_345_205_94x90[Temp_Counter],345,205);
-			Temp_Counter++;
-			if(7<=Temp_Counter)	Temp_Counter=0;		
 		}				 
 		else	{
-			if(0!=Light_Beep_On_Flag){
+			if(0!=People_Exist_Flag){
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);
+				GUI_DispStringAt(_apStrings_wuren[0], 175, 112);
+				People_Exist_Flag=0;				
+			}				
+		}
+		//警报器
+		if(0!=OUTPUTDEVICE.Beep){
+			if(1!=Beep_On_Flag){
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_beep_on_350_125_84x75, 350, 125);	
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);				 
+				GUI_DispStringAt(_apStrings_youren[0], 175, 112);	
+				Beep_On_Flag=1;			 
+			}		 	
+		}				 
+		else	{
+			if(0!=Beep_On_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_beep_off_350_125_84x75, 350, 125);	
+				Beep_On_Flag=0;				
+			}				
+		}
+		//灯
+		if(1==OUTPUTDEVICE.LED[0]){
+			if(1!=Light_On_Flag){
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_light_on_360_50_66x76 ,360,50); 
+				Light_On_Flag=1;			 
+			}	 	
+		}				 
+		else	{
+			if(0!=Light_On_Flag){	
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_light_off_360_50_66x76 ,360,50);
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);
 				GUI_DispStringAt(_apStrings_wuren[0], 175, 112);
-				Light_Beep_On_Flag=0;				
+				Light_On_Flag=0;				
 			}				
 		}
-
+		//风扇
+		if(0<OUTPUTDEVICE.Motor){
+			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_fan_345_205_94x90[Temp_Counter],345,205);
+			Temp_Counter++;	
+			if(7<=Temp_Counter)	Temp_Counter=0;	
+		}			
+		//删除存储设备
 		if((1!=OUTPUTDEVICE.Cureent_Exam_Num) || (hMem_Sub_fan_345_205_94x90[7]==0)){
 			Delete_MEMDEV_Icon(hMem_Sub_beep_off_350_125_84x75);
 			Delete_MEMDEV_Icon(hMem_Sub_beep_on_350_125_84x75);
@@ -113,8 +144,7 @@ void bmpdisplay_exam1(void)
 			}
 			break;
 		}
-		GUI_Delay(10);
-		
+		GUI_Delay(10);		
 	}
 }
 
@@ -181,8 +211,8 @@ void bmpdisplay_exam2(void)
 	hMem_Sub_light_off_116_37x16[2]=Create_MEMDEV_Icon("0:/picture/exam2/light_off_360_116_37x16.bmp",360,116);
 	hMem_Sub_light_off_116_37x16[3]=Create_MEMDEV_Icon("0:/picture/exam2/light_off_417_116_37x16.bmp",417,116);	
 
-
 	while(1){	
+		//灯1-灯4
 		for(Temp_Counter=0;Temp_Counter<4;Temp_Counter++){
 			if((0<OUTPUTDEVICE.LED[Temp_Counter])&&(1!=Light_On_Flag[Temp_Counter])){
 				if(0==Temp_Counter)GUI_MEMDEV_CopyToLCDAt(hMem_Sub_light_on_116_37x16[Temp_Counter], 247, 116);
@@ -195,7 +225,7 @@ void bmpdisplay_exam2(void)
 				Light_On_Flag[Temp_Counter]=0;
 			}
 		}
-		
+		//声音传感器判断有无人
 		if(1==INPUTDEVICE.sound_exceed_threshold){
 			 if(1!=sound_exceed_threshold_Flag){			 
 				 GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_2_150_215_70x40 ,150,215);
@@ -214,7 +244,7 @@ void bmpdisplay_exam2(void)
 				sound_exceed_threshold_Flag=0;				
 			}				
 		}
-		
+		//电源开关
 		if(0<OUTPUTDEVICE.LED[7]){
 			if(1!=Power_On_Flag){			 
 			 GUI_MEMDEV_CopyToLCDAt(hMem_Sub_power_on_274_274_74x37 ,274,274);
@@ -229,13 +259,14 @@ void bmpdisplay_exam2(void)
 				}				
 			}
 		}
-		
+		//显示光照强度
 		if(Light_Intensity_Record!=INPUTDEVICE.LightIntensity){		
 			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_1_125_120_82x40 ,125,120);		
 			sprintf(Light_Intensity,"%d",INPUTDEVICE.LightIntensity);
 			GUI_DispStringHCenterAt(Light_Intensity,166,120);
 			Light_Intensity_Record=INPUTDEVICE.LightIntensity;
-		}	
+		}
+		//删除存储设备
 		if(2!=OUTPUTDEVICE.Cureent_Exam_Num || hMem_Sub_light_off_116_37x16[3]==0){
 			Delete_MEMDEV_Icon(hMem_Sub_power_on_274_274_74x37);
 			Delete_MEMDEV_Icon(hMem_Sub_power_off_274_274_74x37);
@@ -334,7 +365,7 @@ void bmpdisplay_exam3(void)
 	hMem_Sub_background_zhilengre_335_285_46x19=Create_MEMDEV_Icon("0:/picture/exam3/background_zhilengre_335_285_46x19.bmp",335,285);
 	while(1){
 	//调温	以及显示调温状态（制冷/制热/舒适）	
-		if(INPUTDEVICE.temperature >= 24 ){
+		if(OUTPUTDEVICE.Motor < 0){
 			
 			if(1!=zhilengre_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_background_zhilengre_335_285_46x19,335,285);
@@ -348,7 +379,7 @@ void bmpdisplay_exam3(void)
 			Temp_Counter++;
 			if(5<=Temp_Counter)	Temp_Counter=0;				
 		}
-		else if(INPUTDEVICE.temperature <= 20){
+		else if(OUTPUTDEVICE.Motor > 0 ){
 			if(2!=zhilengre_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_background_zhilengre_335_285_46x19,335,285);
 				GUI_SetFont(&GUI_Fontyouyuan16);
@@ -378,14 +409,15 @@ void bmpdisplay_exam3(void)
 			GUI_DispStringHCenterAt(Temperature_str,191,225);
 			Temperature_Record=INPUTDEVICE.temperature;
 		}
-	//显示温度动画
-		GUI_MEMDEV_CopyToLCDAt(hMem_Sub_temper_84_199_12x43[Temp_flash_Counter],84,199);
+		
+	//显示温度计动画
+		GUI_MEMDEV_CopyToLCDAt(hMem_Sub_temper_84_199_12x43[Temp_flash_Counter/4],84,199);
 		Temp_flash_Counter++;
-		if(Temp_flash_Counter>=3)Temp_flash_Counter=0;
+		if(Temp_flash_Counter/4>=3)Temp_flash_Counter=0;
 	
 		
 	//调湿度	以及显示调湿状态（除湿/去湿/舒适）	zhilengre_Flag
-		if(INPUTDEVICE.humidity >= 60){
+		if(OUTPUTDEVICE.LED[4]>0){
 			if(1!=jiachushi_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_background_jiachushi_340_167_46x19,340,167);
 				GUI_SetFont(&GUI_Fontyouyuan16);
@@ -398,7 +430,7 @@ void bmpdisplay_exam3(void)
 			Humidity_Counter++;
 			if(8<=Humidity_Counter)	Humidity_Counter=0;	
 		}
-		else if(INPUTDEVICE.humidity <= 50){
+		else if(OUTPUTDEVICE.LED[5]>0){
 			if(2!=jiachushi_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_background_jiachushi_340_167_46x19,340,167);
 				GUI_SetFont(&GUI_Fontyouyuan16);
@@ -454,7 +486,7 @@ void bmpdisplay_exam3(void)
 			Delete_MEMDEV_Icon(hMem_Sub_background_zhilengre_335_285_46x19);		
 			break;
 		}		
-	GUI_Delay(30);
+	GUI_Delay(10);
 //		OSTimeDlyHMSM(0, 0, 0, 10);//1000ms		
 	}
 }
@@ -515,6 +547,7 @@ void bmpdisplay_exam4(void)
 	GUI_MEMDEV_Select(0);	
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
 	GUI_MEMDEV_Delete(hMem_Main);
+	
 
 	hMem_Sub_bridge_272_175_171x54[0]=Create_MEMDEV_Icon("0:/picture/exam4/bridge1_272_175_171x54.bmp",272,175);
 	hMem_Sub_bridge_272_175_171x54[1]=Create_MEMDEV_Icon("0:/picture/exam4/bridge2_272_175_171x54.bmp",272,175);
@@ -544,7 +577,7 @@ void bmpdisplay_exam4(void)
 	while(1){
 		
 		//显示开关闸动画
-		if(INPUTDEVICE.Distance<=3){//低水位动画执行一遍
+		if(OUTPUTDEVICE.Motor<0){//关闸动画执行一遍
 			if(Water_Level_State!=1){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_water_level_state_280_90_160x30[0],280,90);
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_water_level_background_53_173_151x69[0],53,173);				
@@ -555,7 +588,7 @@ void bmpdisplay_exam4(void)
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_bridge_272_175_171x54[Distance_Counter],272,175);
 			}		
 		}
-		else if(INPUTDEVICE.Distance>=6){//高水位动画执行一遍
+		else if(OUTPUTDEVICE.Motor>0){//开闸动画执行一遍
 			if(Water_Level_State!=3){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_water_level_state_280_90_160x30[2],280,90);
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_water_level_background_53_173_151x69[2],53,173);	
@@ -594,7 +627,7 @@ void bmpdisplay_exam4(void)
 		Water_flash_Counter++;		
 		if(Water_flash_Counter>=5)Water_flash_Counter=0;
 		
-		if(4!=OUTPUTDEVICE.Cureent_Exam_Num){
+		if(4!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Sub_distance_background_140_88_54x32){
 				
 			for(Delete_Counter=0;Delete_Counter<=7;Delete_Counter++){
 				Delete_MEMDEV_Icon(hMem_Sub_bridge_272_175_171x54[Delete_Counter]);
@@ -739,7 +772,7 @@ void bmpdisplay_exam5(void){
 				counter_2=5;
 				break;			
 		}
-		if(5!=OUTPUTDEVICE.Cureent_Exam_Num){
+		if(5!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Sub_Recomend_Sendsuccess_195_193_256x31){
 				
 			for(Delete_Counter=0;Delete_Counter<=2;Delete_Counter++){
 				Delete_MEMDEV_Icon(hMem_Sub_light_top_135_59_80x83[Delete_Counter]);
@@ -765,9 +798,11 @@ void bmpdisplay_exam5(void){
 
 
 void bmpdisplay_exam6_bus(void){
-	int Putcard_Flag=0;		
+//	int	Putcard_Flag=0;
   int RFID_CARDID_Record=0;
 	int RFID_CARDDATA_Record=0;
+	int RFID_CARDOPERATION_Record=0;
+	CARD_Info RFID_CARDID_Inf_Temp;
 	char RFID_CARDID_str[20];
 	char remaining_sum_str[10];	
 	
@@ -811,84 +846,59 @@ void bmpdisplay_exam6_bus(void){
 	hMem_Sub_ID_background_130_135_77x17=Create_MEMDEV_Icon("0:/picture/exam6/ID_background_130_135_77x17.bmp",130,135);	
 	hMem_Sub_not_enough_145_157_63x23=Create_MEMDEV_Icon("0:/picture/exam6/not_enough_145_157_63x23.bmp",145,157);	
 	hMem_Sub_remaining_sum_background_145_160_42x18=Create_MEMDEV_Icon("0:/picture/exam6/remaining_sum_background_145_160_42x18.bmp",145,160);	
-	
-	switch(OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_State_Operation){
-		case 1:
-			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Putcard_75_105_160x80,75,105);
-			break;
-		case 2:
-			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Slotcard_75_105_160x80,75,105);
-			break;
-	}
+
+	if(OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation==0)OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation=2;
 	
 	while(1){
-		switch(OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_State_Operation){
-			case 1:
-				if(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){
-					if(RFID_CARDID_Record!=INPUTDEVICE.RFID_CARD.rfid_card_Info.RFID_CARDID){
-						RFID_CARDID_Record=INPUTDEVICE.RFID_CARD.rfid_card_Info.RFID_CARDID;
-						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Readcardinfo_75_105_160x80,75,105);
-						
-						sprintf(RFID_CARDID_str,"%04X",RFID_CARDID_Record);
-						GUI_DispStringHCenterAt(RFID_CARDID_str,169,135);			
-					}
-					if(RFID_CARDDATA_Record!=INPUTDEVICE.RFID_CARD.rfid_card_Info.Data){
-						RFID_CARDDATA_Record=INPUTDEVICE.RFID_CARD.rfid_card_Info.Data;
-						if(RFID_CARDDATA_Record>0){
-							GUI_MEMDEV_CopyToLCDAt(hMem_Sub_remaining_sum_background_145_160_42x18,145,160);
-							sprintf(remaining_sum_str,"%d",RFID_CARDDATA_Record);
-							GUI_DispStringHCenterAt(remaining_sum_str,166,159);
-						}
-						else {
-							GUI_MEMDEV_CopyToLCDAt(hMem_Sub_not_enough_145_157_63x23,145,157);
-						}	
-					}
+		if(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){					
+			//打印卡的ID
+			RFID_CARDID_Record=INPUTDEVICE.RFID_CARD.rfid_card_Info.RFID_CARDID;
+			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Readcardinfo_75_105_160x80,75,105);	
+			sprintf(RFID_CARDID_str,"%04X",RFID_CARDID_Record);
+			GUI_DispStringHCenterAt(RFID_CARDID_str,169,135);		
+			//打印卡内余额
+			RFID_CARDDATA_Record=INPUTDEVICE.RFID_CARD.rfid_card_Info.Data;
+			if(RFID_CARDDATA_Record>0){
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_remaining_sum_background_145_160_42x18,145,160);				
+				sprintf(remaining_sum_str,"%d",RFID_CARDDATA_Record);
+				GUI_DispStringHCenterAt(remaining_sum_str,166,159);			
+			}
+			else {
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_not_enough_145_157_63x23,145,157);
+			}	
+			GUI_Delay(50);
+			
+			switch(OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation){
+				case 1:
 					//充值
-					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Recharge_75_105_160x80,75,105);
-					if(!Write_Block(5,OUTPUTDEVICE.RFID_CARD.CARD_Info_Str)){	
-						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Rechargesuccess_75_105_160x80,75,105);
-						GUI_Delay(50);
-					}
-					else GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Rechargefault_75_105_160x80,75,105);	
-					
-					while(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){
-						GUI_Delay(50);
-					}						
-					Putcard_Flag=1;	
-				}
-				else {//对移开卡的处理
-					if(Putcard_Flag!=0){
-						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Putcard_75_105_160x80,75,105);
-						Putcard_Flag=0;
-						RFID_CARDID_Record=0;
-						RFID_CARDDATA_Record=51300;
-					}
-				}			
-				break;
-			case 2:
-				if(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){
-					if(RFID_CARDID_Record!=INPUTDEVICE.RFID_CARD.rfid_card_Info.RFID_CARDID){
-						RFID_CARDID_Record=INPUTDEVICE.RFID_CARD.rfid_card_Info.RFID_CARDID;
-						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Readcardinfo_75_105_160x80,75,105);
-						sprintf(RFID_CARDID_str,"%04X",RFID_CARDID_Record);
-						GUI_DispStringHCenterAt(RFID_CARDID_str,169,135);			
-					}
-					if(RFID_CARDDATA_Record!=INPUTDEVICE.RFID_CARD.rfid_card_Info.Data){
-						RFID_CARDDATA_Record=INPUTDEVICE.RFID_CARD.rfid_card_Info.Data;
-						if(RFID_CARDDATA_Record>0){
-							GUI_MEMDEV_CopyToLCDAt(hMem_Sub_remaining_sum_background_145_160_42x18,145,160);
-							sprintf(remaining_sum_str,"%d",RFID_CARDDATA_Record);
-							GUI_DispStringHCenterAt(remaining_sum_str,166,159);
+					if(1==OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Charge_Enable){
+						RFID_CARDID_Inf_Temp.rfid_card_Info.Data = OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Data;
+						OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Charge_Enable=0;
+						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Recharge_75_105_160x80,75,105);
+						
+						if(0==RFID_CARDID_Inf_Temp.rfid_card_Info.Data){
+							if(!Write_Block(5,RFID_CARDID_Inf_Temp.CARD_Info_Str)){	
+								GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_remaining_sum_clear_75_105_160x80,75,105);
+								GUI_Delay(50);
+							}
 						}
-						else {
-							GUI_MEMDEV_CopyToLCDAt(hMem_Sub_not_enough_145_157_63x23,145,157);
-						}	
+						else{
+							if(!Write_Block(5,RFID_CARDID_Inf_Temp.CARD_Info_Str)){	
+								GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Rechargesuccess_75_105_160x80,75,105);
+								GUI_Delay(50);
+							}
+							else {
+								GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Rechargefault_75_105_160x80,75,105);	
+								GUI_Delay(50);								
+							}
+						}
 					}
-					Putcard_Flag=1;
+					break;
+				case 2:
 					//消费			
-					if(RFID_CARDDATA_Record>0){
-						OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Data=--RFID_CARDDATA_Record;
-						Write_Block(5,OUTPUTDEVICE.RFID_CARD.CARD_Info_Str);
+					if(RFID_CARDDATA_Record>0){				
+						RFID_CARDID_Inf_Temp.rfid_card_Info.Data=--RFID_CARDDATA_Record;
+						Write_Block(5,RFID_CARDID_Inf_Temp.CARD_Info_Str);
 						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_remaining_sum_background_145_160_42x18,145,160);
 						sprintf(remaining_sum_str,"%d",RFID_CARDDATA_Record);
 						GUI_DispStringHCenterAt(remaining_sum_str,166,159);
@@ -897,21 +907,35 @@ void bmpdisplay_exam6_bus(void){
 						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_not_enough_145_157_63x23,145,157);
 					}
 					
-					while(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){
-						GUI_Delay(50);
-					}
-				}
-				else {//对移开卡的处理
-					if(Putcard_Flag!=0){
-						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Slotcard_75_105_160x80,75,105);
-						Putcard_Flag=0;
-						RFID_CARDID_Record=0;
-						RFID_CARDDATA_Record=51300;
-					}
-				}
-				break;								
+					//禁止充值
+					OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Charge_Enable=0;	
+					while(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str))
+						GUI_Delay(50);										
+					break;
+				default:
+					OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation=2;//错误的情况下进入刷卡模式		
+
+			}
 		}
-		if(61!=OUTPUTDEVICE.Cureent_Exam_Num){			
+		else {//对移开卡的处理
+			if(RFID_CARDOPERATION_Record!=OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation){
+				RFID_CARDOPERATION_Record=OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation;
+			}
+			switch(RFID_CARDOPERATION_Record){
+				case 1:
+					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Putcard_75_105_160x80,75,105);
+					break;
+				case 2:
+					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Slotcard_75_105_160x80,75,105);	
+			}			
+//			if(0!=Putcard_Flag){
+//			
+//			}
+			RFID_CARDID_Record=0;
+			RFID_CARDDATA_Record=51300;
+		}			
+				
+		if(61!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Sub_remaining_sum_background_145_160_42x18){			
 			Delete_MEMDEV_Icon(hMem_Sub_Recomend_Putcard_75_105_160x80);	
 			Delete_MEMDEV_Icon(hMem_Sub_Recomend_Readcardinfo_75_105_160x80);	
 			Delete_MEMDEV_Icon(hMem_Sub_Recomend_Recharge_75_105_160x80);	
@@ -976,8 +1000,8 @@ void bmpdisplay_exam6_entrance_guard(void){
 	hMem_Sub_entrance_guard_recognising_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_recognising_50_132_56x23.bmp",50,132);	
 	hMem_Sub_entrance_guard_void_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_void_50_132_56x23.bmp",50,132);	
 
-	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass=1;
-	Write_Block(5,OUTPUTDEVICE.RFID_CARD.CARD_Info_Str);
+//	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass=1;
+//	Write_Block(5,OUTPUTDEVICE.RFID_CARD.CARD_Info_Str);
 	while(1){
 		if(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){
 			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_recognising_50_132_56x23,50,132);
@@ -1008,7 +1032,7 @@ void bmpdisplay_exam6_entrance_guard(void){
 			while(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str));		
 		}				
 		GUI_Delay(50);
-		if(62!=OUTPUTDEVICE.Cureent_Exam_Num){			
+		if(62!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Sub_entrance_guard_void_50_132_56x23){			
 			Delete_MEMDEV_Icon(hMem_Sub_entrance_guard_fault_50_132_56x23);	
 			Delete_MEMDEV_Icon(hMem_Sub_entrance_guard_pass_50_132_56x23);	
 			Delete_MEMDEV_Icon(hMem_Sub_entrance_guard_recognising_50_132_56x23);	
@@ -1056,7 +1080,8 @@ void bmpdisplay_exam7(void){
 	while(1){	
 		GUI_MEMDEV_CopyToLCDAt(hMem_Sub_FS_19_93_439x223[picture_counter],19,93);
 		if(++picture_counter>2)picture_counter=0;
-		if(7!=OUTPUTDEVICE.Cureent_Exam_Num){
+		
+		if(7!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Sub_FS_19_93_439x223[1]){
 			for(Delete_Counter=0;Delete_Counter<3;Delete_Counter++){
 				Delete_MEMDEV_Icon(hMem_Sub_FS_19_93_439x223[Delete_Counter]);
 			}
@@ -1109,7 +1134,7 @@ void bmpdisplay_exam8(void){
 			case 4:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_chart5_35_50_418x160,35,50);picture_counter=0;break;					
 		}
 		
-		if(8!=OUTPUTDEVICE.Cureent_Exam_Num){
+		if(8!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Sub_chart5_35_50_418x160){
 			Delete_MEMDEV_Icon(hMem_Sub_chart1_39_67_134x134);
 			Delete_MEMDEV_Icon(hMem_Sub_chart2_223_51_138x135);
 			Delete_MEMDEV_Icon(hMem_Sub_chart3_136_89_130x122);
@@ -1156,7 +1181,7 @@ void bmpdisplay_exam9(void){
 			picture_counter=0;
 		}		
 		
-		if(9!=OUTPUTDEVICE.Cureent_Exam_Num){
+		if(9!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Sub_comm_104_121_279x30[4]){
 			Delete_MEMDEV_Icon(hMem_Sub_comm_104_121_279x30[0]);
 			Delete_MEMDEV_Icon(hMem_Sub_comm_104_121_279x30[1]);
 			Delete_MEMDEV_Icon(hMem_Sub_comm_104_121_279x30[2]);
