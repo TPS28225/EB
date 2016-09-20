@@ -16,6 +16,8 @@
     {
     	"type": "pong",
     }
+	
+	
 	4服务端推送数据
 	Json描述:
     {
@@ -28,7 +30,7 @@
 	
 	
 	
-	
+	{"devId":"NQAyAAtRNTMzODQwNQAyAAtRNTMzODQw","type":"cmd","data":{"test":5,"led":{"led1":50,"led2":0,"led3":50,"led4":0,"led5":0,"led6":0,"led7":0,"led8":0},"ir":{"state":2,"code":"A:572,B:1658,C:2211,D:4461,E:9049;CODE:EDAAAAAAAAAAAAAAAAABABABABABABABABABAAAAABAAAAAAAAAAABABAAABABABABAEECA"},"beep":0,"dcmotor":1,"rfid":{"operation":2,"charge_enable":1,"data":20}}}
 	
 	
 	

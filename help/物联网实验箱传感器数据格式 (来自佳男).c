@@ -145,5 +145,5 @@ RPT:嵌入式向服务器上报当前状态
 {
     "devId":'054f631D587A005b',
     "devName":'zongheng_kongkai',//存放适配器类名称,便于服务端动态调用解析类模块
-    "type":"reg",
+    "type":"reg"
 }

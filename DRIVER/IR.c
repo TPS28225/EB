@@ -8,6 +8,7 @@
 ***********************************************************************/
 IR_STRUCT IR;
 u16 Timeval[IR_CODE_LEN];
+int IR_LearnState=0;
 extern u8 SOUND_Counter;
 char IR_CODE[IR_CODE_LEN]="A:100;B:200;C:300;D:400;CODE:ABCDABCD;";
 
@@ -16,11 +17,12 @@ char IR_CODE[IR_CODE_LEN]="A:100;B:200;C:300;D:400;CODE:ABCDABCD;";
 //{
 //	enCode(Timeval,INPUTDEVICE.IR_Code,71);
 //}
+
 void IR_Run(void)
 {
 	if(OUTPUTDEVICE.IR_State == 1)
 	{
-		IR_Send(IR_CODE,strlen(IR_CODE));
+		//IR_Send(IR_CODE,strlen(IR_CODE));
 		IR_Send(OUTPUTDEVICE.IR_Code,strlen(OUTPUTDEVICE.IR_Code));
 		OUTPUTDEVICE.IR_State = 0;
 	}
@@ -55,7 +57,7 @@ void IR_Run(void)
 void IR_Configuration(void)
 {
 	IR_EXTI_Init();
-//	TIM7_Int_Init(417,1);  
+	TIM7_Int_Init(417,1);  
   TIM6_Int_Init(9,59);
 	
 	
@@ -119,7 +121,7 @@ void TIM6_DAC_IRQHandler(void)
 			else
 			{
 				IR.Send=0;
-				GPIO_SetBits(GPIOG, GPIO_Pin_7);
+				GPIO_ResetBits(GPIOG, GPIO_Pin_7);
 			}
 		}	
 	}
@@ -148,7 +150,7 @@ void TIM7_IRQHandler(void)
 			}
 			else
 			{
-				GPIO_SetBits(GPIOG, GPIO_Pin_7);
+				GPIO_ResetBits(GPIOG, GPIO_Pin_7);
 			}
 		}
   }			
@@ -238,7 +240,7 @@ void IR_EXTI_Init(void)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;   
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; 
 	GPIO_Init(GPIOG ,&GPIO_InitStructure); 
-	GPIO_SetBits(GPIOG, GPIO_Pin_7);
+	GPIO_ResetBits(GPIOG, GPIO_Pin_7);
 	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
   SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOG, EXTI_PinSource6);

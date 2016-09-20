@@ -90,21 +90,21 @@ void Task_KEY(void *pdata)
 extern int IR_LearnState;
 void Task_OUTPUT(void *pdata)
 {	
-//	IR_LearnState=0;		
+	IR_LearnState=0;		
   while(1)
 	{
-//		runTime.OutputStartTime = TIM_GetCounter(DELAY_TIMER);
+		runTime.OutputStartTime = TIM_GetCounter(DELAY_TIMER);
 		LED_Run();	
 		MOTOR_Run();
 		BLUTOOTH_Run();
-//		Zigbee_RUN();
-//		IR_Run();
+		Zigbee_RUN();
+		IR_Run();
 				
-//		runTime.OutputEndTime = TIM_GetCounter(DELAY_TIMER);
-//		if(runTime.OutputEndTime - runTime.OutputStartTime > runTime.OutputRunTime)
-//			runTime.OutputRunTime = runTime.OutputEndTime - runTime.OutputStartTime;	
+		runTime.OutputEndTime = TIM_GetCounter(DELAY_TIMER);
+		if(runTime.OutputEndTime - runTime.OutputStartTime > runTime.OutputRunTime)
+			runTime.OutputRunTime = runTime.OutputEndTime - runTime.OutputStartTime;	
 
-	OSTimeDlyHMSM(0, 0, 2, 0);//延时2s
+		OSTimeDlyHMSM(0, 0, 2, 0);//延时2s
 	}
 }
 /***********************************************************************
@@ -151,7 +151,7 @@ void Task_TX(void *pdata)
 		runTime.TxEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.TxEndTime - runTime.TxStartTime > runTime.TxRunTime)
 			runTime.TxRunTime = runTime.TxEndTime - runTime.TxStartTime;	
-		OSTimeDlyHMSM(0, 0, 2, 0);
+		OSTimeDlyHMSM(0, 0, 5, 0);
 	}
 }
 /***********************************************************************
@@ -263,7 +263,7 @@ void Task_OLEDDisplay(void *pdata)
 	GUI_DispStringAt("PLEASE WAITING...   ",10,90);	
 //	MainTask();
 	
-	OUTPUTDEVICE.Cureent_Exam_Num=4;
+	OUTPUTDEVICE.Cureent_Exam_Num=5;
 	while(1){
 			//检测SD卡，防止他干扰实验正常进行				
 		GUI_SetTextMode(GUI_TM_NORMAL);

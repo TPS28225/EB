@@ -658,7 +658,7 @@ void bmpdisplay_exam5(void){
 	int Delete_Counter=0;
 	int counter_2=0;
 	
-	int Recomend_Record=4;
+	int Recomend_Record_In=9,Recomend_Record_Out=9;
 	
 	GUI_MEMDEV_Handle hMem_Main;
 
@@ -670,7 +670,8 @@ void bmpdisplay_exam5(void){
 	GUI_MEMDEV_Handle hMem_Sub_Recomend_Learnsuccess_195_193_256x31;	
 	GUI_MEMDEV_Handle hMem_Sub_Recomend_Pressbuten_195_193_256x31;	
 	GUI_MEMDEV_Handle hMem_Sub_Recomend_Sendsuccess_195_193_256x31;	
-
+	GUI_MEMDEV_Handle hMem_Sub_Recomend_void_195_193_256x31;
+	
 //
 // Create the memory device
 //
@@ -702,25 +703,69 @@ void bmpdisplay_exam5(void){
 	hMem_Sub_Recomend_Learnsuccess_195_193_256x31=Create_MEMDEV_Icon("0:/picture/exam5/Recomend_Learnsuccess_195_193_256x31.bmp",195,193);	
 	hMem_Sub_Recomend_Pressbuten_195_193_256x31=Create_MEMDEV_Icon("0:/picture/exam5/Recomend_Pressbuten_195_193_256x31.bmp",195,193);	
 	hMem_Sub_Recomend_Sendsuccess_195_193_256x31=Create_MEMDEV_Icon("0:/picture/exam5/Recomend_Sendsuccess_195_193_256x31.bmp",195,193);
-
+	hMem_Sub_Recomend_void_195_193_256x31=Create_MEMDEV_Icon("0:/picture/exam5/Recomend_void_195_193_256x31.bmp",195,193);
+	
+	
 	while(1){
-		if(Recomend_Record!=OUTPUTDEVICE.IR_State){
-			Recomend_Record=OUTPUTDEVICE.IR_State;
+		if(Recomend_Record_Out!=OUTPUTDEVICE.IR_State){
+			Recomend_Record_Out=OUTPUTDEVICE.IR_State;
 			switch(OUTPUTDEVICE.IR_State){
-				case 0:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Pressbuten_195_193_256x31,195,193);				
-					counter_2=0;
+				case 0://空闲	--
+					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_void_195_193_256x31,195,193);
+					counter_2=0;	
 					break;
-				case 1:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Learnsuccess_195_193_256x31,195,193);
+				case 1://发送（完成）
+					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Sendsuccess_195_193_256x31,195,193);
 					counter_2=5;				
 					break;
-				case 2:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Learncancel_195_193_256x31,195,193);
+				case 2:	//学习命令	--
+					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Pressbuten_195_193_256x31,195,193);	
+					counter_2=4;	
+					break;
+				case 3://	取消学习
+					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Learncancel_195_193_256x31,195,193);
 					counter_2=4;				
 					break;
-				case 3:GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Sendsuccess_195_193_256x31,195,193);
-					counter_2=5;				
-					break;	
+				case 4:	//学习中
+//					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Pressbuten_195_193_256x31,195,193);					
+//					counter_2=4;		
+					break;
+				case 5://学习完成
+//					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Learnsuccess_195_193_256x31,195,193);
+//					counter_2=5;	
+					break;
 			}
 		}
+		
+		if(Recomend_Record_In!=INPUTDEVICE.IR_State){
+		Recomend_Record_In=INPUTDEVICE.IR_State;
+		switch(INPUTDEVICE.IR_State){
+			case 0://空闲	--
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_void_195_193_256x31,195,193);
+				counter_2=0;	
+				break;
+			case 1://发送（完成）
+//				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Sendsuccess_195_193_256x31,195,193);
+//				counter_2=5;				
+				break;
+			case 2:	//学习命令	--
+//				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Pressbuten_195_193_256x31,195,193);	
+//				counter_2=4;	
+				break;
+			case 3://	取消学习
+//				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Learncancel_195_193_256x31,195,193);
+//				counter_2=4;				
+				break;
+			case 4:	//学习中
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Pressbuten_195_193_256x31,195,193);					
+				counter_2=4;		
+				break;
+			case 5://学习完成
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Learnsuccess_195_193_256x31,195,193);
+				counter_2=5;	
+				break;
+		}
+	}
 			
 		switch(counter_2++){
 			case 0:
@@ -789,7 +834,8 @@ void bmpdisplay_exam5(void){
 			Delete_MEMDEV_Icon(hMem_Sub_Recomend_Learncancel_195_193_256x31);	
 			Delete_MEMDEV_Icon(hMem_Sub_Recomend_Learnsuccess_195_193_256x31);	
 			Delete_MEMDEV_Icon(hMem_Sub_Recomend_Pressbuten_195_193_256x31);	
-			Delete_MEMDEV_Icon(hMem_Sub_Recomend_Sendsuccess_195_193_256x31);	
+			Delete_MEMDEV_Icon(hMem_Sub_Recomend_Sendsuccess_195_193_256x31);
+			Delete_MEMDEV_Icon(hMem_Sub_Recomend_void_195_193_256x31);			
 			break;
 		}			
 		GUI_Delay(20);	

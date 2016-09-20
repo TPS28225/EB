@@ -54,13 +54,13 @@ void BSP_Init(void)
 	Beep_Config();	
 	MOTOR_Configuration();
 	BLUTOOTH_Configuration();
-//	Zigbee_Configuration();	//引脚冲突，暂时屏蔽
-	UltrasonicWave_Configuration();	//不好用，应该是产生中断太频繁了，建议单独使用一个任务
+	Zigbee_Configuration();	
+	UltrasonicWave_Configuration();	
 	KEY_init();
 	DHT11_Init();
 	LightIntensitySensor_Init();
 	RC522_Init();
 	IR_Configuration();
-//	uart_init(115200);
+	uart_init(115200);//将来会用作485温湿度传感器
 }
 
