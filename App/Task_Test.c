@@ -104,7 +104,7 @@ void Task_OUTPUT(void *pdata)
 		if(runTime.OutputEndTime - runTime.OutputStartTime > runTime.OutputRunTime)
 			runTime.OutputRunTime = runTime.OutputEndTime - runTime.OutputStartTime;	
 
-		OSTimeDlyHMSM(0, 0, 2, 0);//—” ±2s
+		OSTimeDlyHMSM(0, 0, 0, 500);//—” ±500ms
 	}
 }
 /***********************************************************************

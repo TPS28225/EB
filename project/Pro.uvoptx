@@ -134,6 +134,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
+          <Name></Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -166,17 +167,29 @@
           <Name>-O207 -S0 -C0 -FO7  -FN1 -FC1000 -FD20000000 -FF0STM32F2xx_1024 -FL0100000 -FS08000000 -FP0($$Device:STM32F207ZGTx$CMSIS/Flash/STM32F2xx_1024.FLM)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>14</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\DRIVER\Zigbee.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+      </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
           <ItemText>INPUTDEVICE,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>1</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>q_msg_bluetooth_tx</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -190,7 +203,7 @@
         <Mm>
           <WinNumber>1</WinNumber>
           <SubType>8</SubType>
-          <ItemText>buf</ItemText>
+          <ItemText>\\Pro\../App/Task_Test.c\INPUTDEVICE.Zigbee_RX</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
@@ -244,7 +257,7 @@
 
   <Group>
     <GroupName>App</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -814,7 +827,7 @@
 
   <Group>
     <GroupName>CMSIS/Core</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1603,7 +1616,7 @@
 
   <Group>
     <GroupName>I/O DEVICE</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1931,7 +1944,7 @@
 
   <Group>
     <GroupName>cJSON</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

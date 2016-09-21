@@ -1,6 +1,7 @@
 #include "main.h"
 #include "Zigbee.h"
 #include <string.h>
+//57600波特率；广播；信道1001；
 u16 RX_Row_Counter=0;
 u16 RX_Column_Counter=0;
 
@@ -86,7 +87,6 @@ void Zigbee_Rx(void)
 {
 		char res;
 		res=USART_ReceiveData(ZIGBEE_USART);	
-		USART_SendData(ZIGBEE_USART, res);
 		if(RX_Column_Counter<TX_RX_BUFFER_SIZE)		//还可以接收数据
 		{
 			TIM_SetCounter(ZIGBEE_TIMER,0);		//计数器清空        					//计数器清空
@@ -99,7 +99,7 @@ void Zigbee_Rx(void)
 				INPUTDEVICE.Zigbee_RX[RX_Row_Counter][RX_Column_Counter++]=res;		//记录接收到的值
 		}
 /*溢出处理：1一行写满，但下一个缓冲区还空：从下一行开始写
-						2所有缓冲区都写满：跳至第一行，不断刷新第一行，但不第一行写满后，不会跳至第二行，而是接着从第一行的头写起。
+						2所有缓冲区都写满：跳至第一行，不断刷新第一行，但是第一行写满后，不会跳至第二行，而是接着从第一行的头写起。
 */		
 		else 																
 		{

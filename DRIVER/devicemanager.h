@@ -5,13 +5,12 @@
 
 #define ZIGBEE_RX_ARRY_NUM			8
 #define KEY_NUMBER							4
-#define ZIGBEE_INPUT_ARRY_NUM		50
 #define MAG_DOOR_CONTACT_NUM 		4
 
 
 #define LED_NUM 								8
 #define ZIGBEE_TX_ARRY_NUM			4
-#define TX_RX_BUFFER_SIZE				50
+#define TX_RX_BUFFER_SIZE				80
 #define OLED_OUTPUT_ARRY_NUM		50
 #define IRCODE_ARRY_NUM			    300
 #define BLUETOOTH_TX_ARRY_NUM   8 
