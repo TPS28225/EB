@@ -86,7 +86,7 @@ char * makeJson(Jason_Funtype function)
 			break;
 		//客户端回应心跳 pong
 		case PONG:
-			cJSON_AddStringToObject(pJsonRoot, "type","test");
+			cJSON_AddStringToObject(pJsonRoot, "type","pong");
 			break;
 	}			
 	p = cJSON_PrintUnformatted(pJsonRoot);

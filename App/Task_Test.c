@@ -127,7 +127,8 @@ void Task_TX(void *pdata)
 	strlen(msg);
 	msgReporter(msg,strlen(msg));
 	free(msg);
-
+	
+	OSTimeDlyHMSM(0, 0, 2, 0);
 	msg = makeJson(REG);
 	strlen(msg);
 	msgReporter(msg,strlen(msg));
@@ -137,22 +138,29 @@ void Task_TX(void *pdata)
 	
   while(1)
 	{
+		
+		
 		runTime.TxStartTime = TIM_GetCounter(DELAY_TIMER);
+		
 		if(0<pong_flag){		
 			msg = makeJson(PONG);
 			pong_flag=0;
+			strlen(msg);
+			msgReporter(msg,strlen(msg));
+			free(msg);	
 		}
-		else{
-			msg = makeJson(RPT);
-		}
-		strlen(msg);
-		msgReporter(msg,strlen(msg));
-		free(msg);
+//		else{
+//			msg = makeJson(REG);
+//			strlen(msg);
+//			msgReporter(msg,strlen(msg));
+//			free(msg);		
+//		}
+
+		
 		runTime.TxEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.TxEndTime - runTime.TxStartTime > runTime.TxRunTime)
 			runTime.TxRunTime = runTime.TxEndTime - runTime.TxStartTime;	
-		OSTimeDlyHMSM(0, 0, 1, 0);
-//		pong_flag++;
+		OSTimeDlyHMSM(0, 0, 30, 0);
 	}
 }
 /***********************************************************************
@@ -266,6 +274,19 @@ void Task_OLEDDisplay(void *pdata)
 	
 	OUTPUTDEVICE.Cureent_Exam_Num=5;
 	while(1){
+		
+		//清除输出设备状态
+		OUTPUTDEVICE.Beep=0;
+		OUTPUTDEVICE.LED[0]=0;
+		OUTPUTDEVICE.LED[1]=0;
+		OUTPUTDEVICE.LED[2]=0;
+		OUTPUTDEVICE.LED[3]=0;
+		OUTPUTDEVICE.LED[4]=0;
+		OUTPUTDEVICE.LED[5]=0;
+		OUTPUTDEVICE.LED[6]=0;
+		OUTPUTDEVICE.LED[7]=0;
+		OUTPUTDEVICE.Motor=0;
+		
 			//检测SD卡，防止他干扰实验正常进行				
 		GUI_SetTextMode(GUI_TM_NORMAL);
 		GUI_SetFont(&GUI_Font16_1);

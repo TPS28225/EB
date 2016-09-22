@@ -270,7 +270,7 @@ void buzzerSound(unsigned short usFreq)
 		GPIO_Init(BEEP_GPIO,&GPIO_InitStructure);              //初始化PE5  
 		ulVal=12000000/usFreq;
 		TIM9->ARR =ulVal ;	//设置自动重装载寄存器周期的值（音调） 
-		TIM_SetCompare1(TIM9,ulVal/50);//音量
+		TIM_SetCompare1(TIM9,ulVal/30);//音量
     TIM_Cmd(TIM9, ENABLE);  //启动TIM9
   }  
 }
