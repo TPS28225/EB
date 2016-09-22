@@ -11,9 +11,6 @@
 #define KEY2_PORT         			GPIOD                   
 #define KEY2_CLK          			RCC_AHB1Periph_GPIOD
 
-//#define KEY3_PIN               	GPIO_Pin_7             
-//#define KEY3_PORT         			GPIOD                     
-//#define KEY3_CLK          			RCC_AHB1Periph_GPIOD
 #define KEY3_PIN               	GPIO_Pin_6             
 #define KEY3_PORT         			GPIOE                    
 #define KEY3_CLK          			RCC_AHB1Periph_GPIOE

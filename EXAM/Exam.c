@@ -494,15 +494,13 @@ void bmpdisplay_exam3(void)
 
 void bmpdisplay_exam4(void)
 {
-//	char result;
-//	static FIL BMPFile;	
 	int Distance_Counter=7;
 	int Water_flash_Counter=0;
 	int Delete_Counter=0;
 	
 	int Water_Level_State=4;
 
-	float Distance_Record=9.0;
+	float Distance_Record=9.123;
 	
 	char Distance_str[5];	
 	
@@ -519,20 +517,6 @@ void bmpdisplay_exam4(void)
 //
 // Create the memory device
 //
-
-
-//	while(1){
-
-//		result = f_open(&BMPFile,"0:/picture/exam4/bridge1_272_175_171x54.bmp",FA_READ);	//打开文件
-//	//文件打开错误
-//		if(result != FR_OK) 	cccc_OF++;
-//		hMem_Main = GUI_MEMDEV_Create(200, 100, 5, 5);
-//		if(result == FR_OK) 		f_close(&BMPFile);		//关闭BMPFile文件
-//		GUI_MEMDEV_Delete(hMem_Main);
-//		if(hMem_Main!=0)cccc_S++;
-//		else cccc_F++;
-//		cccc++;
-//	}
 
 	GUI_SetFont(&GUI_Font24_1);
 
@@ -616,7 +600,7 @@ void bmpdisplay_exam4(void)
 		if(INPUTDEVICE.Distance!=Distance_Record){
 			Distance_Record=INPUTDEVICE.Distance;
 			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_distance_background_140_88_54x32,140,88);
-			sprintf(Distance_str,"%.2f",INPUTDEVICE.Distance);
+			sprintf(Distance_str,"%.2f",INPUTDEVICE.Distance/100);
 			GUI_DispStringHCenterAt(Distance_str,167,93);
 		}
 		//水动画	

@@ -86,7 +86,7 @@ char * makeJson(Jason_Funtype function)
 			break;
 		//客户端回应心跳 pong
 		case PONG:
-			cJSON_AddStringToObject(pJsonRoot, "type","pong");
+			cJSON_AddStringToObject(pJsonRoot, "type","test");
 			break;
 	}			
 	p = cJSON_PrintUnformatted(pJsonRoot);
@@ -186,7 +186,7 @@ void parserJson(char * pMsg)
 					{
 						OUTPUTDEVICE.Beep = pSubSub->valueint;
 					}	
-					pSubSub = cJSON_GetObjectItem(pSub, "dcmotor");
+					pSubSub = cJSON_GetObjectItem(pSub, "motor");
 					if(pSubSub != NULL)
 					{
 						OUTPUTDEVICE.Motor = pSubSub->valueint;						

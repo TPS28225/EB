@@ -82,7 +82,7 @@
 #define GW_ADDR0   192
 #define GW_ADDR1   168
 #define GW_ADDR2   87
-#define GW_ADDR3   1  
+#define GW_ADDR3   111  
 //全局初始化函数声明
 void M_Global_init(void);
 

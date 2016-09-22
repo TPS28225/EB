@@ -151,7 +151,8 @@ void Task_TX(void *pdata)
 		runTime.TxEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.TxEndTime - runTime.TxStartTime > runTime.TxRunTime)
 			runTime.TxRunTime = runTime.TxEndTime - runTime.TxStartTime;	
-		OSTimeDlyHMSM(0, 0, 5, 0);
+		OSTimeDlyHMSM(0, 0, 1, 0);
+//		pong_flag++;
 	}
 }
 /***********************************************************************

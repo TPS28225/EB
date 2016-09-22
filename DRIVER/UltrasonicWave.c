@@ -111,7 +111,7 @@ void EXTI15_10_IRQHandler(void)
 		{
 			ECHO_COUNT_START = RESET;
 			TIM_Cmd(UltrasonicWave_TIMER, DISABLE);   
-			UltrasonicWave_Distance = TIM_GetCounter(UltrasonicWave_TIMER)*0.0017;									 //º∆À„æ‡¿Î&&UltrasonicWave_Distance<150
+			UltrasonicWave_Distance = TIM_GetCounter(UltrasonicWave_TIMER)*0.17;									 //º∆À„æ‡¿Î&&UltrasonicWave_Distance<150
 		}		
 		else if((ECHO_PIN_STATE==SET)&&(ECHO_COUNT_START == SET))
  		{	
@@ -128,7 +128,7 @@ void EXTI15_10_IRQHandler(void)
 
 		if(UltrasonicWave_Distance>0)
 		{
-			if(UltrasonicWave_Distance>20)INPUTDEVICE.Distance=20;
+			if(UltrasonicWave_Distance>2000)INPUTDEVICE.Distance=2000;
 			else INPUTDEVICE.Distance = UltrasonicWave_Distance;
 
 		}
