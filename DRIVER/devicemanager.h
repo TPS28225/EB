@@ -55,6 +55,7 @@ typedef struct {
 	CARD_Info		RFID_CARD;
 	char        IR_Code[IRCODE_ARRY_NUM];    //¡Ì
 	char				Cureent_Exam_Num;
+	char				picture_num;
 }OUTPUTDEVICE_CONTROL;
 #endif
 

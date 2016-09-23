@@ -1247,7 +1247,83 @@ void bmpdisplay_exam9(void){
 }
 
 
+void bmpdisplay_exam10(void){	
+	char picture_record=0;
+	GUI_MEMDEV_Handle hMem_Main;	
+//
+// Create the memory device
+//
+	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
+	
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/face.bmp",0,0,0);
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
+	
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/exam10/exam10_background.bmp",0,0,0);
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
+	
+	OUTPUTDEVICE.picture_num=0;
+	
+	while(1){			
+		if(picture_record!=OUTPUTDEVICE.picture_num){
+			picture_record=OUTPUTDEVICE.picture_num;
+			switch(picture_record){
+				case 'a':
+					dispbmpex("0:/picture/exam10/picture1.bmp",0,0,0);
+					break;
+				case 'b':
+					dispbmpex("0:/picture/exam10/picture2.bmp",0,0,0);
+					break;
+				case 'c':
+					dispbmpex("0:/picture/exam10/picture3.bmp",0,0,0);
+					break;
+				case 'd':
+					dispbmpex("0:/picture/exam10/picture4.bmp",0,0,0);
+					break;
+				case 'e':
+					dispbmpex("0:/picture/exam10/picture5.bmp",0,0,0);
+					break;
+				case 'f':
+					dispbmpex("0:/picture/exam10/picture6.bmp",0,0,0);	
+					break;
+				default:
+					dispbmpex("0:/picture/exam10/exam10_background.bmp",0,0,0);
+			}
+			GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
+		}
+		if(10!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Main){
+			GUI_MEMDEV_Delete(hMem_Main);
+			break;
+		}
+		GUI_Delay(30);		
+	}
+}
 
+void bmpdisplay_exam11(void){
+	GUI_MEMDEV_Handle hMem_Main;	
+//
+// Create the memory device
+//
+	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
+	
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/face.bmp",0,0,0);
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
+	
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/exam11/exam11_background.bmp",0,0,0);
+	GUI_MEMDEV_Select(0);	
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);		
+	
+	while(1){	
+		if(11!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Main){
+			GUI_MEMDEV_Delete(hMem_Main);
+			break;
+		}
+		GUI_Delay(100);		
+	}
+}
 
 
 

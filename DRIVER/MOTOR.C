@@ -49,7 +49,7 @@ void MOTOR_PWM_Init(u32 arr,u32 psc)
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_Init(MOTOR_GPIO, &GPIO_InitStructure);	
-	GPIO_SetBits(GPIOA, GPIO_Pin_12);
+	MOTOR_OFF;
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_11;           //GPIOA8 11
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;        //复用功能
@@ -67,7 +67,7 @@ void MOTOR_PWM_Init(u32 arr,u32 psc)
 	//初始化TIM1Channel1 4 PWM模式	 
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; //选择定时器模式:TIM脉冲宽度调制模式1
  	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //比较输出使能
-	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; //输出极性:TIM输出比较极性低
+	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low; //输出极性:TIM输出比较极性低
 	TIM_OC1Init(TIM1, &TIM_OCInitStructure);  //根据T指定的参数初始化外设TIM1 OC1	 
 	TIM_OC4Init(TIM1, &TIM_OCInitStructure);  //根据T指定的参数初始化外设TIM1 OC4	
 

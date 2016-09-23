@@ -128,13 +128,11 @@ void Task_TX(void *pdata)
 	msgReporter(msg,strlen(msg));
 	free(msg);
 	
-	OSTimeDlyHMSM(0, 0, 2, 0);
-	msg = makeJson(REG);
-	strlen(msg);
-	msgReporter(msg,strlen(msg));
-	free(msg);
-	
-
+//	OSTimeDlyHMSM(0, 0, 2, 0);
+//	msg = makeJson(REG);
+//	strlen(msg);
+//	msgReporter(msg,strlen(msg));
+//	free(msg);
 	
   while(1)
 	{
@@ -330,7 +328,12 @@ void Task_OLEDDisplay(void *pdata)
 			
 			case 8:bmpdisplay_exam8();break;
 
-			case 9:bmpdisplay_exam9();break;			
+			case 9:bmpdisplay_exam9();break;
+
+			case 10:bmpdisplay_exam10();break;
+			
+			case 11:bmpdisplay_exam11();break;
+			
 		}
 		OSTimeDlyHMSM(0, 0, 0, 200);//挂起200ms，以便其他线程运行
 	}	

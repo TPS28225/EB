@@ -191,7 +191,11 @@ void parserJson(char * pMsg)
 					{
 						OUTPUTDEVICE.Motor = pSubSub->valueint;						
 					}
-					
+					pSubSub = cJSON_GetObjectItem(pSub, "screen");
+					if(pSubSub != NULL)
+					{
+						strncpy(&(OUTPUTDEVICE.picture_num),pSubSub->valuestring,1);					
+					}
 					pSubSub = cJSON_GetObjectItem(pSub, "ir");
 					if(pSubSub != NULL)
 					{

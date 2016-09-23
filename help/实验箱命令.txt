@@ -1,5 +1,5 @@
-{"devId":"PwAeABhHMjIxNDkyPwAeABhHMjIxNDky","type":"cmd","data":{"test":61,"led":{"led1":1,"led2":1,"led3":3,"led4":4,"led5":0,"led6":1,"led7":0,"led8":3},"ir":{"state":1},"beep":0,"dcmotor":0,"rfid":{"operation":1,"charge_enable":1,"data":99}}}
+{"devId":"PwAeABhHMjIxNDkyPwAeABhHMjIxNDky","type":"cmd","data":{"test":61,"led":{"led1":1,"led2":1,"led3":3,"led4":4,"led5":0,"led6":1,"led7":0,"led8":3},"ir":{"state":1},"beep":0,"motor":0,"rfid":{"operation":1,"charge_enable":1,"data":99}}}
 
-{"devId":"NQAyAAtRNTMzODQwNQAyAAtRNTMzODQw","type":"cmd","data":{"test":5,"led":{"led1":50,"led2":0,"led3":50,"led4":0,"led5":0,"led6":0,"led7":0,"led8":0},"ir":{"state":1},"beep":0,"dcmotor":0,"bluetooth":"AT+MD\r\n","rfid":{"operation":2,"charge_enable":0,"data":20}}}
+{"devId":"NQAyAAtRNTMzODQwNQAyAAtRNTMzODQw","type":"cmd","data":{"test":5,"led":{"led1":50,"led2":0,"led3":50,"led4":0,"led5":0,"led6":0,"led7":0,"led8":0},"ir":{"state":0},"beep":0,"motor":0,"bluetooth":"AT+MD\r\n","rfid":{"operation":2,"charge_enable":0,"data":20}}}
 
 {"type":"ping"}
