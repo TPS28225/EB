@@ -208,7 +208,10 @@ void parserJson(char * pMsg)
 						if(pSubSubSub != NULL)
 						{
 							strncpy(OUTPUTDEVICE.IR_Code,pSubSubSub->valuestring,IRCODE_ARRY_NUM);
-						}								
+						}	
+						else{
+							if(1 == OUTPUTDEVICE.IR_State)OUTPUTDEVICE.IR_State = 0;
+						}						
 					}
 
 //							"rfid":{
