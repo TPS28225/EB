@@ -74,7 +74,7 @@ char * makeJson(Jason_Funtype function)
 				IR_LearnEnable(0);
 			}	
 			cJSON_AddNumberToObject(pSubJson, "beep",OUTPUTDEVICE.Beep);
-			cJSON_AddNumberToObject(pSubJson, "dcmotor",OUTPUTDEVICE.Motor);
+			cJSON_AddNumberToObject(pSubJson, "motor",OUTPUTDEVICE.Motor);
 			break;
 		//客户端发送注册包
 		case REG:
