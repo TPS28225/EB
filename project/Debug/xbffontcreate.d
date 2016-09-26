@@ -97,6 +97,7 @@
 .\debug\xbffontcreate.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\xbffontcreate.o: ..\DRIVER\RC522.h
 .\debug\xbffontcreate.o: ..\DRIVER\ir.h
+.\debug\xbffontcreate.o: ..\DRIVER\EV1527.h
 .\debug\xbffontcreate.o: ..\DRIVER\ILI93xx.h
 .\debug\xbffontcreate.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\xbffontcreate.o: ..\STemWin\inc\GUI.h

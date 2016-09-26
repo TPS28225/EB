@@ -96,6 +96,7 @@
 .\debug\bsp_global.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\bsp_global.o: ..\DRIVER\RC522.h
 .\debug\bsp_global.o: ..\DRIVER\ir.h
+.\debug\bsp_global.o: ..\DRIVER\EV1527.h
 .\debug\bsp_global.o: ..\DRIVER\ILI93xx.h
 .\debug\bsp_global.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\bsp_global.o: ..\STemWin\inc\GUI.h

@@ -8,8 +8,6 @@
 
 extern GUI_CONST_STORAGE GUI_FONT GUI_Fontyouyuan20;
 extern GUI_CONST_STORAGE GUI_FONT GUI_Fontyouyuan16;
-extern INPUTDEVICE_MEASURE INPUTDEVICE;
-extern OUTPUTDEVICE_CONTROL OUTPUTDEVICE;
 
 static const char * _apStrings_youren[] = {"\xe6\x9c\x89\xe4\xba\xba"};//有人(UTF8格式的)
 static const char * _apStrings_wuren[] = {"\xe6\x97\xa0\xe4\xba\xba"};  //无人
@@ -19,9 +17,26 @@ static const char * _apStrings_zhileng[] = {"\xe5\x88\xb6\xe5\x86\xb7"};//制冷
 static const char * _apStrings_zhire[] = {"\xe5\x88\xb6\xe7\x83\xad"};	//制热
 static const char * _apStrings_shushi[] = {"\xe8\x88\x92\xe9\x80\x82"};	//舒适
 
-extern u32 fsmc_sram_test(void);
-
-
+void bmpdisplay_exam0(void){
+	GUI_MEMDEV_Handle hMem_Main;	
+//
+// Create the memory device
+//
+	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
+	
+	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+	dispbmpex("0:/picture/face.bmp",0,0,0);
+	GUI_MEMDEV_Select(0);	
+	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);	
+	
+	while(1){	
+		if(0!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Main){
+			GUI_MEMDEV_Delete(hMem_Main);
+			break;
+		}
+		GUI_Delay(100);		
+	}
+}
 void bmpdisplay_exam1(void)
 {
 	int Temp_Counter=0;
@@ -43,10 +58,6 @@ void bmpdisplay_exam1(void)
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,	0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam1/exam_background.bmp",0,0,	0);
@@ -178,10 +189,6 @@ void bmpdisplay_exam2(void)
 	GUI_SetFont(&GUI_Font32_ASCII);
 	
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,	0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam2/exam2_background.bmp",0,0,	0);
@@ -324,16 +331,19 @@ void bmpdisplay_exam3(void)
 //
 
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,	0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam3/exam3_background.bmp",0,0,	0);
 	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
 	GUI_MEMDEV_Delete(hMem_Main);			
-	
+//	while(1){
+//		hMem_Main = GUI_MEMDEV_Create(365,50, 72, 73);
+//		cccc++;
+//		if(hMem_Main==0)
+//			cccc_F++;
+//		//GUI_MEMDEV_Delete(hMem_Main);			
+//	}
 //创建存储设备	
 	hMem_Sub_fan_324_205_73x72[0]=Create_MEMDEV_Icon("0:/picture/exam3/fan1_324_205_73x72.bmp",324,205);
 	hMem_Sub_fan_324_205_73x72[1]=Create_MEMDEV_Icon("0:/picture/exam3/fan2_324_205_73x72.bmp",324,205);	
@@ -522,9 +532,9 @@ void bmpdisplay_exam4(void)
 
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,	0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
+//	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
+//	dispbmpex("0:/picture/face.bmp",0,0,	0);
+//	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam4/exam4_background.bmp",0,0,0);
@@ -660,10 +670,6 @@ void bmpdisplay_exam5(void){
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,	0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam5/exam5_background.bmp",0,0,0);
@@ -855,10 +861,6 @@ void bmpdisplay_exam6_bus(void){
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam6/exam6_buscardmanage_background.bmp",0,0,0);
@@ -1026,10 +1028,6 @@ void bmpdisplay_exam6_entrance_guard(void){
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam6/exam6_entrance_guard_background.bmp",0,0,0);
@@ -1114,10 +1112,6 @@ void bmpdisplay_exam7(void){
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam7/exam7_background.bmp",0,0,0);
@@ -1156,10 +1150,6 @@ void bmpdisplay_exam8(void){
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam8/exam8_background.bmp",0,0,0);
@@ -1200,7 +1190,6 @@ void bmpdisplay_exam8(void){
 
 void bmpdisplay_exam9(void){
 	int picture_counter=0;
-//	int picture_falg=0;
 	
 	GUI_MEMDEV_Handle hMem_Main;	
 	GUI_MEMDEV_Handle hMem_Sub_comm_104_121_279x30[6];
@@ -1208,10 +1197,6 @@ void bmpdisplay_exam9(void){
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-	
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam9/exam9_background.bmp",0,0,0);
@@ -1254,10 +1239,6 @@ void bmpdisplay_exam10(void){
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-	
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam10/exam10_background.bmp",0,0,0);
@@ -1306,10 +1287,6 @@ void bmpdisplay_exam11(void){
 // Create the memory device
 //
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
-	
-	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
-	dispbmpex("0:/picture/face.bmp",0,0,0);
-	GUI_MEMDEV_CopyToLCDAt(hMem_Main,0,0);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
 	dispbmpex("0:/picture/exam11/exam11_background.bmp",0,0,0);

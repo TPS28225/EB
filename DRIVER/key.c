@@ -1,7 +1,5 @@
 #include "main.h"
 
-
-extern INPUTDEVICE_MEASURE INPUTDEVICE;
 char Buletooth_msg[4][10]={{"AT+CK\r\n"},//音量加
 													 {"AT+CL\r\n"},//音量减
 													 {"AT+MD\r\n"},//下一曲

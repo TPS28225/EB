@@ -97,6 +97,7 @@
 .\debug\diskio.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\diskio.o: ..\DRIVER\RC522.h
 .\debug\diskio.o: ..\DRIVER\ir.h
+.\debug\diskio.o: ..\DRIVER\EV1527.h
 .\debug\diskio.o: ..\DRIVER\ILI93xx.h
 .\debug\diskio.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\diskio.o: ..\STemWin\inc\GUI.h

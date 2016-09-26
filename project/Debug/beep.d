@@ -96,6 +96,7 @@
 .\debug\beep.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\beep.o: ..\DRIVER\RC522.h
 .\debug\beep.o: ..\DRIVER\ir.h
+.\debug\beep.o: ..\DRIVER\EV1527.h
 .\debug\beep.o: ..\DRIVER\ILI93xx.h
 .\debug\beep.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\beep.o: ..\STemWin\inc\GUI.h

@@ -96,6 +96,7 @@
 .\debug\rc522.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\rc522.o: ..\DRIVER\RC522.h
 .\debug\rc522.o: ..\DRIVER\ir.h
+.\debug\rc522.o: ..\DRIVER\EV1527.h
 .\debug\rc522.o: ..\DRIVER\ILI93xx.h
 .\debug\rc522.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\rc522.o: ..\STemWin\inc\GUI.h

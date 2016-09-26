@@ -96,6 +96,7 @@
 .\debug\blutooth.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\blutooth.o: ..\DRIVER\RC522.h
 .\debug\blutooth.o: ..\DRIVER\ir.h
+.\debug\blutooth.o: ..\DRIVER\EV1527.h
 .\debug\blutooth.o: ..\DRIVER\ILI93xx.h
 .\debug\blutooth.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\blutooth.o: ..\STemWin\inc\GUI.h

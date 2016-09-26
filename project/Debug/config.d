@@ -96,6 +96,7 @@
 .\debug\config.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\config.o: ..\DRIVER\RC522.h
 .\debug\config.o: ..\DRIVER\ir.h
+.\debug\config.o: ..\DRIVER\EV1527.h
 .\debug\config.o: ..\DRIVER\ILI93xx.h
 .\debug\config.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\config.o: ..\STemWin\inc\GUI.h

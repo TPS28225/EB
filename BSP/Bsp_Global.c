@@ -61,6 +61,7 @@ void BSP_Init(void)
 	LightIntensitySensor_Init();
 	RC522_Init();
 	IR_Configuration();
-	uart_init(115200);//将来会用作485温湿度传感器
+	RF_H3V4_H34B_Init();
+//	uart_init(115200);//将来会用作485温湿度传感器
 }
 

@@ -17,9 +17,8 @@
 //All rights reserved									  
 ////////////////////////////////////////////////////////////////////////////////// 	
 
-#if SYSTEM_SUPPORT_UCOS
-#include "includes.h"					//ucos สนำร	  
-#endif
+#define SYSTEM_SUPPORT_UCOS	1
+
 static FIL BMPFile;
 static char bmpBuffer[BMPPERLINESIZE];
 /*******************************************************************

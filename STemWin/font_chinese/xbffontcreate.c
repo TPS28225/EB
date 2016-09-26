@@ -12,10 +12,7 @@
 //Copyright(C) 广州市星翼电子科技有限公司 2014-2024
 //All rights reserved									  
 ////////////////////////////////////////////////////////////////////////////////// 	
-
-#if SYSTEM_SUPPORT_UCOS
-#include "includes.h"					//ucos 使用	  
-#endif
+#define SYSTEM_SUPPORT_UCOS 1
 
 //定义字体
 GUI_FONT XBF12_Font;

@@ -13,6 +13,7 @@
 #define TX_RX_BUFFER_SIZE				100
 #define OLED_OUTPUT_ARRY_NUM		50
 #define IRCODE_ARRY_NUM			    300
+#define RFCODE_ARRY_NUM			    4
 #define BLUETOOTH_TX_ARRY_NUM   8 
 typedef struct {
 	int RFID_CARDID;
@@ -28,7 +29,7 @@ typedef union
 	u8	CARD_Info_Str[16];
 }CARD_Info;	
 
-typedef struct {
+typedef struct{
 	float 			Distance; 			//¡Ì									  //0-2000CM    //¼ÆËã³öµÄ¾àÀë 
 	u8 					temperature;		//¡Ì							    	//0-50Degree
 	u8 					humidity;				//¡Ì	      						//20-95%
@@ -41,10 +42,12 @@ typedef struct {
 	u8					KEY[KEY_NUMBER];       //¡Ì	
 	u8					Magnetic_Door_Contact; //¡Ì	
 	char        IR_State;
-	char        IR_Code[IRCODE_ARRY_NUM];       
+	char        IR_Code[IRCODE_ARRY_NUM];
+	char        RF_State;
+	char        RF_Code[RFCODE_ARRY_NUM];	
 }INPUTDEVICE_MEASURE;
 
-typedef struct {
+typedef struct{
 	char 				LED[LED_NUM];       //¡Ì															
 	char 				Beep;								//¡Ì											
 	char 				Motor;							//¡Ì																				
@@ -52,11 +55,17 @@ typedef struct {
 	char	 			OLED[OLED_OUTPUT_ARRY_NUM];											
 	char        Bluetooth[BLUETOOTH_TX_ARRY_NUM][TX_RX_BUFFER_SIZE];//¡Ì			
 	char        IR_State;           //¡Ì	
-	CARD_Info		RFID_CARD;
 	char        IR_Code[IRCODE_ARRY_NUM];    //¡Ì
+	char        RF_State;
+	char        RF_Code[RFCODE_ARRY_NUM];	
+	CARD_Info		RFID_CARD;
 	char				Cureent_Exam_Num;
 	char				picture_num;
 }OUTPUTDEVICE_CONTROL;
+
+extern INPUTDEVICE_MEASURE INPUTDEVICE;
+extern OUTPUTDEVICE_CONTROL OUTPUTDEVICE;
+
 #endif
 
 

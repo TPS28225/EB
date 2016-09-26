@@ -96,6 +96,7 @@
 .\debug\task_test.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\task_test.o: ..\DRIVER\RC522.h
 .\debug\task_test.o: ..\DRIVER\ir.h
+.\debug\task_test.o: ..\DRIVER\EV1527.h
 .\debug\task_test.o: ..\DRIVER\ILI93xx.h
 .\debug\task_test.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\task_test.o: ..\STemWin\inc\GUI.h

@@ -97,6 +97,7 @@
 .\debug\parserjson.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\parserjson.o: ..\DRIVER\RC522.h
 .\debug\parserjson.o: ..\DRIVER\ir.h
+.\debug\parserjson.o: ..\DRIVER\EV1527.h
 .\debug\parserjson.o: ..\DRIVER\ILI93xx.h
 .\debug\parserjson.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\parserjson.o: ..\STemWin\inc\GUI.h

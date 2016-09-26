@@ -11,7 +11,6 @@
 
 #include "main.h"
 
-
 #define TASK_TEST_TX_STK_SIZE	    2048
 #define TASK_TEST_RX_STK_SIZE	    2048
 #define TASK_TEST_OUTPUT_STK_SIZE	512

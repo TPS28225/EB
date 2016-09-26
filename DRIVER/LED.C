@@ -53,22 +53,16 @@ void LED_PWM_Init(u32 arr,u32 psc)
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;           //GPIOC7
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;        //复用功能
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;	//速度100MHz
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      //推挽复用输出
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;        //上拉
 	GPIO_Init(GPIOC,&GPIO_InitStructure);              //初始化PC7
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1;//GPIOB0 GPIOB1
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;        //复用功能
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;	//速度100MHz
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      //推挽复用输出
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;        //上拉
 	GPIO_Init(GPIOB,&GPIO_InitStructure);               //初始化GPIOB0 GPIOB1
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7|GPIO_Pin_6|GPIO_Pin_8|GPIO_Pin_9;//GPIOB6789 
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;        //复用功能
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;	//速度100MHz
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      //推挽复用输出
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;        //上拉
 	GPIO_Init(GPIOB,&GPIO_InitStructure);               //初始化
 
 	TIM_TimeBaseStructure.TIM_Prescaler=psc;  //定时器分频

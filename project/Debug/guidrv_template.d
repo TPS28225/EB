@@ -112,6 +112,7 @@
 .\debug\guidrv_template.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\guidrv_template.o: ..\DRIVER\RC522.h
 .\debug\guidrv_template.o: ..\DRIVER\ir.h
+.\debug\guidrv_template.o: ..\DRIVER\EV1527.h
 .\debug\guidrv_template.o: ..\DRIVER\ILI93xx.h
 .\debug\guidrv_template.o: ..\BSP\sram.h
 .\debug\guidrv_template.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h

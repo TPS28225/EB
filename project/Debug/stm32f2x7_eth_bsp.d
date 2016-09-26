@@ -96,6 +96,7 @@
 .\debug\stm32f2x7_eth_bsp.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\stm32f2x7_eth_bsp.o: ..\DRIVER\RC522.h
 .\debug\stm32f2x7_eth_bsp.o: ..\DRIVER\ir.h
+.\debug\stm32f2x7_eth_bsp.o: ..\DRIVER\EV1527.h
 .\debug\stm32f2x7_eth_bsp.o: ..\DRIVER\ILI93xx.h
 .\debug\stm32f2x7_eth_bsp.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\stm32f2x7_eth_bsp.o: ..\STemWin\inc\GUI.h

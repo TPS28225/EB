@@ -69,7 +69,6 @@ void UltrasonicWave_Configuration(void)
 	TIM_TimeBaseInit(UltrasonicWave_TIMER, &TIM_TimeBaseStructure); //根据TIM_TimeBaseInitStruct中指定的参数初始化TIMx的时间基数单位
 	TIM_SetCounter(UltrasonicWave_TIMER,0);
 	TIM_Cmd(UltrasonicWave_TIMER, DISABLE);			                                 //定时器失能
-
 }
 
 /*
@@ -89,7 +88,7 @@ void UltrasonicWave_StartMeasure(void)
 		delay_us(30);	
 	}
 }
-
+extern u16 RFTimeBuff[200];
 void EXTI15_10_IRQHandler(void)
 {
 	OS_CPU_SR cpu_sr;
@@ -134,6 +133,62 @@ void EXTI15_10_IRQHandler(void)
 		}
 			
 		EXTI_ClearITPendingBit(EXTI_Line11);  //清除EXTI11线路挂起位
+	}
+	
+	if(EXTI_GetITStatus(RF_RX_EXIT_LINE) != RESET)
+	{
+		EXTI_ClearITPendingBit(RF_RX_EXIT_LINE);  //清除LINE10上的中断标志位 
+		TIM14_Set(0);              //关闭定时器
+		if(Rf.ZaboFlag==1)       //使能滤波
+		{
+			if(Rf.Count >= RF_CONT)     //判断数据上报是否完成，完成继续，未完成退出等待完成
+				return;
+					
+			Rf.TimeVal=TIM14->CNT;
+			if((Rf.TimeVal>3000)&&(Rf.TimeVal<14000))  //判断是否为同步头
+			{
+				if(Rf.HeadFlag==0)
+					Rf.HeadFlag=1;                  //接收到1次同步头
+				else if(Rf.HeadFlag==1)
+				{
+					Rf.HeadFlag=0;               //接收到2次同步头
+					Rf.ZaboFlag=0;							//滤波结束
+					Rf.Count=0;		
+					RFTimeBuff[Rf.Count]=TIM14->CNT;
+					Rf.Count++;
+				}
+			}
+		}else if(Rf.ZaboFlag==0)
+		{
+			/*
+			if((TIM14->CNT) < 50)
+			{
+			  TIM14->CNT += RFTimeBuff[Rf.Count - 1];
+				Rf.Count --;
+			}
+			else
+			*/
+			{
+				RFTimeBuff[Rf.Count]=TIM14->CNT;
+				//接收数据过程中如果收到高低电平时间超出范围则认为该码无效
+				if(RFTimeBuff[Rf.Count]<150 || RFTimeBuff[Rf.Count]>15000)				
+				{
+					Rf.ZaboFlag=1;
+					Rf.Count=0;
+					TIM14_Set(1);
+					return;
+				}
+				Rf.Count++;
+				if(Rf.Count >= RF_CONT)   //接收数据超过150个，接收完成，使能上报
+				{
+					Rf.State=1;
+					Rf.ZaboFlag=1;
+					TIM14_Set(1);
+					return;
+				}
+			}
+		}
+		TIM14_Set(1);
 	}
 	OSIntExit();//中断退出，通知ucos，（该句必须加）	
 }

@@ -96,6 +96,7 @@
 .\debug\usart.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\usart.o: ..\DRIVER\RC522.h
 .\debug\usart.o: ..\DRIVER\ir.h
+.\debug\usart.o: ..\DRIVER\EV1527.h
 .\debug\usart.o: ..\DRIVER\ILI93xx.h
 .\debug\usart.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\usart.o: ..\STemWin\inc\GUI.h

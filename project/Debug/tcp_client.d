@@ -96,6 +96,7 @@
 .\debug\tcp_client.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\tcp_client.o: ..\DRIVER\RC522.h
 .\debug\tcp_client.o: ..\DRIVER\ir.h
+.\debug\tcp_client.o: ..\DRIVER\EV1527.h
 .\debug\tcp_client.o: ..\DRIVER\ILI93xx.h
 .\debug\tcp_client.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\tcp_client.o: ..\STemWin\inc\GUI.h

@@ -96,6 +96,7 @@
 .\debug\ultrasonicwave.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\ultrasonicwave.o: ..\DRIVER\RC522.h
 .\debug\ultrasonicwave.o: ..\DRIVER\ir.h
+.\debug\ultrasonicwave.o: ..\DRIVER\EV1527.h
 .\debug\ultrasonicwave.o: ..\DRIVER\ILI93xx.h
 .\debug\ultrasonicwave.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\ultrasonicwave.o: ..\STemWin\inc\GUI.h

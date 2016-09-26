@@ -18,6 +18,9 @@ char * makeJson(Jason_Funtype function)
 	cJSON * PThdSubJson;
 	char * p=0;
 	u8 err;
+	static u32 Tx_Conter=0;
+	
+	Tx_Conter++;
 	
 	pJsonRoot = cJSON_CreateObject();
 	if(NULL == pJsonRoot)
@@ -30,6 +33,8 @@ char * makeJson(Jason_Funtype function)
 		case RPT:
 			cJSON_AddStringToObject(pJsonRoot, "devId", DEVICEID);
 			cJSON_AddStringToObject(pJsonRoot, "type", "rpt");
+			cJSON_AddStringToObject(pJsonRoot, "group_id", "1");
+			cJSON_AddNumberToObject(pJsonRoot, "Tx_Conter", Tx_Conter);
 			cJSON_AddItemToObject(pJsonRoot, "data", pSubJson = cJSON_CreateObject());
 			cJSON_AddNumberToObject(pSubJson, "lux", INPUTDEVICE.LightIntensity);
 			cJSON_AddNumberToObject(pSubJson,"soundSensor",INPUTDEVICE.sound_exceed_threshold);

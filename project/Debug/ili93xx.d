@@ -97,6 +97,7 @@
 .\debug\ili93xx.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\ili93xx.o: ..\DRIVER\RC522.h
 .\debug\ili93xx.o: ..\DRIVER\ir.h
+.\debug\ili93xx.o: ..\DRIVER\EV1527.h
 .\debug\ili93xx.o: ..\DRIVER\ILI93xx.h
 .\debug\ili93xx.o: ..\STemWin\inc\GUI.h
 .\debug\ili93xx.o: ..\STemWin\inc\GUI_ConfDefaults.h

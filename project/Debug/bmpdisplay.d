@@ -97,6 +97,7 @@
 .\debug\bmpdisplay.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\bmpdisplay.o: ..\DRIVER\RC522.h
 .\debug\bmpdisplay.o: ..\DRIVER\ir.h
+.\debug\bmpdisplay.o: ..\DRIVER\EV1527.h
 .\debug\bmpdisplay.o: ..\DRIVER\ILI93xx.h
 .\debug\bmpdisplay.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\bmpdisplay.o: ..\STemWin\inc\GUI.h

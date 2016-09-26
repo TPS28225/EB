@@ -97,6 +97,7 @@
 .\debug\sram.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\sram.o: ..\DRIVER\RC522.h
 .\debug\sram.o: ..\DRIVER\ir.h
+.\debug\sram.o: ..\DRIVER\EV1527.h
 .\debug\sram.o: ..\DRIVER\ILI93xx.h
 .\debug\sram.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\sram.o: ..\STemWin\inc\GUI.h

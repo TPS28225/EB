@@ -96,6 +96,7 @@
 .\debug\zigbee.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\zigbee.o: ..\DRIVER\RC522.h
 .\debug\zigbee.o: ..\DRIVER\ir.h
+.\debug\zigbee.o: ..\DRIVER\EV1527.h
 .\debug\zigbee.o: ..\DRIVER\ILI93xx.h
 .\debug\zigbee.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\zigbee.o: ..\STemWin\inc\GUI.h

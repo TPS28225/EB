@@ -106,6 +106,7 @@
 ".\debug\spi_driver.o"
 ".\debug\ir.o"
 ".\debug\ili93xx.o"
+".\debug\ev1527.o"
 ".\debug\ff.o"
 ".\debug\diskio.o"
 ".\debug\exfuns.o"

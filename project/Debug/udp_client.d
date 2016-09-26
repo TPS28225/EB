@@ -96,6 +96,7 @@
 .\debug\udp_client.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\udp_client.o: ..\DRIVER\RC522.h
 .\debug\udp_client.o: ..\DRIVER\ir.h
+.\debug\udp_client.o: ..\DRIVER\EV1527.h
 .\debug\udp_client.o: ..\DRIVER\ILI93xx.h
 .\debug\udp_client.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\udp_client.o: ..\STemWin\inc\GUI.h

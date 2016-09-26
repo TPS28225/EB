@@ -101,6 +101,7 @@
 .\debug\netconf.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\netconf.o: ..\DRIVER\RC522.h
 .\debug\netconf.o: ..\DRIVER\ir.h
+.\debug\netconf.o: ..\DRIVER\EV1527.h
 .\debug\netconf.o: ..\DRIVER\ILI93xx.h
 .\debug\netconf.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\netconf.o: ..\STemWin\inc\GUI.h

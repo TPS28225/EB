@@ -72,7 +72,7 @@ void Task_StartUp(void *pdata)
 	
 	//以太网任务
 	OSTaskCreate(Task_TCP_Client, (void *)0, &Stk_Task_TCP_Client[TASK_TCP_CLIENT_STK_SIZE-1], OS_USER_PRIO_GET(2));//在移入真正的实验板后再开启
-//	OSTaskCreate(Task_UDP_Client, (void *)0, &Stk_Task_UDP_Client[TASK_UDP_CLIENT_STK_SIZE-1], OS_USER_PRIO_GET(3));
+////	OSTaskCreate(Task_UDP_Client, (void *)0, &Stk_Task_UDP_Client[TASK_UDP_CLIENT_STK_SIZE-1], OS_USER_PRIO_GET(3));
 	OSTaskCreate(Task_TX, (void *)0, &Stk_Task_TX[TASK_TEST_TX_STK_SIZE-1], OS_USER_PRIO_GET(4));
   OSTaskCreate(Task_RX, (void *)0, &Stk_Task_RX[TASK_TEST_RX_STK_SIZE-1], OS_USER_PRIO_GET(5));
 	//OLED显示任务

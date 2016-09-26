@@ -104,6 +104,7 @@
 .\debug\guiconf.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\guiconf.o: ..\DRIVER\RC522.h
 .\debug\guiconf.o: ..\DRIVER\ir.h
+.\debug\guiconf.o: ..\DRIVER\EV1527.h
 .\debug\guiconf.o: ..\DRIVER\ILI93xx.h
 .\debug\guiconf.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\guiconf.o: ..\BSP\sram.h

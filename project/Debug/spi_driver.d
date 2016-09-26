@@ -96,6 +96,7 @@
 .\debug\spi_driver.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\spi_driver.o: ..\DRIVER\RC522.h
 .\debug\spi_driver.o: ..\DRIVER\ir.h
+.\debug\spi_driver.o: ..\DRIVER\EV1527.h
 .\debug\spi_driver.o: ..\DRIVER\ILI93xx.h
 .\debug\spi_driver.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\spi_driver.o: ..\STemWin\inc\GUI.h

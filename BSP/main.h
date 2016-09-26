@@ -35,7 +35,6 @@
 #include "config.h"
 #include "LED.H"
 #include "parserJSON.h"
-#include "devicemanager.h"
 #include "beep.h"
 #include "motor.h"
 #include "Zigbee.h"
@@ -47,6 +46,7 @@
 #include "LightIntensitySensor.h"
 #include "RC522.h"
 #include "ir.h"
+#include "EV1527.h"
 #include "ILI93xx.h"
 #include "GUI.h"
 #include "sram.h"	 
@@ -103,9 +103,6 @@ typedef struct{
 
 extern tx_buf_t  tx_buf;
 extern rx_buf_t  rx_buf;
-
-extern INPUTDEVICE_MEASURE INPUTDEVICE;
-extern OUTPUTDEVICE_CONTROL OUTPUTDEVICE;
 
 extern char uniqueID[33];
 //////////////////////////////////////////////////////////////////////////

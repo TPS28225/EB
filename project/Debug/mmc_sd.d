@@ -97,6 +97,7 @@
 .\debug\mmc_sd.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\mmc_sd.o: ..\DRIVER\RC522.h
 .\debug\mmc_sd.o: ..\DRIVER\ir.h
+.\debug\mmc_sd.o: ..\DRIVER\EV1527.h
 .\debug\mmc_sd.o: ..\DRIVER\ILI93xx.h
 .\debug\mmc_sd.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\mmc_sd.o: ..\STemWin\inc\GUI.h

@@ -97,6 +97,7 @@
 .\debug\delay.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\delay.o: ..\DRIVER\RC522.h
 .\debug\delay.o: ..\DRIVER\ir.h
+.\debug\delay.o: ..\DRIVER\EV1527.h
 .\debug\delay.o: ..\DRIVER\ILI93xx.h
 .\debug\delay.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\delay.o: ..\STemWin\inc\GUI.h

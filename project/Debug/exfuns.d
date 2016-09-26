@@ -97,6 +97,7 @@
 .\debug\exfuns.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\exfuns.o: ..\DRIVER\RC522.h
 .\debug\exfuns.o: ..\DRIVER\ir.h
+.\debug\exfuns.o: ..\DRIVER\EV1527.h
 .\debug\exfuns.o: ..\DRIVER\ILI93xx.h
 .\debug\exfuns.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\exfuns.o: ..\STemWin\inc\GUI.h

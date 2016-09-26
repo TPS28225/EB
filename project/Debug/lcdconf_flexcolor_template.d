@@ -104,6 +104,7 @@
 .\debug\lcdconf_flexcolor_template.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\lcdconf_flexcolor_template.o: ..\DRIVER\RC522.h
 .\debug\lcdconf_flexcolor_template.o: ..\DRIVER\ir.h
+.\debug\lcdconf_flexcolor_template.o: ..\DRIVER\EV1527.h
 .\debug\lcdconf_flexcolor_template.o: ..\DRIVER\ILI93xx.h
 .\debug\lcdconf_flexcolor_template.o: ..\BSP\sram.h
 .\debug\lcdconf_flexcolor_template.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h

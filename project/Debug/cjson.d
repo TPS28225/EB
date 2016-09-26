@@ -102,6 +102,7 @@
 .\debug\cjson.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\cjson.o: ..\DRIVER\RC522.h
 .\debug\cjson.o: ..\DRIVER\ir.h
+.\debug\cjson.o: ..\DRIVER\EV1527.h
 .\debug\cjson.o: ..\DRIVER\ILI93xx.h
 .\debug\cjson.o: ..\STemWin\inc\GUI.h
 .\debug\cjson.o: ..\STemWin\inc\GUI_ConfDefaults.h

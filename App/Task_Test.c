@@ -76,6 +76,7 @@ void Task_INPUT(void *pdata)
 		UltrasonicWave_StartMeasure();
 		DHT11_Read_Data();
 		LightIntensitySensor_measure();
+//		EV1527_Run();//没写完，不要用
 		OSTimeDlyHMSM(0, 0, 2, 0);
 	}
 }
@@ -99,7 +100,7 @@ void Task_OUTPUT(void *pdata)
 		BLUTOOTH_Run();
 		Zigbee_RUN();
 		IR_Run();
-				
+		
 		runTime.OutputEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.OutputEndTime - runTime.OutputStartTime > runTime.OutputRunTime)
 			runTime.OutputRunTime = runTime.OutputEndTime - runTime.OutputStartTime;	
@@ -121,44 +122,42 @@ void Task_TX(void *pdata)
 {	
 	char *msg;
 	
-	OSTimeDlyHMSM(0, 0, 2, 0);	
-	//这里LOGIN和REG换了下顺序，是为了让接收方收到的顺序正确
-	msg = makeJson(LOGIN);
-	strlen(msg);
-	msgReporter(msg,strlen(msg));
-	free(msg);
+//	OSTimeDlyHMSM(0, 0, 2, 0);	
+//	//这里LOGIN和REG换了下顺序，是为了让接收方收到的顺序正确
+//	msg = makeJson(LOGIN);
+//	strlen(msg);
+//	msgReporter(msg,strlen(msg));
+//	free(msg);
 	
-//	OSTimeDlyHMSM(0, 0, 2, 0);
+	OSTimeDlyHMSM(0, 0, 30, 0);
+	
 //	msg = makeJson(REG);
 //	strlen(msg);
 //	msgReporter(msg,strlen(msg));
 //	free(msg);
 	
   while(1)
-	{
-		
-		
+	{	
 		runTime.TxStartTime = TIM_GetCounter(DELAY_TIMER);
 		
-		if(0<pong_flag){		
+		if(3<pong_flag){		
 			msg = makeJson(PONG);
 			pong_flag=0;
 			strlen(msg);
 			msgReporter(msg,strlen(msg));
 			free(msg);	
 		}
-//		else{
-//			msg = makeJson(REG);
-//			strlen(msg);
-//			msgReporter(msg,strlen(msg));
-//			free(msg);		
-//		}
-
+		else{
+			msg = makeJson(RPT);
+			strlen(msg);
+			msgReporter(msg,strlen(msg));
+			free(msg);		
+		}
 		
 		runTime.TxEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.TxEndTime - runTime.TxStartTime > runTime.TxRunTime)
 			runTime.TxRunTime = runTime.TxEndTime - runTime.TxStartTime;	
-		OSTimeDlyHMSM(0, 0, 30, 0);
+		OSTimeDlyHMSM(0, 0, 2, 0);
 	}
 }
 /***********************************************************************
@@ -260,17 +259,45 @@ void Task_OLEDDisplay(void *pdata)
 	GUI_SetColor(GUI_WHITE);
 	GUI_SetTextMode(GUI_TM_TRANS);
 	GUI_UC_SetEncodeUTF8();
-	GUI_UC_SetEncodeUTF8();
 	GUI_Clear();
 	GUI_SetFont(&GUI_Font16_1);
-	GUI_DispStringAt("CPU         STM32F207",10,10);
-	GUI_DispStringAt("LCD           480x320",10,30);
-	GUI_DispStringAt("EXRAM             OK!",10,50);	
-	GUI_DispStringAt("GUI                   OK!",10,70);
-	GUI_DispStringAt("PLEASE WAITING...   ",10,90);	
+	OUTPUTDEVICE.Cureent_Exam_Num=3;
 //	MainTask();
+			//检测SD卡，防止他干扰实验正常进行				
+//		while(1){
+//			result = f_open(&BMPFile,"0:/picture/face.bmp",FA_READ);	//打开文件
+//			//文件打开错误
+//			if(result != FR_OK) 	
+//			{				
+//				GUI_DispStringAt("SDCARD fault.             ",10,90);
+//			}
+//			else 	{
+//				GUI_DispStringAt("SDCARD SUCCESS.     ",10,90);	
+//				f_close(&BMPFile);	
+//				break;
+//			}
+//		}
+
+	result = f_open(&BMPFile,"0:/picture/face.bmp",FA_READ);	//打开文件
+	//文件打开错误
+	if(result != FR_OK) 	
+	{		
+		GUI_SetBkColor(GUI_BLUE);	
+		GUI_Clear();
+		GUI_DispStringAt("SDCARD fault.             ",10,90);
+		while(1){
+			result = f_open(&BMPFile,"0:/picture/face.bmp",FA_READ);	//打开文件
+			//文件打开错误
+			if(result == FR_OK)break;
+			OSTimeDlyHMSM(0, 0, 1, 0);//挂起100ms，以便其他线程运行
+		}	
+		GUI_SetBkColor(GUI_BLACK);
+		GUI_SetColor(GUI_WHITE);
+		GUI_Clear();	
+		GUI_DispStringAt("SDCARD SUCCESS.     ",10,90);	
+		f_close(&BMPFile);
+	}
 	
-	OUTPUTDEVICE.Cureent_Exam_Num=5;
 	while(1){
 		
 		//清除输出设备状态
@@ -284,32 +311,10 @@ void Task_OLEDDisplay(void *pdata)
 		OUTPUTDEVICE.LED[6]=0;
 		OUTPUTDEVICE.LED[7]=0;
 		OUTPUTDEVICE.Motor=0;
-		
-			//检测SD卡，防止他干扰实验正常进行				
-		GUI_SetTextMode(GUI_TM_NORMAL);
-		GUI_SetFont(&GUI_Font16_1);
-		GUI_Clear();
-		GUI_DispStringAt("CPU         STM32F207",10,10);
-		GUI_DispStringAt("LCD           480x320",10,30);
-		GUI_DispStringAt("EXRAM             OK!",10,50);	
-		GUI_DispStringAt("GUI                   OK!",10,70);
-		GUI_DispStringAt("PLEASE WAITING...   ",10,90);	
-		while(1){
-			result = f_open(&BMPFile,"0:/picture/face.bmp",FA_READ);	//打开文件
-			//文件打开错误
-			if(result != FR_OK) 	
-			{				
-				GUI_DispStringAt("SDCARD fault.             ",10,90);
-			}
-			else 	{
-				GUI_DispStringAt("SDCARD SUCCESS.     ",10,90);	
-				f_close(&BMPFile);	
-				break;
-			}
-		}		
-		GUI_SetTextMode(GUI_TM_TRANS);
-		
-		switch(OUTPUTDEVICE.Cureent_Exam_Num){	
+			
+		switch(OUTPUTDEVICE.Cureent_Exam_Num){			
+			case 0:bmpdisplay_exam0();break;
+			
 			case 1:bmpdisplay_exam1();break;
 			
 			case 2:bmpdisplay_exam2();break;
@@ -334,6 +339,7 @@ void Task_OLEDDisplay(void *pdata)
 			
 			case 11:bmpdisplay_exam11();break;
 			
+			default:OUTPUTDEVICE.Cureent_Exam_Num=0;
 		}
 		OSTimeDlyHMSM(0, 0, 0, 200);//挂起200ms，以便其他线程运行
 	}	

@@ -2,6 +2,7 @@
 #define _EXAMMANAGER_H
 #include "GUI.h"
 
+void bmpdisplay_exam0(void);
 void bmpdisplay_exam1(void);
 void bmpdisplay_exam2(void);
 void bmpdisplay_exam3(void);

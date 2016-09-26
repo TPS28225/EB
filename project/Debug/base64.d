@@ -96,6 +96,7 @@
 .\debug\base64.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\base64.o: ..\DRIVER\RC522.h
 .\debug\base64.o: ..\DRIVER\ir.h
+.\debug\base64.o: ..\DRIVER\EV1527.h
 .\debug\base64.o: ..\DRIVER\ILI93xx.h
 .\debug\base64.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\base64.o: ..\STemWin\inc\GUI.h

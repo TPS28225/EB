@@ -97,6 +97,7 @@
 .\debug\i2c.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\i2c.o: ..\DRIVER\RC522.h
 .\debug\i2c.o: ..\DRIVER\ir.h
+.\debug\i2c.o: ..\DRIVER\EV1527.h
 .\debug\i2c.o: ..\DRIVER\ILI93xx.h
 .\debug\i2c.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\i2c.o: ..\STemWin\inc\GUI.h

@@ -97,6 +97,7 @@
 .\debug\fontupd.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\fontupd.o: ..\DRIVER\RC522.h
 .\debug\fontupd.o: ..\DRIVER\ir.h
+.\debug\fontupd.o: ..\DRIVER\EV1527.h
 .\debug\fontupd.o: ..\DRIVER\ILI93xx.h
 .\debug\fontupd.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\fontupd.o: ..\STemWin\inc\GUI.h

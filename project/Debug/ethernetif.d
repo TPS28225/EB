@@ -98,6 +98,7 @@
 .\debug\ethernetif.o: ..\DRIVER\LightIntensitySensor.h
 .\debug\ethernetif.o: ..\DRIVER\RC522.h
 .\debug\ethernetif.o: ..\DRIVER\ir.h
+.\debug\ethernetif.o: ..\DRIVER\EV1527.h
 .\debug\ethernetif.o: ..\DRIVER\ILI93xx.h
 .\debug\ethernetif.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\ethernetif.o: ..\STemWin\inc\GUI.h
