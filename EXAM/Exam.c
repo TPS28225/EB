@@ -324,7 +324,7 @@ void bmpdisplay_exam3(void)
 	
 	GUI_MEMDEV_Handle hMem_Sub_fog_365_50_115x110[9];			
 	
-	GUI_MEMDEV_Handle void1;
+	GUI_MEMDEV_Handle void1[2];
 
 	
 //
@@ -339,14 +339,14 @@ void bmpdisplay_exam3(void)
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
 	GUI_MEMDEV_Delete(hMem_Main);					
 //创建存储设备	
-	void1=Create_MEMDEV_Icon("0:/picture/exam3/background_degree_165_225_52x29.bmp",165,225);	
-	hMem_Sub_background_degree_165_225_52x29=void1;	
-	void1=Create_MEMDEV_Icon("0:/picture/exam3/background_percent_163_112_57x34.bmp",163,112);
-	hMem_Sub_background_percent_163_112_57x34=void1;	
-	void1=Create_MEMDEV_Icon("0:/picture/exam3/background_jiachushi_340_167_46x19.bmp",340,167);
-	hMem_Sub_background_jiachushi_340_167_46x19=void1;	
-	void1=Create_MEMDEV_Icon("0:/picture/exam3/background_zhilengre_335_285_46x19.bmp",335,285);	
-	hMem_Sub_background_zhilengre_335_285_46x19=void1;
+	void1[1]=Create_MEMDEV_Icon("0:/picture/exam3/background_degree_165_225_52x29.bmp",165,225);	
+	hMem_Sub_background_degree_165_225_52x29=void1[1];	
+	void1[1]=Create_MEMDEV_Icon("0:/picture/exam3/background_percent_163_112_57x34.bmp",163,112);
+	hMem_Sub_background_percent_163_112_57x34=void1[1];	
+	void1[1]=Create_MEMDEV_Icon("0:/picture/exam3/background_jiachushi_340_167_46x19.bmp",340,167);
+	hMem_Sub_background_jiachushi_340_167_46x19=void1[1];	
+	void1[1]=Create_MEMDEV_Icon("0:/picture/exam3/background_zhilengre_335_285_46x19.bmp",335,285);	
+	hMem_Sub_background_zhilengre_335_285_46x19=void1[1];
 
 
 
