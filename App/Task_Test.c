@@ -353,15 +353,19 @@ void Task_BEEP_MUSIC_Display(void *pdata)
 		OSTimeDlyHMSM(0, 0, 0, 200);//挂起100ms，以便其他线程运行
 	}
 }
-	u32 Stak_OLED_Free=0xffffffff;
+u32 Stak_OLED_Free=0xffffffff;
 void Task_STATE_TEST(void *pdata){
-	OS_STK_DATA Stak_OLED;
+	OS_STK_DATA Stak_OLED,Stak_OUTPUT;
 
 	while(1){		
 		GPIO_SetBits(GPIOA,GPIO_Pin_5);		
 		OSTimeDlyHMSM(0, 0, 0, 100);//挂起100ms，以便其他线程运行
 		OSTaskStkChk(OS_USER_PRIO_GET(3), &Stak_OLED);
 		if(Stak_OLED.OSFree<Stak_OLED_Free)
+			Stak_OLED_Free=Stak_OLED.OSFree;
+		
+		OSTaskStkChk(OS_USER_PRIO_GET(3), &Stak_OUTPUT);
+		if(Stak_OUTPUT.OSFree<Stak_OLED_Free)
 			Stak_OLED_Free=Stak_OLED.OSFree;
 		GPIO_ResetBits(GPIOA,GPIO_Pin_5);				
 		OSTimeDlyHMSM(0, 0, 2, 0);//挂起100ms，以便其他线程运行

