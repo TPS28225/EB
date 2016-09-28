@@ -780,6 +780,7 @@ u8 Read_Block(u8 Block_Name,u8* Card_Data)
 	uint8_t Card_ID[4];	
 	uint8_t Card_KEY[6] = {0xff,0xff,0xff,0xff,0xff,0xff};    //{0x11,0x11,0x11,0x11,0x11,0x11};   //??
 	uint8_t status;
+	static uint8_t counter=0;
 	if(MI_OK==PcdRequest(0x52, Card_Type1)){
 		
 		status = PcdAnticoll(Card_ID);//·À³å×²
@@ -807,7 +808,15 @@ u8 Read_Block(u8 Block_Name,u8* Card_Data)
 		PcdHalt();
 		INPUTDEVICE.RFID_CARD.rfid_card_Info.RFID_CARDID=(Card_ID[0]<<24)+(Card_ID[1]<<16)+(Card_ID[2]<<8)+(Card_ID[0]);
 		return 0;
-	}		
+	}	
+	counter++;
+	if(counter>4){
+		counter=0;
+		INPUTDEVICE.RFID_CARD.rfid_card_Info.RFID_CARDID=0;
+		INPUTDEVICE.RFID_CARD.rfid_card_Info.Data=0;
+		INPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass=0;
+	}
+	
 	return 1;
 }
 

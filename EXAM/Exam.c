@@ -18,7 +18,7 @@ static const char * _apStrings_zhire[] = {"\xe5\x88\xb6\xe7\x83\xad"};	//制热
 static const char * _apStrings_shushi[] = {"\xe8\x88\x92\xe9\x80\x82"};	//舒适
 
 void bmpdisplay_exam0(void){
-	GUI_MEMDEV_Handle hMem_Main;	
+	static GUI_MEMDEV_Handle hMem_Main;	
 //
 // Create the memory device
 //
@@ -46,14 +46,14 @@ void bmpdisplay_exam1(void)
 	int Beep_On_Flag=3;
 	int People_Exist_Flag=3;
 	
-	GUI_MEMDEV_Handle hMem_Main;
+	static GUI_MEMDEV_Handle hMem_Main;
 
-	GUI_MEMDEV_Handle hMem_Sub_beep_off_350_125_84x75;
-	GUI_MEMDEV_Handle hMem_Sub_beep_on_350_125_84x75;
-	GUI_MEMDEV_Handle hMem_Sub_light_on_360_50_66x76;
-	GUI_MEMDEV_Handle hMem_Sub_light_off_360_50_66x76;
-	GUI_MEMDEV_Handle hMem_Sub_word_background_175_105_105x40;
-	GUI_MEMDEV_Handle hMem_Sub_fan_345_205_94x90[8];	
+	static GUI_MEMDEV_Handle hMem_Sub_beep_off_350_125_84x75;
+	static GUI_MEMDEV_Handle hMem_Sub_beep_on_350_125_84x75;
+	static GUI_MEMDEV_Handle hMem_Sub_light_on_360_50_66x76;
+	static GUI_MEMDEV_Handle hMem_Sub_light_off_360_50_66x76;
+	static GUI_MEMDEV_Handle hMem_Sub_word_background_175_105_105x40;
+	static GUI_MEMDEV_Handle hMem_Sub_fan_345_205_94x90[8];	
 //
 // Create the memory device
 //
@@ -171,16 +171,16 @@ void bmpdisplay_exam2(void)
 	int Light_Intensity_Record=0;
 	char Light_Intensity[10];
 
-	GUI_MEMDEV_Handle hMem_Main;
+	static GUI_MEMDEV_Handle hMem_Main;
 
-	GUI_MEMDEV_Handle hMem_Sub_power_on_274_274_74x37;
-	GUI_MEMDEV_Handle hMem_Sub_power_off_274_274_74x37;
+	static GUI_MEMDEV_Handle hMem_Sub_power_on_274_274_74x37;
+	static GUI_MEMDEV_Handle hMem_Sub_power_off_274_274_74x37;
 
-	GUI_MEMDEV_Handle hMem_Sub_light_on_116_37x16[4];
-	GUI_MEMDEV_Handle hMem_Sub_light_off_116_37x16[4];
+	static GUI_MEMDEV_Handle hMem_Sub_light_on_116_37x16[4];
+	static GUI_MEMDEV_Handle hMem_Sub_light_off_116_37x16[4];
 
-	GUI_MEMDEV_Handle hMem_Sub_word_background_1_125_120_82x40;//word_background_1_125_120_120x40
-	GUI_MEMDEV_Handle hMem_Sub_word_background_2_150_215_70x40;//word_background_2_150_215_70x40
+	static GUI_MEMDEV_Handle hMem_Sub_word_background_1_125_120_82x40;//word_background_1_125_120_120x40
+	static GUI_MEMDEV_Handle hMem_Sub_word_background_2_150_215_70x40;//word_background_2_150_215_70x40
 	
 //
 // Create the memory device
@@ -294,6 +294,7 @@ void bmpdisplay_exam2(void)
 	}
 }
 
+
 void bmpdisplay_exam3(void)
 {
 	int Temp_Counter=0;
@@ -310,23 +311,20 @@ void bmpdisplay_exam3(void)
 	int jiachushi_Flag=4;	
 	int zhilengre_Flag=4;
 
-	
-	GUI_MEMDEV_Handle hMem_Main;
-	
-	GUI_MEMDEV_Handle hMem_Sub_background_degree_165_225_52x29;		
-	GUI_MEMDEV_Handle hMem_Sub_background_percent_163_112_57x34;
-	GUI_MEMDEV_Handle hMem_Sub_background_jiachushi_340_167_46x19;	
-	GUI_MEMDEV_Handle hMem_Sub_background_zhilengre_335_285_46x19;
-	GUI_MEMDEV_Handle void1[4];	
+	static GUI_MEMDEV_Handle hMem_Main;	
 
-	GUI_MEMDEV_Handle hMem_Sub_fan_324_205_73x72[5];	
-	GUI_MEMDEV_Handle hMem_Sub_heat_324_205_73x72[3];
-	GUI_MEMDEV_Handle hMem_Sub_temper_84_199_12x43[3];
-	
-	GUI_MEMDEV_Handle hMem_Sub_fog_365_50_115x110[9];		
-	
+	static GUI_MEMDEV_Handle hMem_Sub_fan_324_205_73x72[5];	
+	static GUI_MEMDEV_Handle hMem_Sub_heat_324_205_73x72[3];
+	static GUI_MEMDEV_Handle hMem_Sub_temper_84_199_12x43[3];
 
-
+	static GUI_MEMDEV_Handle hMem_Sub_fog_365_50_115x110[9];	
+	
+		
+	static GUI_MEMDEV_Handle hMem_Sub_background_degree_165_225_52x29;		
+	static GUI_MEMDEV_Handle hMem_Sub_background_percent_163_112_57x34;
+	static GUI_MEMDEV_Handle hMem_Sub_background_jiachushi_340_167_46x19;	
+	static GUI_MEMDEV_Handle hMem_Sub_background_zhilengre_335_285_46x19;
+	static GUI_MEMDEV_Handle void1[4];
 //
 // Create the memory device
 //
@@ -339,14 +337,14 @@ void bmpdisplay_exam3(void)
 	GUI_MEMDEV_Delete(hMem_Main);					
 //创建存储设备
 	//奇怪的事件，不这样干会死机
-	hMem_Sub_background_degree_165_225_52x29=Create_MEMDEV_Icon("0:/picture/exam3/background_degree_165_225_52x29.bmp",165,225);
-	hMem_Sub_background_percent_163_112_57x34=Create_MEMDEV_Icon("0:/picture/exam3/background_percent_163_112_57x34.bmp",163,112);
-	hMem_Sub_background_jiachushi_340_167_46x19=Create_MEMDEV_Icon("0:/picture/exam3/background_jiachushi_340_167_46x19.bmp",340,167);
-	hMem_Sub_background_zhilengre_335_285_46x19=Create_MEMDEV_Icon("0:/picture/exam3/background_zhilengre_335_285_46x19.bmp",335,285);		
-//	hMem_Sub_background_degree_165_225_52x29=void1[0];	
-//	hMem_Sub_background_percent_163_112_57x34=void1[1];
-//	hMem_Sub_background_jiachushi_340_167_46x19=void1[2];
-//	hMem_Sub_background_zhilengre_335_285_46x19=void1[3];
+	void1[0]=Create_MEMDEV_Icon("0:/picture/exam3/background_degree_165_225_52x29.bmp",165,225);
+	void1[1]=Create_MEMDEV_Icon("0:/picture/exam3/background_percent_163_112_57x34.bmp",163,112);
+	void1[2]=Create_MEMDEV_Icon("0:/picture/exam3/background_jiachushi_340_167_46x19.bmp",340,167);
+	void1[3]=Create_MEMDEV_Icon("0:/picture/exam3/background_zhilengre_335_285_46x19.bmp",335,285);		
+	hMem_Sub_background_degree_165_225_52x29=void1[0];	
+	hMem_Sub_background_percent_163_112_57x34=void1[1];
+	hMem_Sub_background_jiachushi_340_167_46x19=void1[2];
+	hMem_Sub_background_zhilengre_335_285_46x19=void1[3];
 	
 	hMem_Sub_fan_324_205_73x72[0]=Create_MEMDEV_Icon("0:/picture/exam3/fan1_324_205_73x72.bmp",324,205);
 	hMem_Sub_fan_324_205_73x72[1]=Create_MEMDEV_Icon("0:/picture/exam3/fan2_324_205_73x72.bmp",324,205);	
@@ -376,7 +374,7 @@ void bmpdisplay_exam3(void)
 
 	while(1){
 	//调温	以及显示调温状态（制冷/制热/舒适）	
-		if(OUTPUTDEVICE.Motor == 0){
+		if(OUTPUTDEVICE.Motor < 0){
 			
 			if(1!=zhilengre_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_background_zhilengre_335_285_46x19,335,285);
@@ -515,14 +513,14 @@ void bmpdisplay_exam4(void)
 	
 	char Distance_str[5];	
 	
-	GUI_MEMDEV_Handle hMem_Main;
+	static GUI_MEMDEV_Handle hMem_Main;
 
-	GUI_MEMDEV_Handle hMem_Sub_bridge_272_175_171x54[8];	
-	GUI_MEMDEV_Handle hMem_Sub_water_53_xx_151x29[5];
-	GUI_MEMDEV_Handle hMem_Sub_water_level_state_280_90_160x30[3];
-	GUI_MEMDEV_Handle hMem_Sub_water_level_background_53_173_151x69[3];	
+	static GUI_MEMDEV_Handle hMem_Sub_bridge_272_175_171x54[8];	
+	static GUI_MEMDEV_Handle hMem_Sub_water_53_xx_151x29[5];
+	static GUI_MEMDEV_Handle hMem_Sub_water_level_state_280_90_160x30[3];
+	static GUI_MEMDEV_Handle hMem_Sub_water_level_background_53_173_151x69[3];	
 
-	GUI_MEMDEV_Handle hMem_Sub_distance_background_140_88_54x32;
+	static GUI_MEMDEV_Handle hMem_Sub_distance_background_140_88_54x32;
 	
 
 //
@@ -655,17 +653,17 @@ void bmpdisplay_exam5(void){
 	
 	int Recomend_Record_In=9,Recomend_Record_Out=9;
 	
-	GUI_MEMDEV_Handle hMem_Main;
+	static GUI_MEMDEV_Handle hMem_Main;
 
-	GUI_MEMDEV_Handle hMem_Sub_light_top_135_59_80x83[3];
-	GUI_MEMDEV_Handle hMem_Sub_light_middle_95_140_80x83[3];	
-	GUI_MEMDEV_Handle hMem_Sub_light_bottom_42_214_80x83[3];
+	static GUI_MEMDEV_Handle hMem_Sub_light_top_135_59_80x83[3];
+	static GUI_MEMDEV_Handle hMem_Sub_light_middle_95_140_80x83[3];	
+	static GUI_MEMDEV_Handle hMem_Sub_light_bottom_42_214_80x83[3];
 	
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_Learncancel_195_193_256x31;	
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_Learnsuccess_195_193_256x31;	
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_Pressbuten_195_193_256x31;	
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_Sendsuccess_195_193_256x31;	
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_void_195_193_256x31;
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_Learncancel_195_193_256x31;	
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_Learnsuccess_195_193_256x31;	
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_Pressbuten_195_193_256x31;	
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_Sendsuccess_195_193_256x31;	
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_void_195_193_256x31;
 	
 //
 // Create the memory device
@@ -834,6 +832,9 @@ void bmpdisplay_exam5(void){
 }
 
 
+
+
+
 void bmpdisplay_exam6_bus(void){
 //	int	Putcard_Flag=0;
   int RFID_CARDID_Record=0;
@@ -844,20 +845,18 @@ void bmpdisplay_exam6_bus(void){
 	char RFID_CARDID_str[20];
 	char remaining_sum_str[10];	
 	
-	GUI_MEMDEV_Handle hMem_Main;
+	static GUI_MEMDEV_Handle hMem_Main;
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_Putcard_75_105_160x80;
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_Readcardinfo_75_105_160x80;	
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_Recharge_75_105_160x80;
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_Rechargesuccess_75_105_160x80;
+	static GUI_MEMDEV_Handle	hMem_Sub_Recomend_Rechargefault_75_105_160x80;
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_remaining_sum_clear_75_105_160x80;
+	static GUI_MEMDEV_Handle hMem_Sub_Recomend_Slotcard_75_105_160x80;
 
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_Putcard_75_105_160x80;
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_Readcardinfo_75_105_160x80;	
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_Recharge_75_105_160x80;
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_Rechargesuccess_75_105_160x80;
-	GUI_MEMDEV_Handle	hMem_Sub_Recomend_Rechargefault_75_105_160x80;
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_remaining_sum_clear_75_105_160x80;
-	GUI_MEMDEV_Handle hMem_Sub_Recomend_Slotcard_75_105_160x80;
-	
-	GUI_MEMDEV_Handle hMem_Sub_ID_background_130_135_77x17;
-	GUI_MEMDEV_Handle hMem_Sub_not_enough_145_157_63x23;	
-	GUI_MEMDEV_Handle hMem_Sub_remaining_sum_background_145_160_42x18;	
-
+	static GUI_MEMDEV_Handle hMem_Sub_ID_background_130_135_77x17;
+	static GUI_MEMDEV_Handle hMem_Sub_not_enough_145_157_63x23;	
+	static GUI_MEMDEV_Handle hMem_Sub_remaining_sum_background_145_160_42x18;	
 //
 // Create the memory device
 //
@@ -881,8 +880,7 @@ void bmpdisplay_exam6_bus(void){
 	hMem_Sub_not_enough_145_157_63x23=Create_MEMDEV_Icon("0:/picture/exam6/not_enough_145_157_63x23.bmp",145,157);	
 	hMem_Sub_remaining_sum_background_145_160_42x18=Create_MEMDEV_Icon("0:/picture/exam6/remaining_sum_background_145_160_42x18.bmp",145,160);	
 
-	if(OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation==0)OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation=2;
-	
+	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation=1;	
 	while(1){
 		if(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){					
 			//打印卡的ID
@@ -906,6 +904,7 @@ void bmpdisplay_exam6_bus(void){
 				case 1:
 					//充值
 					if(1==OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Charge_Enable){
+						RFID_CARDID_Inf_Temp.rfid_card_Info=INPUTDEVICE.RFID_CARD.rfid_card_Info;
 						RFID_CARDID_Inf_Temp.rfid_card_Info.Data = OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Data;
 						OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Charge_Enable=0;
 						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_Recomend_Recharge_75_105_160x80,75,105);
@@ -959,7 +958,12 @@ void bmpdisplay_exam6_bus(void){
 
 					}
 					else {
+						BEEP_state_Record=OUTPUTDEVICE.Beep;
+						OUTPUTDEVICE.Beep=1;
+						GUI_Delay(120);	
+						OUTPUTDEVICE.Beep=BEEP_state_Record;	
 						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_not_enough_145_157_63x23,145,157);
+
 					}
 					
 					//禁止充值
@@ -968,7 +972,7 @@ void bmpdisplay_exam6_bus(void){
 						GUI_Delay(20);										
 					break;
 				default:
-					OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation=2;//错误的情况下进入刷卡模式		
+					OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation=1;//错误的情况下进入充值模式		
 
 			}
 		}
@@ -1011,20 +1015,24 @@ void bmpdisplay_exam6_bus(void){
 void bmpdisplay_exam6_entrance_guard(void){
 	int Delete_Counter=0;
 	int open_door_counter=0;
+	int BEEP_state_Record=0;	
+	CARD_Info RFID_CARDID_Inf_Temp;
 	
-	GUI_MEMDEV_Handle hMem_Main;
+	static GUI_MEMDEV_Handle hMem_Main;
 	
-	GUI_MEMDEV_Handle hMem_Sub_door_160_114_278x151[5];
+	static GUI_MEMDEV_Handle hMem_Sub_door_160_114_278x151[5];
 	
-	GUI_MEMDEV_Handle hMem_Sub_door_light_blue_247_91_100x22;
-	GUI_MEMDEV_Handle hMem_Sub_door_light_red_247_91_100x22;
-	GUI_MEMDEV_Handle hMem_Sub_door_light_grey_247_91_100x22;	
+	static GUI_MEMDEV_Handle hMem_Sub_door_light_blue_247_91_100x22;
+	static GUI_MEMDEV_Handle hMem_Sub_door_light_red_247_91_100x22;
+	static GUI_MEMDEV_Handle hMem_Sub_door_light_grey_247_91_100x22;	
 	
-	GUI_MEMDEV_Handle hMem_Sub_entrance_guard_fault_50_132_56x23;	
-	GUI_MEMDEV_Handle hMem_Sub_entrance_guard_pass_50_132_56x23;
-	GUI_MEMDEV_Handle hMem_Sub_entrance_guard_recognising_50_132_56x23;	
-	GUI_MEMDEV_Handle hMem_Sub_entrance_guard_void_50_132_56x23;
-
+	static GUI_MEMDEV_Handle hMem_Sub_entrance_guard_fault_50_132_56x23;	
+	static GUI_MEMDEV_Handle hMem_Sub_entrance_guard_pass_50_132_56x23;
+	static GUI_MEMDEV_Handle hMem_Sub_entrance_guard_recognising_50_132_56x23;	
+	static GUI_MEMDEV_Handle hMem_Sub_entrance_guard_void_50_132_56x23;
+	static GUI_MEMDEV_Handle hMem_Sub_entrance_guard_enable_pass_50_132_56x23;
+	static GUI_MEMDEV_Handle hMem_Sub_entrance_guard_disable_pass_50_132_56x23;
+	static GUI_MEMDEV_Handle hMem_Sub_entrance_guard_enabling_50_132_56x23;
 //
 // Create the memory device
 //
@@ -1049,40 +1057,85 @@ void bmpdisplay_exam6_entrance_guard(void){
 	hMem_Sub_entrance_guard_fault_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_fault_50_132_56x23.bmp",50,132);	
 	hMem_Sub_entrance_guard_pass_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_pass_50_132_56x23.bmp",50,132);	
 	hMem_Sub_entrance_guard_recognising_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_recognising_50_132_56x23.bmp",50,132);	
-	hMem_Sub_entrance_guard_void_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_void_50_132_56x23.bmp",50,132);	
-
-//	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass=1;
-//	Write_Block(5,OUTPUTDEVICE.RFID_CARD.CARD_Info_Str);
+	hMem_Sub_entrance_guard_void_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_void_50_132_56x23.bmp",50,132);
+	
+	hMem_Sub_entrance_guard_enable_pass_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_enable_pass_50_132_56x23.bmp",50,132);	
+	hMem_Sub_entrance_guard_disable_pass_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_disable_pass_50_132_56x23.bmp",50,132);	
+	hMem_Sub_entrance_guard_enabling_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_enabling_50_132_56x23.bmp",50,132);	
+	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass=2;
+	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation=3;
 	while(1){
-		if(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){
-			GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_recognising_50_132_56x23,50,132);
-			GUI_Delay(50);
-			if(1==INPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass){
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_pass_50_132_56x23,50,132);
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_light_blue_247_91_100x22,247,91);
-				GUI_Delay(50);
-				for(open_door_counter=0;open_door_counter<5;open_door_counter++){
-					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_160_114_278x151[open_door_counter],160,114);
-					GUI_Delay(10);
+		switch(OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation){
+			case 3:
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_enabling_50_132_56x23,50,132);
+				if(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){
+					if(0==OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass){
+						RFID_CARDID_Inf_Temp.rfid_card_Info=INPUTDEVICE.RFID_CARD.rfid_card_Info;
+						RFID_CARDID_Inf_Temp.rfid_card_Info.entrance_guard_pass=0;
+						OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass=2;
+						if(0==Write_Block(5,RFID_CARDID_Inf_Temp.CARD_Info_Str)){
+							GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_disable_pass_50_132_56x23,50,132);
+						}
+						GUI_Delay(50);
+					}
+					else if(1==OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass){
+						RFID_CARDID_Inf_Temp.rfid_card_Info=INPUTDEVICE.RFID_CARD.rfid_card_Info;
+						RFID_CARDID_Inf_Temp.rfid_card_Info.entrance_guard_pass=1;
+						OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass=2;
+						if(0==Write_Block(5,RFID_CARDID_Inf_Temp.CARD_Info_Str)){
+							GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_enable_pass_50_132_56x23,50,132);
+						}
+						GUI_Delay(50);
+					}
 				}
-				GUI_Delay(300);
-				for(open_door_counter=0;open_door_counter<5;open_door_counter++){
-					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_160_114_278x151[4-open_door_counter],160,114);
-					GUI_Delay(10);
-				}
+				break;
+			case 4:
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_void_50_132_56x23,50,132);
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_light_grey_247_91_100x22,247,91);
-			}
-			else{
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_fault_50_132_56x23,50,132);
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_light_red_247_91_100x22,247,91);
-				GUI_Delay(100);
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_void_50_132_56x23,50,132);
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_light_grey_247_91_100x22,247,91);			
-			}
-			while(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str));		
-		}				
-		GUI_Delay(50);
+				if(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str)){
+					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_recognising_50_132_56x23,50,132);
+					GUI_Delay(50);
+					if(1<=INPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass){
+						
+						BEEP_state_Record=OUTPUTDEVICE.Beep;
+						OUTPUTDEVICE.Beep=5;
+						GUI_Delay(20);	
+						OUTPUTDEVICE.Beep=BEEP_state_Record;	
+						
+						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_pass_50_132_56x23,50,132);
+						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_light_blue_247_91_100x22,247,91);
+						GUI_Delay(50);
+						for(open_door_counter=0;open_door_counter<5;open_door_counter++){
+							GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_160_114_278x151[open_door_counter],160,114);
+							GUI_Delay(10);
+						}
+						GUI_Delay(300);
+						for(open_door_counter=0;open_door_counter<5;open_door_counter++){
+							GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_160_114_278x151[4-open_door_counter],160,114);
+							GUI_Delay(10);
+						}
+						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_void_50_132_56x23,50,132);
+						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_light_grey_247_91_100x22,247,91);
+					}
+					else{
+						
+						BEEP_state_Record=OUTPUTDEVICE.Beep;
+						OUTPUTDEVICE.Beep=1;
+						GUI_Delay(120);
+						OUTPUTDEVICE.Beep=BEEP_state_Record;	
+						
+						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_fault_50_132_56x23,50,132);
+						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_light_red_247_91_100x22,247,91);
+						GUI_Delay(100);
+						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_entrance_guard_void_50_132_56x23,50,132);
+						GUI_MEMDEV_CopyToLCDAt(hMem_Sub_door_light_grey_247_91_100x22,247,91);			
+					}
+					while(0==Read_Block(5,INPUTDEVICE.RFID_CARD.CARD_Info_Str))	GUI_Delay(50);		
+				}				
+				break;
+				default:
+					OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation=3;
+		}
+		GUI_Delay(50);		
 		if(62!=OUTPUTDEVICE.Cureent_Exam_Num || 0==hMem_Sub_entrance_guard_void_50_132_56x23){			
 			Delete_MEMDEV_Icon(hMem_Sub_entrance_guard_fault_50_132_56x23);	
 			Delete_MEMDEV_Icon(hMem_Sub_entrance_guard_pass_50_132_56x23);	
@@ -1106,8 +1159,8 @@ void bmpdisplay_exam7(void){
 	int Delete_Counter=0;
 	int picture_counter=0;
 	
-	GUI_MEMDEV_Handle hMem_Main;	
-	GUI_MEMDEV_Handle hMem_Sub_FS_19_93_439x223[3];
+	static GUI_MEMDEV_Handle hMem_Main;	
+	static GUI_MEMDEV_Handle hMem_Sub_FS_19_93_439x223[3];
 	
 //
 // Create the memory device
@@ -1141,12 +1194,12 @@ void bmpdisplay_exam7(void){
 void bmpdisplay_exam8(void){
 	int picture_counter=0;
 	
-	GUI_MEMDEV_Handle hMem_Main;	
-	GUI_MEMDEV_Handle hMem_Sub_chart1_39_67_134x134;
-	GUI_MEMDEV_Handle hMem_Sub_chart2_223_51_138x135;
-	GUI_MEMDEV_Handle hMem_Sub_chart3_136_89_130x122;
-	GUI_MEMDEV_Handle hMem_Sub_chart4_329_96_121x110;
-	GUI_MEMDEV_Handle hMem_Sub_chart5_35_50_418x160;	
+	static GUI_MEMDEV_Handle hMem_Main;	
+	static GUI_MEMDEV_Handle hMem_Sub_chart1_39_67_134x134;
+	static GUI_MEMDEV_Handle hMem_Sub_chart2_223_51_138x135;
+	static GUI_MEMDEV_Handle hMem_Sub_chart3_136_89_130x122;
+	static GUI_MEMDEV_Handle hMem_Sub_chart4_329_96_121x110;
+	static GUI_MEMDEV_Handle hMem_Sub_chart5_35_50_418x160;	
 //
 // Create the memory device
 //
@@ -1192,8 +1245,8 @@ void bmpdisplay_exam8(void){
 void bmpdisplay_exam9(void){
 	int picture_counter=0;
 	
-	GUI_MEMDEV_Handle hMem_Main;	
-	GUI_MEMDEV_Handle hMem_Sub_comm_104_121_279x30[6];
+	static GUI_MEMDEV_Handle hMem_Main;	
+	static GUI_MEMDEV_Handle hMem_Sub_comm_104_121_279x30[6];
 //
 // Create the memory device
 //
@@ -1235,7 +1288,7 @@ void bmpdisplay_exam9(void){
 
 void bmpdisplay_exam10(void){	
 	char picture_record=0;
-	GUI_MEMDEV_Handle hMem_Main;	
+	static GUI_MEMDEV_Handle hMem_Main;	
 //
 // Create the memory device
 //
@@ -1283,7 +1336,7 @@ void bmpdisplay_exam10(void){
 }
 
 void bmpdisplay_exam11(void){
-	GUI_MEMDEV_Handle hMem_Main;	
+	static GUI_MEMDEV_Handle hMem_Main;	
 //
 // Create the memory device
 //

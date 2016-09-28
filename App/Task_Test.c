@@ -261,7 +261,7 @@ void Task_OLEDDisplay(void *pdata)
 	GUI_UC_SetEncodeUTF8();
 	GUI_Clear();
 	GUI_SetFont(GUI_FONT_24_ASCII);
-	OUTPUTDEVICE.Cureent_Exam_Num=3;
+	OUTPUTDEVICE.Cureent_Exam_Num=0;
 //	MainTask();
 
 	result = f_open(&BMPFile,"0:/picture/face.bmp",FA_READ);	//打开文件
@@ -286,7 +286,9 @@ void Task_OLEDDisplay(void *pdata)
 			if(T_counter>100){			
 				GUI_DispStringAt ("SORRY! ERROR CAN NOT BE FIXED. ", 10,120);
 				GUI_DispStringAt ("PLEASE POWER OFF AND RESTART...", 10,160);
-				while(1);
+				while(1){
+					OSTimeDlyHMSM(0, 0, 2, 0);//挂起100ms，以便其他线程运行
+				}
 			}
 		}	
 		GUI_SetBkColor(GUI_BLACK);
@@ -296,11 +298,12 @@ void Task_OLEDDisplay(void *pdata)
 		f_close(&BMPFile);
 	}
 	GUI_SetTextMode(GUI_TM_TRANS);
+	GUI_SetFont(GUI_FONT_16_ASCII);
 	
 	while(1){
 		
 		//清除输出设备状态
-		OUTPUTDEVICE.Beep=0;
+
 		OUTPUTDEVICE.LED[0]=0;
 		OUTPUTDEVICE.LED[1]=0;
 		OUTPUTDEVICE.LED[2]=0;
@@ -310,6 +313,11 @@ void Task_OLEDDisplay(void *pdata)
 		OUTPUTDEVICE.LED[6]=0;
 		OUTPUTDEVICE.LED[7]=0;
 		OUTPUTDEVICE.Motor=0;
+		OUTPUTDEVICE.Beep=0;
+		OUTPUTDEVICE.picture_num=0;
+		
+		GUI_SetTextMode(GUI_TM_TRANS);
+		GUI_SetFont(GUI_FONT_16_ASCII);
 			
 		switch(OUTPUTDEVICE.Cureent_Exam_Num){			
 			case 0:bmpdisplay_exam0();break;
