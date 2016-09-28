@@ -297,13 +297,26 @@ void Task_OLEDDisplay(void *pdata)
 		GUI_DispStringAt("SDCARD OK.                ",10,90);	
 		f_close(&BMPFile);
 	}
+	
+	GUI_Init();
+	GUI_SetBkColor(GUI_BLACK);
+	GUI_SetColor(GUI_WHITE);
+	GUI_SetTextMode(GUI_TM_NORMAL);
+	GUI_UC_SetEncodeUTF8();
+	GUI_Clear();
+	GUI_SetFont(GUI_FONT_24_ASCII);
 	GUI_SetTextMode(GUI_TM_TRANS);
 	GUI_SetFont(GUI_FONT_16_ASCII);
 	
 	while(1){
 		
 		//清除输出设备状态
-
+		GUI_Init();
+		GUI_SetBkColor(GUI_BLACK);
+		GUI_SetColor(GUI_WHITE);
+		GUI_SetTextMode(GUI_TM_TRANS);
+		GUI_SetFont(GUI_FONT_16_ASCII);
+		
 		OUTPUTDEVICE.LED[0]=0;
 		OUTPUTDEVICE.LED[1]=0;
 		OUTPUTDEVICE.LED[2]=0;
