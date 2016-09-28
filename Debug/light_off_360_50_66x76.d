@@ -1,9 +1,0 @@
-.\debug\light_off_360_50_66x76.o: ..\STemWin\GUIDemo\light_off_360_50_66x76.c
-.\debug\light_off_360_50_66x76.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\debug\light_off_360_50_66x76.o: ..\STemWin\inc\GUI.h
-.\debug\light_off_360_50_66x76.o: ..\STemWin\inc\GUI_ConfDefaults.h
-.\debug\light_off_360_50_66x76.o: ..\STemWin\Config\GUIConf.h
-.\debug\light_off_360_50_66x76.o: ..\STemWin\inc\GUI_Type.h
-.\debug\light_off_360_50_66x76.o: ..\STemWin\inc\LCD.h
-.\debug\light_off_360_50_66x76.o: ..\STemWin\inc\Global.h
-.\debug\light_off_360_50_66x76.o: ..\STemWin\inc\GUI_Version.h

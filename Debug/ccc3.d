@@ -1,9 +1,0 @@
-.\debug\ccc3.o: ..\STemWin\GUIDemo\ccc3.c
-.\debug\ccc3.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\debug\ccc3.o: ..\STemWin\inc\GUI.h
-.\debug\ccc3.o: ..\STemWin\inc\GUI_ConfDefaults.h
-.\debug\ccc3.o: ..\STemWin\Config\GUIConf.h
-.\debug\ccc3.o: ..\STemWin\inc\GUI_Type.h
-.\debug\ccc3.o: ..\STemWin\inc\LCD.h
-.\debug\ccc3.o: ..\STemWin\inc\Global.h
-.\debug\ccc3.o: ..\STemWin\inc\GUI_Version.h

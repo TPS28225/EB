@@ -1067,14 +1067,14 @@
               <FilePath>..\FATFS\SPI\spi.c</FilePath>
             </File>
             <File>
-              <FileName>flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\FATFS\FLASH\flash.c</FilePath>
-            </File>
-            <File>
               <FileName>fontupd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FATFS\TEXT\fontupd.c</FilePath>
+            </File>
+            <File>
+              <FileName>flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FATFS\FLASH\flash.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,9 +1,0 @@
-.\debug\exam1.o: ..\STemWin\GUIDemo\exam1.c
-.\debug\exam1.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\debug\exam1.o: ..\STemWin\inc\GUI.h
-.\debug\exam1.o: ..\STemWin\inc\GUI_ConfDefaults.h
-.\debug\exam1.o: ..\STemWin\Config\GUIConf.h
-.\debug\exam1.o: ..\STemWin\inc\GUI_Type.h
-.\debug\exam1.o: ..\STemWin\inc\LCD.h
-.\debug\exam1.o: ..\STemWin\inc\Global.h
-.\debug\exam1.o: ..\STemWin\inc\GUI_Version.h

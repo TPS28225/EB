@@ -137,7 +137,7 @@ u8 SD_SendCmd(u8 cmd, u32 arg, u8 crc)
     SD_SPI_ReadWriteByte(crc); 
 	if(cmd==CMD12)SD_SPI_ReadWriteByte(0xff);//Skip a stuff byte when stop reading
     //等待响应，或超时退出
-	Retry=0X1F;
+	Retry=0XFF;
 	do
 	{
 		r1=SD_SPI_ReadWriteByte(0xFF);
@@ -284,7 +284,17 @@ u8 SD_Initialize(void)
 					r1=SD_SendCmd(CMD1,0,0X01);//发送CMD1
 				}while(r1&&retry--);  
 			}
-			if(retry==0||SD_SendCmd(CMD16,512,0X01)!=0)SD_Type=SD_TYPE_ERR;//错误的卡
+			//if(retry==0||SD_SendCmd(CMD16,512,0X00)!=0)SD_Type=SD_TYPE_ERR;//错误的卡
+			if(retry!=0)
+			{				
+				retry=0XFF;
+				do //等待退出IDLE模式
+				{											    
+					r1=SD_SendCmd(CMD16,512,0X00);//发送CMD1
+				}while(r1&&retry--); 
+				
+				if(retry==0)SD_Type=SD_TYPE_ERR;
+			}
 		}
 	}
 	SD_DisSelect();//取消片选
@@ -304,14 +314,14 @@ u8 SD_ReadDisk(u8*buf,u32 sector,u8 cnt)
 	u8 r1;
 	if(SD_Type!=SD_TYPE_V2HC)sector <<= 9;//转换为字节地址
 	if(cnt==1)
-	{
-		r1=SD_SendCmd(CMD17,sector,0X01);//读命令
+	{		
+		r1=SD_SendCmd(CMD17,sector,0X01);//读命令		
 		if(r1==0)//指令发送成功
 		{
 			r1=SD_RecvData(buf,512);//接收512个字节	   
 		}
 	}else
-	{
+	{				
 		r1=SD_SendCmd(CMD18,sector,0X01);//连续读命令
 		do
 		{

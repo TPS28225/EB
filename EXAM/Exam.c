@@ -294,8 +294,6 @@ void bmpdisplay_exam2(void)
 	}
 }
 
-
-u32 cccc,cccc_S,cccc_F,cccc_OF;
 void bmpdisplay_exam3(void)
 {
 	int Temp_Counter=0;
@@ -310,28 +308,28 @@ void bmpdisplay_exam3(void)
 	char Humidity_str[5];
 	
 	int jiachushi_Flag=4;	
-	int zhilengre_Flag=4;	
+	int zhilengre_Flag=4;
+
 	
 	GUI_MEMDEV_Handle hMem_Main;
-
+	
 	GUI_MEMDEV_Handle hMem_Sub_background_degree_165_225_52x29;		
 	GUI_MEMDEV_Handle hMem_Sub_background_percent_163_112_57x34;
 	GUI_MEMDEV_Handle hMem_Sub_background_jiachushi_340_167_46x19;	
 	GUI_MEMDEV_Handle hMem_Sub_background_zhilengre_335_285_46x19;
+	GUI_MEMDEV_Handle void1[4];	
+
 	GUI_MEMDEV_Handle hMem_Sub_fan_324_205_73x72[5];	
 	GUI_MEMDEV_Handle hMem_Sub_heat_324_205_73x72[3];
 	GUI_MEMDEV_Handle hMem_Sub_temper_84_199_12x43[3];
 	
-	GUI_MEMDEV_Handle hMem_Sub_fog_365_50_115x110[9];			
+	GUI_MEMDEV_Handle hMem_Sub_fog_365_50_115x110[9];		
 	
-	GUI_MEMDEV_Handle void1[4];
-//	GUI_MEMDEV_Handle a,b,c,d;
 
-	
+
 //
 // Create the memory device
 //
-
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 	
 	GUI_MEMDEV_Select(hMem_Main);//选中存储设备		
@@ -339,31 +337,16 @@ void bmpdisplay_exam3(void)
 	GUI_MEMDEV_Select(0);
 	GUI_MEMDEV_CopyToLCDAt(hMem_Main, 0, 0);	
 	GUI_MEMDEV_Delete(hMem_Main);					
-//创建存储设备	
-	void1[0]=Create_MEMDEV_Icon("0:/picture/exam3/background_degree_165_225_52x29.bmp",165,225);	
-	hMem_Sub_background_degree_165_225_52x29=void1[0];	
-	void1[1]=Create_MEMDEV_Icon("0:/picture/exam3/background_percent_163_112_57x34.bmp",163,112);
-	hMem_Sub_background_percent_163_112_57x34=void1[1];	
-	void1[2]=Create_MEMDEV_Icon("0:/picture/exam3/background_jiachushi_340_167_46x19.bmp",340,167);
-	hMem_Sub_background_jiachushi_340_167_46x19=void1[2];	
-	void1[3]=Create_MEMDEV_Icon("0:/picture/exam3/background_zhilengre_335_285_46x19.bmp",335,285);	
-	hMem_Sub_background_zhilengre_335_285_46x19=void1[3];
-
-//	void1[0]=Create_MEMDEV_Icon("0:/picture/exam3/background_degree_165_225_52x29.bmp",165,225);	
-//	void1[1]=Create_MEMDEV_Icon("0:/picture/exam3/background_percent_163_112_57x34.bmp",163,112);
-//	void1[2]=Create_MEMDEV_Icon("0:/picture/exam3/background_jiachushi_340_167_46x19.bmp",340,167);
-//	void1[3]=Create_MEMDEV_Icon("0:/picture/exam3/background_zhilengre_335_285_46x19.bmp",335,285);
-	
-//	hMem_Sub_background_degree_165_225_52x29=Create_MEMDEV_Icon("0:/picture/exam3/background_degree_165_225_52x29.bmp",165,225);		
-//	hMem_Sub_background_percent_163_112_57x34=Create_MEMDEV_Icon("0:/picture/exam3/background_percent_163_112_57x34.bmp",163,112);
-//	hMem_Sub_background_jiachushi_340_167_46x19=Create_MEMDEV_Icon("0:/picture/exam3/background_jiachushi_340_167_46x19.bmp",340,167);
-//	hMem_Sub_background_zhilengre_335_285_46x19=Create_MEMDEV_Icon("0:/picture/exam3/background_zhilengre_335_285_46x19.bmp",335,285);
-
-
-//	hMem_Sub_background_degree_165_225_52x29=a;		
-//	hMem_Sub_background_percent_163_112_57x34=b;		
-//	hMem_Sub_background_jiachushi_340_167_46x19=c;		
-//	hMem_Sub_background_zhilengre_335_285_46x19=d;	
+//创建存储设备
+	//奇怪的事件，不这样干会死机
+	hMem_Sub_background_degree_165_225_52x29=Create_MEMDEV_Icon("0:/picture/exam3/background_degree_165_225_52x29.bmp",165,225);
+	hMem_Sub_background_percent_163_112_57x34=Create_MEMDEV_Icon("0:/picture/exam3/background_percent_163_112_57x34.bmp",163,112);
+	hMem_Sub_background_jiachushi_340_167_46x19=Create_MEMDEV_Icon("0:/picture/exam3/background_jiachushi_340_167_46x19.bmp",340,167);
+	hMem_Sub_background_zhilengre_335_285_46x19=Create_MEMDEV_Icon("0:/picture/exam3/background_zhilengre_335_285_46x19.bmp",335,285);		
+//	hMem_Sub_background_degree_165_225_52x29=void1[0];	
+//	hMem_Sub_background_percent_163_112_57x34=void1[1];
+//	hMem_Sub_background_jiachushi_340_167_46x19=void1[2];
+//	hMem_Sub_background_zhilengre_335_285_46x19=void1[3];
 	
 	hMem_Sub_fan_324_205_73x72[0]=Create_MEMDEV_Icon("0:/picture/exam3/fan1_324_205_73x72.bmp",324,205);
 	hMem_Sub_fan_324_205_73x72[1]=Create_MEMDEV_Icon("0:/picture/exam3/fan2_324_205_73x72.bmp",324,205);	
@@ -393,7 +376,7 @@ void bmpdisplay_exam3(void)
 
 	while(1){
 	//调温	以及显示调温状态（制冷/制热/舒适）	
-		if(OUTPUTDEVICE.Motor < 0){
+		if(OUTPUTDEVICE.Motor == 0){
 			
 			if(1!=zhilengre_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_background_zhilengre_335_285_46x19,335,285);

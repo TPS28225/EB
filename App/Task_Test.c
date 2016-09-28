@@ -249,7 +249,7 @@ void Task_TCP_Client(void *pdata)
 }
 void Task_OLEDDisplay(void *pdata)
 {
-	u8 result;
+	u8 result,T_counter=0;
 	FATFS fs;
 	static FIL BMPFile;
 	f_mount(0, &fs);
@@ -257,26 +257,12 @@ void Task_OLEDDisplay(void *pdata)
   GUI_Init();
 	GUI_SetBkColor(GUI_BLACK);
 	GUI_SetColor(GUI_WHITE);
-	GUI_SetTextMode(GUI_TM_TRANS);
+	GUI_SetTextMode(GUI_TM_NORMAL);
 	GUI_UC_SetEncodeUTF8();
 	GUI_Clear();
-	GUI_SetFont(&GUI_Font16_1);
+	GUI_SetFont(GUI_FONT_24_ASCII);
 	OUTPUTDEVICE.Cureent_Exam_Num=3;
 //	MainTask();
-			//检测SD卡，防止他干扰实验正常进行				
-//		while(1){
-//			result = f_open(&BMPFile,"0:/picture/face.bmp",FA_READ);	//打开文件
-//			//文件打开错误
-//			if(result != FR_OK) 	
-//			{				
-//				GUI_DispStringAt("SDCARD fault.             ",10,90);
-//			}
-//			else 	{
-//				GUI_DispStringAt("SDCARD SUCCESS.     ",10,90);	
-//				f_close(&BMPFile);	
-//				break;
-//			}
-//		}
 
 	result = f_open(&BMPFile,"0:/picture/face.bmp",FA_READ);	//打开文件
 	//文件打开错误
@@ -284,19 +270,32 @@ void Task_OLEDDisplay(void *pdata)
 	{		
 		GUI_SetBkColor(GUI_BLUE);	
 		GUI_Clear();
-		GUI_DispStringAt("SDCARD fault.             ",10,90);
+		GUI_DispStringAt("HARDWARE ERROR: ",10,40);
+		GUI_DispStringAt("NOW FIXING:   ",10,80);
+		//GUI_DispDec  (result, 3);
+		GUI_DispDecAt (result, 230, 40, 3);
 		while(1){
 			result = f_open(&BMPFile,"0:/picture/face.bmp",FA_READ);	//打开文件
+			GUI_DispDecAt (result, 230, 40, 3);
+			GUI_DispDecAt (T_counter, 230, 80,2);
+			GUI_DispChar('%');
+			T_counter+=10;
 			//文件打开错误
 			if(result == FR_OK)break;
-			OSTimeDlyHMSM(0, 0, 1, 0);//挂起100ms，以便其他线程运行
+			OSTimeDlyHMSM(0, 0, 0, 100);//挂起100ms，以便其他线程运行
+			if(T_counter>100){			
+				GUI_DispStringAt ("SORRY! ERROR CAN NOT BE FIXED. ", 10,120);
+				GUI_DispStringAt ("PLEASE POWER OFF AND RESTART...", 10,160);
+				while(1);
+			}
 		}	
 		GUI_SetBkColor(GUI_BLACK);
 		GUI_SetColor(GUI_WHITE);
 		GUI_Clear();	
-		GUI_DispStringAt("SDCARD SUCCESS.     ",10,90);	
+		GUI_DispStringAt("SDCARD OK.                ",10,90);	
 		f_close(&BMPFile);
 	}
+	GUI_SetTextMode(GUI_TM_TRANS);
 	
 	while(1){
 		

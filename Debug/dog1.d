@@ -1,9 +1,0 @@
-.\debug\dog1.o: ..\STemWin\GUIDemo\dog1.c
-.\debug\dog1.o: D:\KEIL_V5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\debug\dog1.o: ..\STemWin\inc\GUI.h
-.\debug\dog1.o: ..\STemWin\inc\GUI_ConfDefaults.h
-.\debug\dog1.o: ..\STemWin\Config\GUIConf.h
-.\debug\dog1.o: ..\STemWin\inc\GUI_Type.h
-.\debug\dog1.o: ..\STemWin\inc\LCD.h
-.\debug\dog1.o: ..\STemWin\inc\Global.h
-.\debug\dog1.o: ..\STemWin\inc\GUI_Version.h

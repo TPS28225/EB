@@ -717,7 +717,7 @@ void TFTLCD_Init(void)
   writeTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（B		
   writeTiming.FSMC_DataSetupTime = 0x05;		 ////数据保存时间5个HCLK	
   writeTiming.FSMC_BusTurnAroundDuration = 0x00;
-  writeTiming.FSMC_CLKDivision = 0x02;
+  writeTiming.FSMC_CLKDivision = 0x01;
   writeTiming.FSMC_DataLatency = 0x00;
   writeTiming.FSMC_AccessMode = FSMC_AccessMode_B;	 //模式A
 
