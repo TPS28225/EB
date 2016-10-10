@@ -48,6 +48,7 @@ typedef struct{
 }INPUTDEVICE_MEASURE;
 
 typedef struct{
+	char				CLEAR;
 	char 				LED[LED_NUM];       //¡Ì															
 	char 				Beep;								//¡Ì											
 	char 				Motor;							//¡Ì																				

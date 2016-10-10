@@ -156,6 +156,12 @@ void parserJson(char * pMsg)
 					{
 						OUTPUTDEVICE.Cureent_Exam_Num = pSubSub->valueint;
 					}
+											
+					pSubSub = cJSON_GetObjectItem(pSub, "clear");
+					if(pSubSub != NULL)
+					{
+						OUTPUTDEVICE.CLEAR = pSubSub->valueint;
+					}				
 					
 					pSubSub = cJSON_GetObjectItem(pSub, "led1");
 					if(pSubSub != NULL)

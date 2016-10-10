@@ -60,6 +60,21 @@ typedef struct
 	
 }taskRunTime;
 taskRunTime runTime;
+
+void Clear_Sensor_Data(void)
+{
+	OUTPUTDEVICE.LED[0]=0;
+	OUTPUTDEVICE.LED[1]=0;
+	OUTPUTDEVICE.LED[2]=0;
+	OUTPUTDEVICE.LED[3]=0;
+	OUTPUTDEVICE.LED[4]=0;
+	OUTPUTDEVICE.LED[5]=0;
+	OUTPUTDEVICE.LED[6]=0;
+	OUTPUTDEVICE.LED[7]=0;
+	OUTPUTDEVICE.Motor=0;
+	OUTPUTDEVICE.Beep=0;
+	OUTPUTDEVICE.picture_num=0;
+}
 /***********************************************************************
 函数名称：void Task_LED(void *pdata)
 功    能：
@@ -94,6 +109,10 @@ void Task_OUTPUT(void *pdata)
 	IR_LearnState=0;		
   while(1)
 	{
+		if(OUTPUTDEVICE.CLEAR>=1){
+			Clear_Sensor_Data();
+			OUTPUTDEVICE.CLEAR=0;
+		}
 		runTime.OutputStartTime = TIM_GetCounter(DELAY_TIMER);
 		LED_Run();	
 		MOTOR_Run();
