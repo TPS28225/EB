@@ -76,7 +76,7 @@ void Task_INPUT(void *pdata)
 		UltrasonicWave_StartMeasure();
 		DHT11_Read_Data();
 		LightIntensitySensor_measure();
-//		EV1527_Run();//没写完，不要用
+		EV1527_Run();//待进一步调试
 		OSTimeDlyHMSM(0, 0, 2, 0);
 	}
 }

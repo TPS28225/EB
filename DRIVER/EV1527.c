@@ -32,11 +32,12 @@ int RF_StatusCheck()
 编 写 人：
 注    意：
 ***********************************************************************/
-u8 RF_H3V4F_Rev(u8 *decOut)
+u8 RF_H3V4F_Rev(u32 *data)
 {
 	u16 i=0,j=8,k=0;
 	u8 buff[9];
-
+	u32 decOut[3];
+	
 	if(Rf.State==1)
 	{
 		for(i=1;i<49;i+=2)
@@ -94,6 +95,7 @@ u8 RF_H3V4F_Rev(u8 *decOut)
 				decOut[1] = buff[1];
 				decOut[2] = buff[2];
 			 
+				*data=(decOut[0]<<16)+(decOut[1]<<8)+decOut[2];//可能出错
 				Rf.State = 0;
 			  Rf.Count = 0;
 				return 1;
@@ -103,7 +105,8 @@ u8 RF_H3V4F_Rev(u8 *decOut)
 				decOut[0] = buff[3];
 				decOut[1] = buff[4];
 				decOut[2] = buff[5];
-			 
+			 		 
+				*data=(decOut[0]<<16)+(decOut[1]<<8)+decOut[2];//可能出错
 				Rf.State = 0;
 			  Rf.Count = 0;
 				return 1;
@@ -114,12 +117,14 @@ u8 RF_H3V4F_Rev(u8 *decOut)
 				decOut[1] = 0;
 				decOut[2] = 0;
 			 
+				data=0;
 				Rf.State = 0;
 			  Rf.Count = 0;
 				return 0;
 		 }
 		#endif
-	}else 
+	}else
+		data=0;
 		return 0;
 }
 
@@ -424,41 +429,23 @@ void RF_H3V4_H34B_Init(void)
 
 void EV1527_Run(void)
 {
-//	RF_H3V4F_Rev((u8 *)(INPUTDEVICE.RF_Code));
-	RF_H34B_Send(0x0f0f0f0f);
-//	if(OUTPUTDEVICE.RF_State == 1)
-//	{
-//		//IR_Send(RF_State,strlen(RF_State));
-//		IR_Send(OUTPUTDEVICE.RF_Code,strlen(OUTPUTDEVICE.RF_Code));
-//		OUTPUTDEVICE.RF_State = 0;
-//	}
-//	else if(OUTPUTDEVICE.RF_State == 2)
-//	{
-//		IR_LearnEnable(1);
-//		OUTPUTDEVICE.RF_State = 0;
-//	}
-//	else if(OUTPUTDEVICE.RF_State == 3) 
-//	{
-//		IR_LearnEnable(0);
-//		OUTPUTDEVICE.RF_State = 0;
-//	}
-//	
-//	
-//	if(Rf.State == 0)
-//	{
-//		INPUTDEVICE.RF_State = 0;
-////		memset(INPUTDEVICE.RF_State,0,IRCODE_ARRY_NUM);
-//	}
-//	else if(Rf.State == 1)
-//	{
-//		INPUTDEVICE.RF_State = 4;
-////		memset(INPUTDEVICE.RF_State,0,IRCODE_ARRY_NUM);		
-//	}
-//	else if(Rf.State == 2)
-//	{
-//		INPUTDEVICE.RF_State = 5;	
-//		enCode(Timeval,INPUTDEVICE.RF_State,RF.Len);
-//	}
+	if(OUTPUTDEVICE.RF_State == 1){
+		RF_H34B_Send(OUTPUTDEVICE.RF_Code);
+		OUTPUTDEVICE.RF_State = 0;
+	}
+	else if(OUTPUTDEVICE.RF_State == 2){
+		INPUTDEVICE.RF_State=4;
+		while(RF_H3V4F_Rev(&(INPUTDEVICE.RF_Code))==0){
+			if(OUTPUTDEVICE.RF_State == 3){
+				OUTPUTDEVICE.RF_State = 0;
+				break;
+			}
+		}
+		if(OUTPUTDEVICE.RF_State != 0){	
+			OUTPUTDEVICE.RF_State = 0;
+			INPUTDEVICE.RF_State=6;
+		}			
+	}
 }
 
 

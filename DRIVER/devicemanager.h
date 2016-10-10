@@ -44,7 +44,7 @@ typedef struct{
 	char        IR_State;
 	char        IR_Code[IRCODE_ARRY_NUM];
 	char        RF_State;
-	char        RF_Code[RFCODE_ARRY_NUM];	
+	u32        	RF_Code;	
 }INPUTDEVICE_MEASURE;
 
 typedef struct{
@@ -57,7 +57,7 @@ typedef struct{
 	char        IR_State;           //¡Ì	
 	char        IR_Code[IRCODE_ARRY_NUM];    //¡Ì
 	char        RF_State;
-	char        RF_Code[RFCODE_ARRY_NUM];	
+	u32        	RF_Code;	
 	CARD_Info		RFID_CARD;
 	char				Cureent_Exam_Num;
 	char				picture_num;

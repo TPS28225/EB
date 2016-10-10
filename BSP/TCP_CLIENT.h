@@ -18,7 +18,7 @@
 
 #define TCP_LOCAL_PORT     		1030 
 #define TCP_SERVER_PORT    		7298
-#define TCP_SERVER_IP   		192,168,87,110	//192,168,87,111//115,28,86,143 //192,168,87,105//服务器IP
+#define TCP_SERVER_IP   			192,168,87,222	//192,168,87,111//115,28,86,143 //192,168,87,105//服务器IP
 
 extern struct tcp_pcb *tcp_client_pcb;
 

@@ -78,7 +78,16 @@ char * makeJson(Jason_Funtype function)
 			{
 				cJSON_AddStringToObject(PThdSubJson,"code",INPUTDEVICE.IR_Code);
 				IR_LearnEnable(0);
-			}	
+			}
+			
+			cJSON_AddItemToObject(pSubJson, "ev1527", PThdSubJson = cJSON_CreateObject());
+			cJSON_AddNumberToObject(PThdSubJson,"state",INPUTDEVICE.RF_State);
+			if(INPUTDEVICE.RF_State == 6)
+			{
+				cJSON_AddNumberToObject(PThdSubJson,"code",INPUTDEVICE.RF_Code);
+				INPUTDEVICE.RF_State = 0;
+			}
+			
 			cJSON_AddNumberToObject(pSubJson, "beep",OUTPUTDEVICE.Beep);
 			cJSON_AddNumberToObject(pSubJson, "motor",OUTPUTDEVICE.Motor);
 			break;
@@ -228,13 +237,26 @@ void parserJson(char * pMsg)
 							if(1 == OUTPUTDEVICE.IR_State)OUTPUTDEVICE.IR_State = 0;
 						}						
 					}
-
-//							"rfid":{
-//			"id":"FF03DC6B",
-//			"data":10,   //(?????)
-//			"enable":0,  //????:0???/1???   ?????
-//			"ack":" "    //??		 
-//		}
+					
+					pSubSub = cJSON_GetObjectItem(pSub, "ev1527");
+					if(pSubSub != NULL)
+					{
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "state");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.RF_State = pSubSubSub->valueint;
+						}	
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "code");
+						if(pSubSubSub != NULL)
+						{
+							OUTPUTDEVICE.RF_Code = pSubSubSub->valueint;
+						}	
+						else{
+							OUTPUTDEVICE.RF_State = 0;
+						}	
+						
+					}
+					
 					pSubSub = cJSON_GetObjectItem(pSub, "rfid");
 					if(pSubSub != NULL)
 					{
@@ -253,9 +275,9 @@ void parserJson(char * pMsg)
 						if(pSubSubSub != NULL)
 						{
 							OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass = pSubSubSub->valueint;
-						}
-						
+						}						
 					}
+					
 					pSubSub = cJSON_GetObjectItem(pSub, "zigbee");
 					if(pSubSub != NULL)
 					{		

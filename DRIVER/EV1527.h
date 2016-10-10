@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-#define RF_CONT 150  //????50????,??3?????150????
+#define RF_CONT 150  
 
 #define RF_TX_PORT 				GPIOC
 #define RF_TX_PIN					GPIO_Pin_13
@@ -36,7 +36,7 @@ typedef struct{
 extern RF_STRUCT Rf;
 
 void RF_H3V4_H34B_Init(void);
-u8 RF_H3V4F_Rev(u8 *decOut);
+u8 RF_H3V4F_Rev(u32 *data);
 void RF_H34B_Send(u32 data);
 void EXTI10_Int(u8 en);
 void EV1527_Run(void);
