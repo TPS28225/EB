@@ -1,3 +1,5 @@
 {"type":"ping"}
 
 {"devId":"NQAyAAtRNTMzODQwNQAyAAtRNTMzODQw","type":"cmd","data":{"test":61,"led1":0,"led2":1,"led3":50,"led4":1,"led5":1,"led6":0,"led7":0,"led8":1,"screen":"h","ir":{"state":1,"code":"A:576,B:1651,C:2221,D:4457,E:9064;CODE:EDAAAAAAAAAAAAAAAAABABABABABABABABAAABABAAAAAAAAAAABAAAAABABABABABAEECA"},"beep":0,"motor":1,"bluetooth":"AT+MD\r\n","rfid":{"operation":1,"money":10}}}
+
+{"devId":"NQAyAAtRNTMzODQwNQAyAAtRNTMzODQw","type":"cmd","data":{"test":1}}

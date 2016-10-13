@@ -16,7 +16,6 @@ char * makeJson(Jason_Funtype function)
 	cJSON * pJsonRoot;
 	cJSON * pSubJson;
 	cJSON * PThdSubJson;
-	char test[6];
 	char * p=0;
 	u8 err;
 	static u32 Tx_Conter=0;
@@ -33,8 +32,6 @@ char * makeJson(Jason_Funtype function)
 		//发送传感器数据
 		case RPT:
 			cJSON_AddStringToObject(pJsonRoot, "devId", DEVICEID);
-			sprintf(test,"test%d",OUTPUTDEVICE.Cureent_Exam_Num);
-			cJSON_AddStringToObject(pJsonRoot, "test", test);		
 			cJSON_AddStringToObject(pJsonRoot, "type", "rpt");
 			cJSON_AddStringToObject(pJsonRoot, "group_id", "1");
 			cJSON_AddNumberToObject(pJsonRoot, "Tx_Conter", Tx_Conter);
@@ -169,143 +166,53 @@ void parserJson(char * pMsg)
 					pSubSub = cJSON_GetObjectItem(pSub, "led1");
 					if(pSubSub != NULL)
 					{
-						if(pSubSub->valueint !=0)
-						{
-							OUTPUTDEVICE.LED[0] = pSubSub->valueint;
-						}else if(pSubSub->valuestring != 0)
-						{
-							OUTPUTDEVICE.LED[0] = atoi(pSubSub->valuestring);
-						}else
-						{
-							OUTPUTDEVICE.LED[0] = 0;
-						}						
+						OUTPUTDEVICE.LED[0] = pSubSub->valueint;
 					}
 					pSubSub = cJSON_GetObjectItem(pSub, "led2");
 					if(pSubSub != NULL)
 					{
-						if(pSubSub->valueint !=0)
-						{
-							OUTPUTDEVICE.LED[1] = pSubSub->valueint;
-						}else if(pSubSub->valuestring != 0)
-						{
-							OUTPUTDEVICE.LED[1] = atoi(pSubSub->valuestring);
-						}else
-						{
-							OUTPUTDEVICE.LED[1] = 0;
-						}
+						OUTPUTDEVICE.LED[1] = pSubSub->valueint;
 					}		
 					pSubSub = cJSON_GetObjectItem(pSub, "led3");
 					if(pSubSub != NULL)
 					{
-						if(pSubSub->valueint !=0)
-						{
-							OUTPUTDEVICE.LED[2] = pSubSub->valueint;
-						}else if(pSubSub->valuestring != 0)
-						{
-							OUTPUTDEVICE.LED[2] = atoi(pSubSub->valuestring);
-						}else
-						{
-							OUTPUTDEVICE.LED[2] = 0;
-						}
+						OUTPUTDEVICE.LED[2] = pSubSub->valueint;
 					}	
 					pSubSub = cJSON_GetObjectItem(pSub, "led4");
 					if(pSubSub != NULL)
 					{
-						if(pSubSub->valueint !=0)
-						{
-							OUTPUTDEVICE.LED[3] = pSubSub->valueint;
-						}else if(pSubSub->valuestring != 0)
-						{
-							OUTPUTDEVICE.LED[3] = atoi(pSubSub->valuestring);
-						}else
-						{
-							OUTPUTDEVICE.LED[3] = 0;
-						}
+						OUTPUTDEVICE.LED[3] = pSubSub->valueint;
 					}	
 					pSubSub = cJSON_GetObjectItem(pSub, "led5");
 					if(pSubSub != NULL)
 					{
-						if(pSubSub->valueint !=0)
-						{
-							OUTPUTDEVICE.LED[4] = pSubSub->valueint;
-						}else if(pSubSub->valuestring != 0)
-						{
-							OUTPUTDEVICE.LED[4] = atoi(pSubSub->valuestring);
-						}else
-						{
-							OUTPUTDEVICE.LED[4] = 0;
-						}
+						OUTPUTDEVICE.LED[4] = pSubSub->valueint;
 					}	
 					pSubSub = cJSON_GetObjectItem(pSub, "led6");
 					if(pSubSub != NULL)
 					{
-						if(pSubSub->valueint !=0)
-						{
-							OUTPUTDEVICE.LED[5] = pSubSub->valueint;
-						}else if(pSubSub->valuestring != 0)
-						{
-							OUTPUTDEVICE.LED[5] = atoi(pSubSub->valuestring);
-						}else
-						{
-							OUTPUTDEVICE.LED[5] = 0;
-						}
+						OUTPUTDEVICE.LED[5] = pSubSub->valueint;
 					}	
 					pSubSub = cJSON_GetObjectItem(pSub, "led7");
 					if(pSubSub != NULL)
 					{
-						if(pSubSub->valueint !=0)
-						{
-							OUTPUTDEVICE.LED[6] = pSubSub->valueint;
-						}else if(pSubSub->valuestring != 0)
-						{
-							OUTPUTDEVICE.LED[6] = atoi(pSubSub->valuestring);
-						}else
-						{
-							OUTPUTDEVICE.LED[6] = 0;
-						}
+						OUTPUTDEVICE.LED[6] = pSubSub->valueint;
 					}	
 					pSubSub = cJSON_GetObjectItem(pSub, "led8");
 					if(pSubSub != NULL)
 					{
-						if(pSubSub->valueint !=0)
-						{
-							OUTPUTDEVICE.LED[7] = pSubSub->valueint;
-						}else if(pSubSub->valuestring != 0)
-						{
-							OUTPUTDEVICE.LED[7] = atoi(pSubSub->valuestring);
-						}else
-						{
-							OUTPUTDEVICE.LED[7] = 0;
-						}
-					}											
+						OUTPUTDEVICE.LED[7] = pSubSub->valueint;
+					}						
 
 					pSubSub = cJSON_GetObjectItem(pSub, "beep");
 					if(pSubSub != NULL)
 					{
-						if(pSubSub->valueint !=0)
-						{
-							OUTPUTDEVICE.Beep = pSubSub->valueint;
-						}else if(pSubSub->valuestring != 0)
-						{
-							OUTPUTDEVICE.Beep = atoi(pSubSub->valuestring);
-						}else
-						{
-							OUTPUTDEVICE.Beep = 0;
-						}
+						OUTPUTDEVICE.Beep = pSubSub->valueint;
 					}	
 					pSubSub = cJSON_GetObjectItem(pSub, "motor");
 					if(pSubSub != NULL)
 					{
-						if(pSubSub->valueint !=0)
-						{
-							OUTPUTDEVICE.Motor = pSubSub->valueint;
-						}else if(pSubSub->valuestring != 0)
-						{
-							OUTPUTDEVICE.Motor = atoi(pSubSub->valuestring);
-						}else
-						{
-							OUTPUTDEVICE.Motor = 0;
-						}				
+						OUTPUTDEVICE.Motor = pSubSub->valueint;						
 					}
 					pSubSub = cJSON_GetObjectItem(pSub, "screen");
 					if(pSubSub != NULL)

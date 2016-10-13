@@ -335,6 +335,7 @@ void Task_OLEDDisplay(void *pdata)
 		GUI_SetColor(GUI_WHITE);
 		GUI_SetTextMode(GUI_TM_TRANS);
 		GUI_SetFont(GUI_FONT_16_ASCII);
+		GUI_UC_SetEncodeUTF8();
 		
 		OUTPUTDEVICE.LED[0]=0;
 		OUTPUTDEVICE.LED[1]=0;

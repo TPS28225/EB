@@ -45,7 +45,8 @@ void bmpdisplay_exam1(void)
 	int Light_On_Flag=3;
 	int Beep_On_Flag=3;
 	int People_Exist_Flag=3;
-	
+	int Magnetic_Door_Contact_Flag=3;
+	int	Beep_On_Flag_Counter=0;	
 	static GUI_MEMDEV_Handle hMem_Main;
 
 	static GUI_MEMDEV_Handle hMem_Sub_beep_off_350_125_84x75;
@@ -54,6 +55,7 @@ void bmpdisplay_exam1(void)
 	static GUI_MEMDEV_Handle hMem_Sub_light_off_360_50_66x76;
 	static GUI_MEMDEV_Handle hMem_Sub_word_background_175_105_105x40;
 	static GUI_MEMDEV_Handle hMem_Sub_fan_345_205_94x90[8];	
+	static GUI_MEMDEV_Handle hMem_Sub_word_background2_175_224_105x40;
 //
 // Create the memory device
 //
@@ -72,6 +74,7 @@ void bmpdisplay_exam1(void)
 	hMem_Sub_light_on_360_50_66x76=Create_MEMDEV_Icon("0:/picture/exam1/light_on_360_50_66x76.bmp",360,50);	
 
 	hMem_Sub_word_background_175_105_105x40=Create_MEMDEV_Icon("0:/picture/exam1/word_background_175_105_105x40.bmp",175,105);	
+	hMem_Sub_word_background2_175_224_105x40=Create_MEMDEV_Icon("0:/picture/exam1/word_background2_175_224_105x40.bmp",175,105);
 	
 	hMem_Sub_fan_345_205_94x90[0]=Create_MEMDEV_Icon("0:/picture/exam1/fan1_345_205_94x90.bmp",345,205);
 	hMem_Sub_fan_345_205_94x90[1]=Create_MEMDEV_Icon("0:/picture/exam1/fan2_345_205_94x90.bmp",345,205);
@@ -90,7 +93,7 @@ void bmpdisplay_exam1(void)
 	
 	while(1)	{	
 		//直接判断有无人
-		if(1==INPUTDEVICE.exist_people || 1==INPUTDEVICE.Magnetic_Door_Contact){
+		if(1==INPUTDEVICE.exist_people){
 			if(1!=People_Exist_Flag){ 
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);				 
 				GUI_DispStringAt(_apStrings_youren[0], 175, 112);	
@@ -104,14 +107,32 @@ void bmpdisplay_exam1(void)
 				People_Exist_Flag=0;				
 			}				
 		}
+		//直接判断有无人
+		if(1==INPUTDEVICE.Magnetic_Door_Contact){
+			if(1!=Magnetic_Door_Contact_Flag){ 
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background2_175_224_105x40 ,175,224);				 
+				GUI_DispStringAt(_apStrings_youren[0], 175, 224);	
+				Magnetic_Door_Contact_Flag=1;			 
+			}
+		}				 
+		else	{
+			if(0!=Magnetic_Door_Contact_Flag){
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background2_175_224_105x40 ,175,224);
+				GUI_DispStringAt(_apStrings_wuren[0], 175, 224);
+				Magnetic_Door_Contact_Flag=0;				
+			}				
+		}
 		//警报器
-		if(0!=OUTPUTDEVICE.Beep){
-			if(1!=Beep_On_Flag){
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_beep_on_350_125_84x75, 350, 125);	
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);				 
-				GUI_DispStringAt(_apStrings_youren[0], 175, 112);	
-				Beep_On_Flag=1;			 
-			}		 	
+		if(1==OUTPUTDEVICE.Beep){
+			if(Beep_On_Flag_Counter==0){
+				Beep_On_Flag_Counter=1;
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_beep_on_350_125_84x75, 350, 125);				
+			}	
+			else {
+				Beep_On_Flag_Counter=0;
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_beep_off_350_125_84x75, 350, 125);
+			}
+			Beep_On_Flag=1;		
 		}				 
 		else	{
 			if(0!=Beep_On_Flag){
@@ -187,6 +208,7 @@ void bmpdisplay_exam2(void)
 //
 	GUI_SetColor(0x00d1fef0);
 	GUI_SetFont(&GUI_Font32_ASCII);
+	GUI_UC_SetEncodeUTF8();
 	
 	hMem_Main = GUI_MEMDEV_Create(0, 0, 480, 320);
 	

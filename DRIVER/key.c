@@ -84,18 +84,19 @@ void KEY_init(void)
 	NVIC_Init(&NVIC_InitStructure);
 }
 
-u8 KEY1_Counter=0;
-u8 KEY2_Counter=0;
-u8 KEY3_Counter=0;
-u8 KEY4_Counter=0;
-u8 DOOR_Counter=0;
-u8 SOUND_Counter=0;
-u8 HUMAN_Counter=0;	
+u16 KEY1_Counter=0;
+u16 KEY2_Counter=0;
+u16 KEY3_Counter=0;
+u16 KEY4_Counter=0;
+u16 DOOR_Counter=0;
+u16 SOUND_Counter=0;
+u16 SOUND_Delay=0;
+u16 HUMAN_Counter=0;	
 
-u8 VOICE_ADD_Counter=0;
-u8 VOICE_RED_Counter=0;
-u8 SONG_NEXT_Counter=0;
-u8 SONG_FORMER_Counter=0;	
+u16 VOICE_ADD_Counter=0;
+u16 VOICE_RED_Counter=0;
+u16 SONG_NEXT_Counter=0;
+u16 SONG_FORMER_Counter=0;	
 
 u8 Counter=0;
 
@@ -131,8 +132,16 @@ void KEY_RUN(void)
 			else INPUTDEVICE.KEY[3]=RESET;
 		if(HUMAN_Counter>1)INPUTDEVICE.exist_people=SET;
 			else INPUTDEVICE.exist_people=RESET;
-		if(SOUND_Counter>1)INPUTDEVICE.sound_exceed_threshold=SET;
-			else INPUTDEVICE.sound_exceed_threshold=RESET;
+		
+		if(SOUND_Counter>1){
+			SOUND_Delay=10;
+			INPUTDEVICE.sound_exceed_threshold=SET;
+		}
+		else{
+			if(SOUND_Delay>=1)SOUND_Delay--;
+			if(SOUND_Delay<=1)INPUTDEVICE.sound_exceed_threshold=RESET;
+		}
+		
 		if(DOOR_Counter>1)INPUTDEVICE.Magnetic_Door_Contact=SET;
 			else INPUTDEVICE.Magnetic_Door_Contact=RESET;
 		
