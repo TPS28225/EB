@@ -96,14 +96,14 @@ void bmpdisplay_exam1(void)
 		if(1==INPUTDEVICE.exist_people){
 			if(1!=People_Exist_Flag){ 
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);				 
-				GUI_DispStringAt(_apStrings_youren[0], 175, 112);	
+				GUI_DispStringAt(_apStrings_youren[0], 175, 224);	
 				People_Exist_Flag=1;			 
 			}
 		}				 
 		else	{
 			if(0!=People_Exist_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);
-				GUI_DispStringAt(_apStrings_wuren[0], 175, 112);
+				GUI_DispStringAt(_apStrings_wuren[0], 175, 224);
 				People_Exist_Flag=0;				
 			}				
 		}
@@ -111,14 +111,14 @@ void bmpdisplay_exam1(void)
 		if(1==INPUTDEVICE.Magnetic_Door_Contact){
 			if(1!=Magnetic_Door_Contact_Flag){ 
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background2_175_224_105x40 ,175,224);				 
-				GUI_DispStringAt(_apStrings_youren[0], 175, 224);	
+				GUI_DispStringAt(_apStrings_youren[0], 175, 112);	
 				Magnetic_Door_Contact_Flag=1;			 
 			}
 		}				 
 		else	{
 			if(0!=Magnetic_Door_Contact_Flag){
 				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background2_175_224_105x40 ,175,224);
-				GUI_DispStringAt(_apStrings_wuren[0], 175, 224);
+				GUI_DispStringAt(_apStrings_wuren[0], 175, 112);
 				Magnetic_Door_Contact_Flag=0;				
 			}				
 		}
@@ -746,6 +746,7 @@ void bmpdisplay_exam5(void){
 //					counter_2=5;	
 					break;
 			}
+			GUI_Delay(100);			
 		}
 		
 		if(Recomend_Record_In!=INPUTDEVICE.IR_State){
@@ -776,6 +777,7 @@ void bmpdisplay_exam5(void){
 				counter_2=5;	
 				break;
 		}
+		GUI_Delay(100);
 	}
 			
 		switch(counter_2++){
