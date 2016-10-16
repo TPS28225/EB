@@ -17,6 +17,7 @@ char * makeJson(Jason_Funtype function)
 	cJSON * pSubJson;
 	cJSON * PThdSubJson;
 	char test[6];
+	char temp[9];
 	char * p=0;
 	u8 err;
 	static u32 Tx_Conter=0;
@@ -33,7 +34,7 @@ char * makeJson(Jason_Funtype function)
 		//发送传感器数据
 		case RPT:
 			cJSON_AddStringToObject(pJsonRoot, "devId", DEVICEID);
-			sprintf(test,"test%d",OUTPUTDEVICE.Cureent_Exam_Num);
+			sprintf(test,"test%x",OUTPUTDEVICE.Cureent_Exam_Num);
 			cJSON_AddStringToObject(pJsonRoot, "test", test);		
 			cJSON_AddStringToObject(pJsonRoot, "type", "rpt");
 			cJSON_AddStringToObject(pJsonRoot, "group_id", "1");
@@ -51,7 +52,8 @@ char * makeJson(Jason_Funtype function)
 		
 //			cJSON_AddNumberToObject(pSubJson,"rfid",INPUTDEVICE.RFID_CARDID);
 			cJSON_AddItemToObject(pSubJson, "rfid", PThdSubJson = cJSON_CreateObject());
-			cJSON_AddNumberToObject(PThdSubJson,"id",INPUTDEVICE.RFID_CARD.rfid_card_Info.RFID_CARDID);
+			sprintf(temp,"%x",INPUTDEVICE.RFID_CARD.rfid_card_Info.RFID_CARDID);
+			cJSON_AddStringToObject(PThdSubJson,"id",temp);
 			cJSON_AddNumberToObject(PThdSubJson,"money",INPUTDEVICE.RFID_CARD.rfid_card_Info.Data);
 			cJSON_AddNumberToObject(PThdSubJson,"enable",INPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass);
 			
@@ -76,13 +78,14 @@ char * makeJson(Jason_Funtype function)
 			cJSON_AddNumberToObject(pSubJson,"led8",OUTPUTDEVICE.LED[7]);
 			
 			cJSON_AddItemToObject(pSubJson, "ir", PThdSubJson = cJSON_CreateObject());
+			cJSON_AddStringToObject(PThdSubJson,"id",OUTPUTDEVICE.IR_Id);
 			cJSON_AddNumberToObject(PThdSubJson,"state",INPUTDEVICE.IR_State);
 			if(INPUTDEVICE.IR_State == 5)
 			{
 				cJSON_AddStringToObject(PThdSubJson,"code",INPUTDEVICE.IR_Code);
 				IR_LearnEnable(0);
-			}
-			
+				sprintf(OUTPUTDEVICE.IR_Id,"");
+			}		
 			cJSON_AddItemToObject(pSubJson, "ev1527", PThdSubJson = cJSON_CreateObject());
 			cJSON_AddNumberToObject(PThdSubJson,"state",INPUTDEVICE.RF_State);
 			if(INPUTDEVICE.RF_State == 6)
@@ -124,6 +127,7 @@ void parserJson(char * pMsg)
 	cJSON * pSub;
 	cJSON * pSubSub;
 	cJSON * pSubSubSub;
+	int  temp;
 	if(pMsg == NULL)
 	{
 		return;
@@ -157,9 +161,18 @@ void parserJson(char * pMsg)
 					pSubSub = cJSON_GetObjectItem(pSub, "test");
 					if(pSubSub != NULL)
 					{
-						OUTPUTDEVICE.Cureent_Exam_Num = pSubSub->valueint;
-					}
-											
+						if(pSubSub->valueint !=0)
+						{
+							OUTPUTDEVICE.Cureent_Exam_Num = pSubSub->valueint;
+						}else if(pSubSub->valuestring != 0)
+						{
+							sscanf(pSubSub->valuestring,"%x",&temp);  						
+							OUTPUTDEVICE.Cureent_Exam_Num = (char)temp;
+						}else
+						{
+							OUTPUTDEVICE.Cureent_Exam_Num = 0;
+						}
+					}										
 					pSubSub = cJSON_GetObjectItem(pSub, "clear");
 					if(pSubSub != NULL)
 					{
@@ -315,13 +328,12 @@ void parserJson(char * pMsg)
 					pSubSub = cJSON_GetObjectItem(pSub, "ir");
 					if(pSubSub != NULL)
 					{
-						pSubSubSub = cJSON_GetObjectItem(pSubSub, "code");
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "id");
 						if(pSubSubSub != NULL)
 						{
-							strncpy(OUTPUTDEVICE.IR_Code,pSubSubSub->valuestring,IRCODE_ARRY_NUM);
-							OUTPUTDEVICE.IR_State = 1;
+							strncpy(OUTPUTDEVICE.IR_Id,pSubSubSub->valuestring,strlen(pSubSubSub->valuestring));
 						}	
-						pSubSubSub = cJSON_GetObjectItem(pSubSub, "value");
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "code");
 						if(pSubSubSub != NULL)
 						{
 							strncpy(OUTPUTDEVICE.IR_Code,pSubSubSub->valuestring,IRCODE_ARRY_NUM);

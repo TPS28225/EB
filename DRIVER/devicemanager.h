@@ -54,7 +54,8 @@ typedef struct{
 	char 				Motor;							//¡Ì																				
 	char 				Zigbee_TX[ZIGBEE_TX_ARRY_NUM][TX_RX_BUFFER_SIZE];	//¡Ì							
 	char	 			OLED[OLED_OUTPUT_ARRY_NUM];											
-	char        Bluetooth[BLUETOOTH_TX_ARRY_NUM][TX_RX_BUFFER_SIZE];//¡Ì			
+	char        Bluetooth[BLUETOOTH_TX_ARRY_NUM][TX_RX_BUFFER_SIZE];//¡Ì	
+	char        IR_Id[10];	
 	char        IR_State;           //¡Ì	
 	char        IR_Code[IRCODE_ARRY_NUM];    //¡Ì
 	char        RF_State;

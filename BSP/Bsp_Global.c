@@ -57,9 +57,9 @@ void BSP_Init(void)
 	Zigbee_Configuration();	
 	UltrasonicWave_Configuration();	
 	KEY_init();
-	DHT11_Init();
-	LightIntensitySensor_Init();
-	RC522_Init();
+	DHT11_Init();//
+	LightIntensitySensor_Init();//
+	RC522_Init();//
 	IR_Configuration();
 	RF_H3V4_H34B_Init();
 //	uart_init(115200);//将来会用作485温湿度传感器

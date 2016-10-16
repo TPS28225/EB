@@ -85,7 +85,7 @@ void IR_Send(char* buff,u16 len)
 		
 		pos = strstr(buffPtr, pattern);
 	}
-	while((*codePtr) != ';' && (i<codeLen))
+	while((*codePtr) != '|' && (i<codeLen))
 	{
 		 IR.Code[i++]=codeBook[(*codePtr++) - 'A'];
 	}
@@ -435,7 +435,7 @@ char* enCode(u16* code,char* encode,int lenth)
 	{
 		if(i==iraverageIndex-1)
 		{
-			sprintf(temp,"%c:%d;",encodeChar+i,iraverage[i]);
+			sprintf(temp,"%c:%d|",encodeChar+i,iraverage[i]);
 		}
 		else
 		{

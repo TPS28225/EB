@@ -92,7 +92,7 @@ void Task_INPUT(void *pdata)
 		DHT11_Read_Data();
 		LightIntensitySensor_measure();
 		EV1527_Run();//待进一步调试
-		OSTimeDlyHMSM(0, 0, 2, 0);
+		OSTimeDlyHMSM(0, 0, 1, 0);
 	}
 }
 void Task_KEY(void *pdata)
@@ -124,7 +124,7 @@ void Task_OUTPUT(void *pdata)
 		if(runTime.OutputEndTime - runTime.OutputStartTime > runTime.OutputRunTime)
 			runTime.OutputRunTime = runTime.OutputEndTime - runTime.OutputStartTime;	
 
-		OSTimeDlyHMSM(0, 0, 0, 500);//延时500ms
+		OSTimeDlyHMSM(0, 0, 0, 200);//延时500ms
 	}
 }
 /***********************************************************************
@@ -148,7 +148,7 @@ void Task_TX(void *pdata)
 //	msgReporter(msg,strlen(msg));
 //	free(msg);
 	
-	OSTimeDlyHMSM(0, 0, 30, 0);
+	OSTimeDlyHMSM(0, 0, 5, 0);
 	
 //	msg = makeJson(REG);
 //	strlen(msg);
@@ -176,7 +176,7 @@ void Task_TX(void *pdata)
 		runTime.TxEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.TxEndTime - runTime.TxStartTime > runTime.TxRunTime)
 			runTime.TxRunTime = runTime.TxEndTime - runTime.TxStartTime;	
-		OSTimeDlyHMSM(0, 0, 2, 0);
+		OSTimeDlyHMSM(0, 0, 1, 0);
 	}
 }
 /***********************************************************************
@@ -335,7 +335,6 @@ void Task_OLEDDisplay(void *pdata)
 		GUI_SetColor(GUI_WHITE);
 		GUI_SetTextMode(GUI_TM_TRANS);
 		GUI_SetFont(GUI_FONT_16_ASCII);
-		GUI_UC_SetEncodeUTF8();
 		
 		OUTPUTDEVICE.LED[0]=0;
 		OUTPUTDEVICE.LED[1]=0;
