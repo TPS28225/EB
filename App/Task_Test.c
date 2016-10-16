@@ -329,6 +329,8 @@ void Task_OLEDDisplay(void *pdata)
 	
 	while(1){
 		
+
+		
 		//清除输出设备状态
 		GUI_Init();
 		GUI_SetBkColor(GUI_BLACK);
@@ -347,6 +349,9 @@ void Task_OLEDDisplay(void *pdata)
 		OUTPUTDEVICE.Motor=0;
 		OUTPUTDEVICE.Beep=0;
 		OUTPUTDEVICE.picture_num=0;
+		DHT11_Init();//
+		LightIntensitySensor_Init();//
+		RC522_Init();//
 		
 		GUI_SetTextMode(GUI_TM_TRANS);
 		GUI_SetFont(GUI_FONT_16_ASCII);
