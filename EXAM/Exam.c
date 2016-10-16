@@ -95,14 +95,14 @@ void bmpdisplay_exam1(void)
 		//直接判断有无人
 		if(1==INPUTDEVICE.exist_people){
 			if(1!=People_Exist_Flag){ 
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);				 
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background2_175_224_105x40 ,175,224);				 
 				GUI_DispStringAt(_apStrings_youren[0], 175, 224);	
 				People_Exist_Flag=1;			 
 			}
 		}				 
 		else	{
 			if(0!=People_Exist_Flag){
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background2_175_224_105x40 ,175,224);
 				GUI_DispStringAt(_apStrings_wuren[0], 175, 224);
 				People_Exist_Flag=0;				
 			}				
@@ -110,14 +110,14 @@ void bmpdisplay_exam1(void)
 		//直接判断有无人
 		if(1==INPUTDEVICE.Magnetic_Door_Contact){
 			if(1!=Magnetic_Door_Contact_Flag){ 
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background2_175_224_105x40 ,175,224);				 
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);				 
 				GUI_DispStringAt(_apStrings_youren[0], 175, 112);	
 				Magnetic_Door_Contact_Flag=1;			 
 			}
 		}				 
 		else	{
 			if(0!=Magnetic_Door_Contact_Flag){
-				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background2_175_224_105x40 ,175,224);
+				GUI_MEMDEV_CopyToLCDAt(hMem_Sub_word_background_175_105_105x40 ,175,105);
 				GUI_DispStringAt(_apStrings_wuren[0], 175, 112);
 				Magnetic_Door_Contact_Flag=0;				
 			}				
@@ -1077,15 +1077,17 @@ void bmpdisplay_exam6_entrance_guard(void){
 	hMem_Sub_door_light_blue_247_91_100x22=Create_MEMDEV_Icon("0:/picture/exam6/door_light_blue_247_91_100x22.bmp",247,91);
 	hMem_Sub_door_light_red_247_91_100x22=Create_MEMDEV_Icon("0:/picture/exam6/door_light_red_247_91_100x22.bmp",247,91);	
 	hMem_Sub_door_light_grey_247_91_100x22=Create_MEMDEV_Icon("0:/picture/exam6/door_light_grey_247_91_100x22.bmp",247,91);
+	
+	hMem_Sub_entrance_guard_enable_pass_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_enable_pass_50_132_56x23.bmp",50,132);	
+	hMem_Sub_entrance_guard_disable_pass_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_disable_pass_50_132_56x23.bmp",50,132);	
+	hMem_Sub_entrance_guard_enabling_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_enabling_50_132_56x23.bmp",50,132);	
 
 	hMem_Sub_entrance_guard_fault_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_fault_50_132_56x23.bmp",50,132);	
 	hMem_Sub_entrance_guard_pass_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_pass_50_132_56x23.bmp",50,132);	
 	hMem_Sub_entrance_guard_recognising_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_recognising_50_132_56x23.bmp",50,132);	
 	hMem_Sub_entrance_guard_void_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_void_50_132_56x23.bmp",50,132);
 	
-	hMem_Sub_entrance_guard_enable_pass_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_enable_pass_50_132_56x23.bmp",50,132);	
-	hMem_Sub_entrance_guard_disable_pass_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_disable_pass_50_132_56x23.bmp",50,132);	
-	hMem_Sub_entrance_guard_enabling_50_132_56x23=Create_MEMDEV_Icon("0:/picture/exam6/entrance_guard_enabling_50_132_56x23.bmp",50,132);	
+
 	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.entrance_guard_pass=2;
 	OUTPUTDEVICE.RFID_CARD.rfid_card_Info.Card_Operation=3;
 	while(1){
