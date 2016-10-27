@@ -166,18 +166,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>1091</LineNumber>
+          <LineNumber>58</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134347476</Address>
+          <Address>134221072</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\EXAM\Exam.c</Filename>
+          <Filename>..\BSP\stm32f2xx_it.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Pro\../EXAM/Exam.c\1091</Expression>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>350</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134287860</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\DRIVER\IR.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Pro\../DRIVER/IR.c\350</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow2>
@@ -426,7 +442,7 @@
       </LintIncludes>
       <SystemViewers>
         <Entry>
-          <Name>System Viewer\GPIOG</Name>
+          <Name>System Viewer\GPIOF</Name>
           <WinId>35905</WinId>
         </Entry>
       </SystemViewers>
@@ -2318,7 +2334,7 @@
 
   <Group>
     <GroupName>EXAM</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

@@ -176,6 +176,7 @@ void EXTI15_10_IRQHandler(void)
 					Rf.ZaboFlag=1;
 					Rf.Count=0;
 					TIM14_Set(1);
+					OSIntExit();//中断退出，通知ucos，（该句必须加）	
 					return;
 				}
 				Rf.Count++;
@@ -184,6 +185,7 @@ void EXTI15_10_IRQHandler(void)
 					Rf.State=1;
 					Rf.ZaboFlag=1;
 					TIM14_Set(1);
+					OSIntExit();//中断退出，通知ucos，（该句必须加）	
 					return;
 				}
 			}

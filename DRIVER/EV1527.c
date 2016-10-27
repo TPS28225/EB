@@ -47,9 +47,9 @@ u8 RF_H3V4F_Rev(u32 *data)
 				buff[k] &= ~(1<<(j-1));
 			}
 			else 
-			{
+			{  
 				buff[k] |= (1<<(j-1));
-			}
+			}  
 			j--;
 			if(j==0) j=8,k++;
 		}

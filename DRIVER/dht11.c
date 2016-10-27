@@ -20,6 +20,8 @@ void DHT11_Rst(void)
 	GPIO_InitStructure.GPIO_Pin = DHT11_DQ_PIN;				 //PE4端口配置
  	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT; 		 //推挽输出
  	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      //推挽复用输出
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;        //上拉
  	GPIO_Init(DHT11_DQ_PORT, &GPIO_InitStructure);				 //初始化IO口
 	
 	GPIO_ResetBits(DHT11_DQ_PORT, DHT11_DQ_PIN); 	//拉低DQ
@@ -37,6 +39,8 @@ u8 DHT11_Check(void)
 	GPIO_InitTypeDef  GPIO_InitStructure;	
 	GPIO_InitStructure.GPIO_Pin = DHT11_DQ_PIN;				 //PE4端口配置
  	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN; 		 //推挽输入
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      //推挽复用输出
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;        //上拉
  	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
  	GPIO_Init(DHT11_DQ_PORT, &GPIO_InitStructure);				 //初始化IO口
 	
@@ -131,6 +135,8 @@ u8 DHT11_Init(void)
 	
  	GPIO_InitStructure.GPIO_Pin = DHT11_DQ_PIN;				 //PE4端口配置
  	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT; 		 //推挽输出
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      //推挽复用输出
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;        //上拉
  	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
  	GPIO_Init(DHT11_DQ_PORT, &GPIO_InitStructure);				 //初始化IO口
 	GPIO_SetBits(DHT11_DQ_PORT, DHT11_DQ_PIN);						 //PE4 输出高

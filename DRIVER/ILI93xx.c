@@ -348,7 +348,7 @@ void LCD_Scan_Dir(u8 dir)
 	else if(lcddev.id==0x8357){
 		if(lcddev.dir==1){
 			LCD_WR_REG(0x36);  
-			LCD_WR_DATA(0x3B);//这里是切换显示方向的关键点0x38/0x3B
+			LCD_WR_DATA(0x38);//这里是切换显示方向的关键点0x38/0x3B
 			
 			LCD_WR_REG(0X2A);
 			LCD_WR_DATA(0X00);
