@@ -9,7 +9,7 @@ void LED_Run(void)
 	TIM_SetCompare2(TIM3,OUTPUTDEVICE.LED[4]*10);	
 	TIM_SetCompare1(TIM3,OUTPUTDEVICE.LED[5]*10);	
 	TIM_SetCompare4(TIM3,OUTPUTDEVICE.LED[6]*10);		
-//	TIM_SetCompare3(TIM3,OUTPUTDEVICE.LED[7]*10);	
+	TIM_SetCompare3(TIM3,OUTPUTDEVICE.LED[7]*10);	
 }
 void LED_Configuration(void)
 {			

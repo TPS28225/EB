@@ -78,7 +78,9 @@ void UltrasonicWave_Configuration(void)
  * Êä³ö  £ºÎÞ	
  */
 void UltrasonicWave_StartMeasure(void)
-{	
+{
+  static int UW_Overtime_Counter=0;
+	float	UW_Record=0;	
 	if(ECHO_COUNT_START == RESET)
 	{
 		INPUTDEVICE.Distance=0;
@@ -87,6 +89,16 @@ void UltrasonicWave_StartMeasure(void)
 		GPIO_ResetBits(TRIG_PORT,TRIG_PIN);
 		delay_us(30);	
 	}
+	
+	if(UW_Record!=INPUTDEVICE.Distance){
+		UW_Record = INPUTDEVICE.Distance;
+		UW_Overtime_Counter=0;
+	}
+	
+	if(UW_Overtime_Counter>5)
+		INPUTDEVICE.Distance=0;		
+	
+	UW_Overtime_Counter++;
 }
 extern u16 RFTimeBuff[200];
 void EXTI15_10_IRQHandler(void)
