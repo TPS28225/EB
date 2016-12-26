@@ -88,10 +88,13 @@ char * makeJson(Jason_Funtype function)
 			}		
 			cJSON_AddItemToObject(pSubJson, "ev1527", PThdSubJson = cJSON_CreateObject());
 			cJSON_AddNumberToObject(PThdSubJson,"state",INPUTDEVICE.RF_State);
-			if(INPUTDEVICE.RF_State == 6)
+			cJSON_AddStringToObject(PThdSubJson,"id",OUTPUTDEVICE.RF_Id);
+			
+			if(INPUTDEVICE.RF_State == 5 || INPUTDEVICE.RF_State == 6)
 			{
 				cJSON_AddNumberToObject(PThdSubJson,"code",INPUTDEVICE.RF_Code);
 				INPUTDEVICE.RF_State = 0;
+				sprintf(OUTPUTDEVICE.RF_Id,"");
 			}
 			
 			cJSON_AddNumberToObject(pSubJson, "beep",OUTPUTDEVICE.Beep);
@@ -191,7 +194,12 @@ void parserJson(char * pMsg)
 						}else
 						{
 							OUTPUTDEVICE.LED[0] = 0;
-						}						
+						}
+						
+						if(OUTPUTDEVICE.Cureent_Exam_Num == 2 && OUTPUTDEVICE.LED[6] == 0)
+						{
+							OUTPUTDEVICE.LED[0] = 0;
+						}
 					}
 					pSubSub = cJSON_GetObjectItem(pSub, "led2");
 					if(pSubSub != NULL)
@@ -203,6 +211,10 @@ void parserJson(char * pMsg)
 						{
 							OUTPUTDEVICE.LED[1] = atoi(pSubSub->valuestring);
 						}else
+						{
+							OUTPUTDEVICE.LED[1] = 0;
+						}
+						if(OUTPUTDEVICE.Cureent_Exam_Num == 2 && OUTPUTDEVICE.LED[6] == 0)
 						{
 							OUTPUTDEVICE.LED[1] = 0;
 						}
@@ -220,6 +232,10 @@ void parserJson(char * pMsg)
 						{
 							OUTPUTDEVICE.LED[2] = 0;
 						}
+						if(OUTPUTDEVICE.Cureent_Exam_Num == 2 && OUTPUTDEVICE.LED[6] == 0)
+						{
+							OUTPUTDEVICE.LED[2] = 0;
+						}
 					}	
 					pSubSub = cJSON_GetObjectItem(pSub, "led4");
 					if(pSubSub != NULL)
@@ -231,6 +247,10 @@ void parserJson(char * pMsg)
 						{
 							OUTPUTDEVICE.LED[3] = atoi(pSubSub->valuestring);
 						}else
+						{
+							OUTPUTDEVICE.LED[3] = 0;
+						}
+						if(OUTPUTDEVICE.Cureent_Exam_Num == 2 && OUTPUTDEVICE.LED[6] == 0)
 						{
 							OUTPUTDEVICE.LED[3] = 0;
 						}
@@ -286,7 +306,8 @@ void parserJson(char * pMsg)
 						}else if(pSubSub->valuestring != 0)
 						{
 							OUTPUTDEVICE.LED[7] = atoi(pSubSub->valuestring);
-						}else
+						}
+						else
 						{
 							OUTPUTDEVICE.LED[7] = 0;
 						}
@@ -352,6 +373,11 @@ void parserJson(char * pMsg)
 					pSubSub = cJSON_GetObjectItem(pSub, "ev1527");
 					if(pSubSub != NULL)
 					{
+						pSubSubSub = cJSON_GetObjectItem(pSubSub, "id");
+						if(pSubSubSub != NULL)
+						{
+							strncpy(OUTPUTDEVICE.RF_Id,pSubSubSub->valuestring,strlen(pSubSubSub->valuestring));
+						}	
 						pSubSubSub = cJSON_GetObjectItem(pSubSub, "state");
 						if(pSubSubSub != NULL)
 						{
@@ -362,8 +388,12 @@ void parserJson(char * pMsg)
 						{
 							OUTPUTDEVICE.RF_Code = pSubSubSub->valueint;
 						}	
-						else{
-							OUTPUTDEVICE.RF_State = 0;
+						else 
+						{
+							if(OUTPUTDEVICE.RF_State == 1)
+							{
+								OUTPUTDEVICE.RF_State = 0;
+							}
 						}	
 						
 					}

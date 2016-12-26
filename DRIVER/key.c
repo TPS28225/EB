@@ -134,7 +134,7 @@ void KEY_RUN(void)
 			else INPUTDEVICE.exist_people=RESET;
 		
 		if(SOUND_Counter>1){
-			SOUND_Delay=10;
+			SOUND_Delay=3;
 			INPUTDEVICE.sound_exceed_threshold=SET;
 		}
 		else{
@@ -171,10 +171,10 @@ void KEY_RUN(void)
 		SOUND_Counter=0;
 		HUMAN_Counter=0;	
 
-	  VOICE_ADD_Counter=0;
-	  VOICE_RED_Counter=0;
-	  SONG_NEXT_Counter=0;
-	  SONG_FORMER_Counter=0;			
+		VOICE_ADD_Counter=0;
+		VOICE_RED_Counter=0;
+		SONG_NEXT_Counter=0;
+		SONG_FORMER_Counter=0;			
 	}
 }
 

@@ -651,16 +651,18 @@ static void _DrawBitmap(GUI_DEVICE * pDevice, int x0, int y0,
     for (i = 0; i < ySize; i++) {
       _DrawBitLine8BPP(pDevice, x0, i + y0, pData, xSize, pTrans);
       pData += BytesPerLine;
-    }
+    }	
     break;
   //
   // Only required for 16bpp color depth of target. Should be removed otherwise.
   //
   case 16:
-    for (i = 0; i < ySize; i++) {
-      _DrawBitLine16BPP(pDevice, x0, i + y0, (const U16 *)pData, xSize);
-      pData += BytesPerLine;
-    }
+//    for (i = 0; i < ySize; i++) {
+//      _DrawBitLine16BPP(pDevice, x0, i + y0, (const U16 *)pData, xSize);
+//      pData += BytesPerLine;
+//    }
+		//LCD_Color_Fill(u16 sx,u16 sy,u16 ex,u16 ey,u16 *color);
+		LCD_Color_Fill(x0,y0,x0+xSize-1,y0+ySize-1,(u16*)pData);
     break;
   //
   // Only required for 32bpp color depth of target. Should be removed otherwise.

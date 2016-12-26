@@ -301,7 +301,7 @@ void EXTI9_5_IRQHandler(void)
 	}
 	if(EXTI_GetITStatus(EXTI_Line7) != RESET)
 	{
-    SOUND_Counter++;
+		SOUND_Counter++;
 		EXTI_ClearITPendingBit(EXTI_Line7);  //清除EXTI7线路挂起位
 	}
 	OSIntExit();//中断退出，通知ucos，（该句必须加）			

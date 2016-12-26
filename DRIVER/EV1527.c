@@ -47,9 +47,9 @@ u8 RF_H3V4F_Rev(u32 *data)
 				buff[k] &= ~(1<<(j-1));
 			}
 			else 
-			{  
+			{
 				buff[k] |= (1<<(j-1));
-			}  
+			}
 			j--;
 			if(j==0) j=8,k++;
 		}
@@ -175,8 +175,9 @@ void RF_EXTI_Init(void)
 	GPIO_Init(RF_TX_PORT, &GPIO_InitStructure); 	
 
 	GPIO_InitStructure.GPIO_Pin = RF_RX_PIN;           
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;   
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;   
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; 
+		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
 	GPIO_Init(RF_RX_PORT, &GPIO_InitStructure); 	
 	
   EXTI_InitStructure.EXTI_Line=RF_RX_EXIT_LINE;	
@@ -420,7 +421,7 @@ void EXTI10_Int(u8 en)
 void RF_H3V4_H34B_Init(void)
 {
 	RF_EXTI_Init();
-	TIM14_Init(60000,59);
+	TIM14_Init(59999,59);
 	TIM14_Set(1);
 	TIM13_Init(300,59);//300usÖÜÆÚ
 	TIM13_Set(0);
@@ -433,19 +434,33 @@ void EV1527_Run(void)
 		RF_H34B_Send(OUTPUTDEVICE.RF_Code);
 		OUTPUTDEVICE.RF_State = 0;
 	}
-	else if(OUTPUTDEVICE.RF_State == 2){
+	else if(OUTPUTDEVICE.RF_State == 2)
+	{
 		INPUTDEVICE.RF_State=4;
-		while(RF_H3V4F_Rev(&(INPUTDEVICE.RF_Code))==0){
-			if(OUTPUTDEVICE.RF_State == 3){
-				OUTPUTDEVICE.RF_State = 0;
+		while(RF_H3V4F_Rev(&(INPUTDEVICE.RF_Code))==0)
+		{
+			if(OUTPUTDEVICE.RF_State == 3 || OUTPUTDEVICE.RF_State == 0 ){
+				INPUTDEVICE.RF_State = 0;
 				break;
 			}
 		}
-		if(OUTPUTDEVICE.RF_State != 0){	
+		if(OUTPUTDEVICE.RF_State != 0  && OUTPUTDEVICE.RF_State != 3 ){	
 			OUTPUTDEVICE.RF_State = 0;
-			INPUTDEVICE.RF_State=6;
-		}			
+			INPUTDEVICE.RF_State=5;
+		}	
+		if(OUTPUTDEVICE.RF_State == 3 )		
+		{
+			OUTPUTDEVICE.RF_State = 0;
+		}
 	}
+	if(OUTPUTDEVICE.RF_State == 0 && INPUTDEVICE.RF_State!=5)
+	{
+		if(RF_H3V4F_Rev(&(INPUTDEVICE.RF_Code)))
+		{
+			INPUTDEVICE.RF_State=6;
+		}	
+	}
+	
 }
 
 

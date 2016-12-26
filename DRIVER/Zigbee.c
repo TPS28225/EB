@@ -65,7 +65,7 @@ void Zigbee_Configuration(void)
 	TIM_ITConfig(ZIGBEE_TIMER,TIM_IT_Update,ENABLE ); //使能指定的TIMx中断,允许更新中断
 
 	USART_ClockInit(ZIGBEE_USART,&USART_ClockInitStruct);
-	USART_InitStructure.USART_BaudRate = 57600;
+	USART_InitStructure.USART_BaudRate = 9600;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;
 	USART_InitStructure.USART_Parity = USART_Parity_No;

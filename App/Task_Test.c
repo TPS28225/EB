@@ -72,8 +72,10 @@ void Clear_Sensor_Data(void)
 	OUTPUTDEVICE.LED[6]=0;
 	OUTPUTDEVICE.LED[7]=0;
 	OUTPUTDEVICE.Motor=0;
-	OUTPUTDEVICE.Beep=0;
+	OUTPUTDEVICE.Beep=0;	
+	OUTPUTDEVICE.RF_State = 0;//add by W
 	OUTPUTDEVICE.picture_num=0;
+
 }
 /***********************************************************************
 函数名称：void Task_LED(void *pdata)
@@ -91,7 +93,7 @@ void Task_INPUT(void *pdata)
 		UltrasonicWave_StartMeasure();
 		DHT11_Read_Data();
 		LightIntensitySensor_measure();
-		EV1527_Run();//待进一步调试
+//		EV1527_Run();//待进一步调试
 		OSTimeDlyHMSM(0, 0, 1, 0);
 	}
 }
@@ -100,7 +102,8 @@ void Task_KEY(void *pdata)
   while(1)
 	{
 		KEY_RUN();
-		OSTimeDlyHMSM(0, 0, 0, 30);
+		EV1527_Run();
+		OSTimeDlyHMSM(0, 0, 0, 100);
 	}
 }
 extern int IR_LearnState;
@@ -119,7 +122,6 @@ void Task_OUTPUT(void *pdata)
 		BLUTOOTH_Run();
 		Zigbee_RUN();
 		IR_Run();
-		
 		runTime.OutputEndTime = TIM_GetCounter(DELAY_TIMER);
 		if(runTime.OutputEndTime - runTime.OutputStartTime > runTime.OutputRunTime)
 			runTime.OutputRunTime = runTime.OutputEndTime - runTime.OutputStartTime;	
@@ -278,7 +280,7 @@ void Task_OLEDDisplay(void *pdata)
 	GUI_SetColor(GUI_WHITE);
 	GUI_SetTextMode(GUI_TM_NORMAL);
 	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
+	LCD_Clear(BLACK);//GUI_Clear();
 	GUI_SetFont(GUI_FONT_24_ASCII);
 	OUTPUTDEVICE.Cureent_Exam_Num=0;
 //	MainTask();
@@ -288,7 +290,7 @@ void Task_OLEDDisplay(void *pdata)
 	if(result != FR_OK) 	
 	{		
 		GUI_SetBkColor(GUI_BLUE);	
-		GUI_Clear();
+		LCD_Clear(BLUE);//GUI_Clear();
 		GUI_DispStringAt("HARDWARE ERROR: ",10,40);
 		GUI_DispStringAt("NOW FIXING:   ",10,80);
 		//GUI_DispDec  (result, 3);
@@ -312,7 +314,7 @@ void Task_OLEDDisplay(void *pdata)
 		}	
 		GUI_SetBkColor(GUI_BLACK);
 		GUI_SetColor(GUI_WHITE);
-		GUI_Clear();	
+		LCD_Clear(BLACK);//GUI_Clear();	
 		GUI_DispStringAt("SDCARD OK.                ",10,90);	
 		f_close(&BMPFile);
 	}
@@ -322,7 +324,7 @@ void Task_OLEDDisplay(void *pdata)
 	GUI_SetColor(GUI_WHITE);
 	GUI_SetTextMode(GUI_TM_NORMAL);
 	GUI_UC_SetEncodeUTF8();
-	GUI_Clear();
+	LCD_Clear(BLACK);//GUI_Clear();
 	GUI_SetFont(GUI_FONT_24_ASCII);
 	GUI_SetTextMode(GUI_TM_TRANS);
 	GUI_SetFont(GUI_FONT_16_ASCII);

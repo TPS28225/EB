@@ -53,9 +53,13 @@ void NMI_Handler(void)
 void HardFault_Handler(void)
 {
   /* Go to infinite loop when Hard Fault exception occurs */
+	if(CoreDebug->DHCSR & 1)
+  {
+	  __breakpoint(0);
+  }
   while (1)
   {
-		delay_ms(100);
+		delay_ms(1000);
 		GPIO_ToggleBits(GPIOA,GPIO_Pin_5);			
   }
 }

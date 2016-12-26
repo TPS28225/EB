@@ -59,7 +59,8 @@ typedef struct{
 	char        IR_State;           //¡Ì	
 	char        IR_Code[IRCODE_ARRY_NUM];    //¡Ì
 	char        RF_State;
-	u32        	RF_Code;	
+	u32        	RF_Code;
+	char				RF_Id[10];
 	CARD_Info		RFID_CARD;
 	char				Cureent_Exam_Num;
 	char				picture_num;

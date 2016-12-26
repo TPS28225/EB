@@ -62,6 +62,7 @@ struct tcp_pcb *Check_TCP_Connect(void)
 	//	if(cpcb->local_port == TCP_LOCAL_PORT && cpcb->remote_port == TCP_SERVER_PORT)		//如果TCP_LOCAL_PORT端口指定的连接没有断开
 		if(cpcb -> state == ESTABLISHED)  //如果得到应答，则证明已经连接上
 		{
+			TIM_SetCompare3(TIM3,100);
 			connect_flag = 1;  						//连接标志
 			break;							   	
 		}
@@ -69,6 +70,7 @@ struct tcp_pcb *Check_TCP_Connect(void)
 
 	if(connect_flag == 0)  	// TCP_LOCAL_PORT指定的端口未连接或已断开
 	{
+		TIM_SetCompare3(TIM3,0);	
 		TCP_Client_Init(TCP_LOCAL_PORT,TCP_SERVER_PORT,TCP_SERVER_IP); //重新连接
 		cpcb = 0;
 	}

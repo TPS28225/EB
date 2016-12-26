@@ -348,7 +348,7 @@ void LCD_Scan_Dir(u8 dir)
 	else if(lcddev.id==0x8357){
 		if(lcddev.dir==1){
 			LCD_WR_REG(0x36);  
-			LCD_WR_DATA(0x38);//这里是切换显示方向的关键点0x38/0x3B
+			LCD_WR_DATA(0x3B);//这里是切换显示方向的关键点0x38/0x3B
 			
 			LCD_WR_REG(0X2A);
 			LCD_WR_DATA(0X00);
@@ -2871,14 +2871,15 @@ void LCD_Fill(u16 sx,u16 sy,u16 ex,u16 ey,u16 color)
 		lcddev.setycmd=0X2A;  	 
  	}else
 	{
+		
 		xlen=ex-sx+1;	 
 		for(i=sy;i<=ey;i++)
 		{
-		 	LCD_SetCursor(sx,i);      				//设置光标位置 
-			LCD_WriteRAM_Prepare();     			//开始写入GRAM	  
+//		 	LCD_SetCursor(sx,i);      				//设置光标位置 
+//			LCD_WriteRAM_Prepare();     			//开始写入GRAM	  
 			for(j=0;j<xlen;j++)
 				TFTLCD->LCD_RAM=color;	//显示颜色 	    
-		}
+		}			
 	}	 
 }  
 //在指定区域内填充指定颜色块			 
@@ -2890,12 +2891,41 @@ void LCD_Color_Fill(u16 sx,u16 sy,u16 ex,u16 ey,u16 *color)
 	u16 i,j;
 	width=ex-sx+1; 			//得到填充的宽度
 	height=ey-sy+1;			//高度
+// 	for(i=0;i<height;i++)
+//	{
+// 		LCD_SetCursor(sx,sy+i);   	//设置光标位置 
+//		LCD_WriteRAM_Prepare();     //开始写入GRAM
+//		for(j=0;j<width;j++)TFTLCD->LCD_RAM=color[i*width+j];//写入数据 
+//	}
+	
+	//LCD_SetFullCursor(sx, sy, ex, ey);   	//设置光标位置 
+	
+	LCD_WR_REG(lcddev.setxcmd); 
+	LCD_WR_DATA(sx>>8);LCD_WR_DATA(sx&0XFF); 
+	LCD_WR_DATA(ex>>8);LCD_WR_DATA(ex&0XFF); 	
+	LCD_WR_REG(lcddev.setycmd); 
+	LCD_WR_DATA(sy>>8);LCD_WR_DATA(sy&0XFF); 
+	LCD_WR_DATA(ey>>8);LCD_WR_DATA(ey&0XFF); 	
+	
+	
+	LCD_WriteRAM_Prepare();     //开始写入GRAM
+	
  	for(i=0;i<height;i++)
 	{
- 		LCD_SetCursor(sx,sy+i);   	//设置光标位置 
-		LCD_WriteRAM_Prepare();     //开始写入GRAM
-		for(j=0;j<width;j++)TFTLCD->LCD_RAM=color[i*width+j];//写入数据 
-	}		  
+		for(j=0;j<width;j++)
+			TFTLCD->LCD_RAM=color[i*width+j];//写入数据 
+	}	
+	
+	
+	sx=0;sy=0;
+	ex=480;ey=320;
+	LCD_WR_REG(lcddev.setxcmd); 
+	LCD_WR_DATA(sx>>8);LCD_WR_DATA(sx&0XFF); 
+	LCD_WR_DATA(ex>>8);LCD_WR_DATA(ex&0XFF); 	
+	LCD_WR_REG(lcddev.setycmd); 
+	LCD_WR_DATA(sy>>8);LCD_WR_DATA(sy&0XFF); 
+	LCD_WR_DATA(ey>>8);LCD_WR_DATA(ey&0XFF); 	
+  
 }  
 //画线
 //x1,y1:起点坐标

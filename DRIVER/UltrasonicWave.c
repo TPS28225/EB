@@ -138,12 +138,16 @@ void EXTI15_10_IRQHandler(void)
 	if(EXTI_GetITStatus(RF_RX_EXIT_LINE) != RESET)
 	{
 		EXTI_ClearITPendingBit(RF_RX_EXIT_LINE);  //清除LINE10上的中断标志位 
+		if(Rf.State!=1)
+		{
 		TIM14_Set(0);              //关闭定时器
 		if(Rf.ZaboFlag==1)       //使能滤波
 		{
 			if(Rf.Count >= RF_CONT)     //判断数据上报是否完成，完成继续，未完成退出等待完成
+			{
+				OSIntExit();
 				return;
-					
+			}
 			Rf.TimeVal=TIM14->CNT;
 			if((Rf.TimeVal>3000)&&(Rf.TimeVal<14000))  //判断是否为同步头
 			{
@@ -176,7 +180,7 @@ void EXTI15_10_IRQHandler(void)
 					Rf.ZaboFlag=1;
 					Rf.Count=0;
 					TIM14_Set(1);
-					OSIntExit();//中断退出，通知ucos，（该句必须加）	
+					OSIntExit();
 					return;
 				}
 				Rf.Count++;
@@ -185,12 +189,14 @@ void EXTI15_10_IRQHandler(void)
 					Rf.State=1;
 					Rf.ZaboFlag=1;
 					TIM14_Set(1);
-					OSIntExit();//中断退出，通知ucos，（该句必须加）	
+					OSIntExit();
 					return;
 				}
 			}
 		}
 		TIM14_Set(1);
+		
+		}
 	}
 	OSIntExit();//中断退出，通知ucos，（该句必须加）	
 }

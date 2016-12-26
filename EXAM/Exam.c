@@ -274,14 +274,14 @@ void bmpdisplay_exam2(void)
 			}				
 		}
 		//电源开关
-		if(0<OUTPUTDEVICE.LED[7]){
+		if(0<OUTPUTDEVICE.LED[6]){
 			if(1!=Power_On_Flag){			 
 			 GUI_MEMDEV_CopyToLCDAt(hMem_Sub_power_on_274_274_74x37 ,274,274);
 			 Power_On_Flag=1;			 
 			}	
 		}				 
 		else{
-			if(0==OUTPUTDEVICE.LED[7]){
+			if(0==OUTPUTDEVICE.LED[6]){
 				if(0!=Power_On_Flag){	
 					GUI_MEMDEV_CopyToLCDAt(hMem_Sub_power_off_274_274_74x37 ,274,274);
 					Power_On_Flag=0;				
