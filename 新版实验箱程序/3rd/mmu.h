@@ -1,0 +1,38 @@
+#ifndef __MMU_H___
+#define __MMU_H___
+#include <stm32f2xx.h>
+#include "main.h" 
+#define ALIGN_NUM           8
+#define UNIT_NUM            65536 
+
+
+#define HEAP_START          0x68000000
+#define HEAP_SIZE           (UNIT_NUM * ALIGN_NUM)
+#define HEAP_END            (HEAP_START + HEAP_SIZE)
+ 
+#define STACK_START                   0x68080000
+#define RS232_RECV_STACK_START        (STACK_START + 0)
+#define RS232_SEND_STACK_START        (RS232_RECV_STACK_START  + RS232_RECV_STK_SIZE * 4)
+#define RS485_RECV_STACK_START        (RS232_SEND_STACK_START  + RS232_SEND_STK_SIZE * 4)  
+#define RS485_SEND_STACK_START        (RS485_RECV_STACK_START  + RS485_RECV_STK_SIZE * 4)
+#define IO_RECV_STACK_START           (RS485_SEND_STACK_START  + RS485_SEND_STK_SIZE * 4)
+#define IO_SEND_STACK_START           (IO_RECV_STACK_START     + IO_RECV_STK_SIZE * 4)
+#define RF_RECV_STACK_START           (IO_SEND_STACK_START     + IO_SEND_STK_SIZE * 4)
+#define RF_SEND_STACK_START           (RF_RECV_STACK_START     + RF_RECV_STK_SIZE * 4)
+#define IR_SEND_STACK_START           (RF_SEND_STACK_START     + RF_SEND_STK_SIZE * 4)
+#define CC1101_SEND_STACK_START       (IR_SEND_STACK_START     + IR_SEND_STK_SIZE * 4)
+#define UDP_RECV_STACK_START          (CC1101_SEND_STACK_START + CC1101_SEND_STK_SIZE * 4)
+
+ 
+
+
+#define STACK_SIZE          (0x40000)
+#define STACK_END           (STACK_START + STACK_SIZE)
+
+#define HEAP_INDEX_START    0x680C0000
+#define HEAP_INDEX_SIZE     UNIT_NUM
+
+
+#define SWAP_BUFF_START     0x680E0000
+#define SWAP_BUFF_SIZE     (128*1024)
+#endif

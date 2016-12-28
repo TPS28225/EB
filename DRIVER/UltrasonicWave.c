@@ -77,13 +77,14 @@ void UltrasonicWave_Configuration(void)
  * 输入  ：无
  * 输出  ：无	
  */
+float	UW_Record=0;
 void UltrasonicWave_StartMeasure(void)
 {
   static int UW_Overtime_Counter=0;
-	float	UW_Record=0;	
+	
 	if(ECHO_COUNT_START == RESET)
 	{
-		INPUTDEVICE.Distance=0;
+		//INPUTDEVICE.Distance=0;
 		GPIO_SetBits(TRIG_PORT,TRIG_PIN);//送>10US的高电平ltrasonicWave_PORT,TRIG_PIN这两个在define中有?
 		delay_us(20);		                      //延时20US
 		GPIO_ResetBits(TRIG_PORT,TRIG_PIN);
@@ -91,12 +92,14 @@ void UltrasonicWave_StartMeasure(void)
 	}
 	
 	if(UW_Record!=INPUTDEVICE.Distance){
-		UW_Record = INPUTDEVICE.Distance;
+		UW_Record = (float)(INPUTDEVICE.Distance);
 		UW_Overtime_Counter=0;
 	}
 	
-	if(UW_Overtime_Counter>5)
-		INPUTDEVICE.Distance=0;		
+	if(UW_Overtime_Counter>5) {
+		INPUTDEVICE.Distance=0;	
+		UW_Overtime_Counter=0;
+	}
 	
 	UW_Overtime_Counter++;
 }
